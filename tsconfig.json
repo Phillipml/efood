@@ -13,6 +13,7 @@
       "@services/*": ["src/services/*"]
     }
   },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "./.eslint.*"],
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
