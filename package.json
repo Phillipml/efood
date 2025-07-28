@@ -12,7 +12,9 @@
     "build-storybook": "storybook build",
     "test": "jest --maxWorker=50% --coverage=false",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:playwright": "playwright test --headed --config=playwright.config.ts --project=chromium",
+    "test:playwright:helper": "npx playwright codegen http://localhost:3000"
   },
   "dependencies": {
     "@storybook/addon-themes": "^9.0.18",
@@ -26,6 +28,7 @@
     "@babel/preset-typescript": "^7.27.1",
     "@chromatic-com/storybook": "^4.0.1",
     "@eslint/js": "^9.32.0",
+    "@playwright/test": "^1.54.1",
     "@storybook/addon-a11y": "^9.0.18",
     "@storybook/addon-docs": "^9.0.18",
     "@storybook/addon-onboarding": "^9.0.18",
