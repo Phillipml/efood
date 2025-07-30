@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "jsx": "react-jsx",
     "paths": {
       "@/*": ["src/*"],
       "@assets/*": ["src/assets/*"],
@@ -14,9 +15,5 @@
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "./.eslint.*"],
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "extends": "./tsconfig.app.json"
 }
