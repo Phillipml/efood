@@ -1,4 +1,4 @@
-import type { VwProps } from '@/types/sizes'
+import type { VwProps } from '@/types'
 import logo from '@assets/images/logo.svg'
 import { LogoStyled } from './styles'
 

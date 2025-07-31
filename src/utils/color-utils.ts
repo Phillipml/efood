@@ -7,5 +7,8 @@ export const setColor = (variant: string) => {
     tertiary: theme.tertiary,
     quaternary: theme.quaternary
   }
-  return Object.entries(colors).find(([color]) => color === variant[1])
+  return (
+    Object.entries(colors).find(([color]) => color === variant[1])?.[1] ||
+    theme.primary
+  )
 }

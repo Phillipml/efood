@@ -1,5 +1,5 @@
 import { FontSize } from '@/utils/size-utils'
-import { setColor } from '@/utils/theme-utils'
+import { setColor } from '@/utils/color-utils'
 import styled, { css } from 'styled-components'
 import type { TextProps } from '.'
 

@@ -1,3 +1,10 @@
+export type FontSizeOptions = 'sm' | 'md' | 'lg' | 'xl'
+export type FontSizeProps = {
+  $lgFontSize?: FontSizeOptions
+  $mdFontSize?: FontSizeOptions
+  $smFontSize?: FontSizeOptions
+}
+
 export type RemProps = {
   $lgRem?: number
   $mdRem?: number

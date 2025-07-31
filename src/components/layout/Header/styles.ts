@@ -1,6 +1,6 @@
 import { MainContainer } from '@/styles/reset'
 import headerBackground from '@assets/images/header-bg.png'
-import { RemSize } from '@utils/size-utils'
+import { pxToRem } from '@utils/size-utils'
 import styled from 'styled-components'
 
 export const HeaderWrapper = styled.div`
@@ -10,7 +10,7 @@ export const HeaderWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  ${RemSize('padding', { lgScreen: 2 })};
+  ${pxToRem('padding', { lgScreen: 2 })};
   color: ${({ theme }) => theme.tertiary};
   background-image: url(${headerBackground});
   background-size: cover;

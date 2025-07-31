@@ -3,8 +3,8 @@ import { DarkTheme, LightTheme } from '@styles/theme'
 import { useState } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-import Header from './components/Header'
-import ThemeButton from './components/ThemeButton'
+import Header from './components/layout/Header'
+import ThemeButton from './components/ui/ThemeButton'
 import GlobalStyle from './styles/reset'
 
 function App() {

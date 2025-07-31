@@ -1,3 +1,4 @@
+import type { FontSizeOptions } from '@/types'
 import { mobile, tablet } from '@styles/breakpoints'
 import { css } from 'styled-components'
 export const PercentSize = (
@@ -38,9 +39,9 @@ export const FontSize = ({
   mdScreen,
   smScreen
 }: {
-  lgScreen?: string
-  mdScreen?: string
-  smScreen?: string
+  lgScreen?: FontSizeOptions
+  mdScreen?: FontSizeOptions
+  smScreen?: FontSizeOptions
 }) => {
   const sizes = {
     sm: '0.625rem',
@@ -71,7 +72,7 @@ export const FontSize = ({
     `}
   `
 }
-export const RemSize = (
+export const pxToRem = (
   tag: string,
   {
     lgScreen,

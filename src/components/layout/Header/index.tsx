@@ -1,5 +1,5 @@
-import Logo from '@components/Logo'
-import Text from '@components/Text'
+import Logo from '@/components/ui/Logo'
+import Text from '@/components/ui/Text'
 import { Container, HeaderWrapper } from './styles'
 
 const Header = () => {

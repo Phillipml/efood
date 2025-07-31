@@ -1,5 +1,4 @@
-import type { FontSizeProps } from '@/types/FontSizeProps'
-import type { ColorsVariants } from '@/types/theme-types'
+import type { FontSizeProps, ColorsVariants } from '@/types'
 import { TextContent } from './styles'
 export type TextProps = {
   children: React.ReactNode
