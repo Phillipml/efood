@@ -1,13 +1,12 @@
-import { MainContainer } from '@/styles/reset'
 import Logo from '@components/Logo'
 import Text from '@components/Text'
-import { HeaderContainer } from './styles'
+import { Container, HeaderWrapper } from './styles'
 
 const Header = () => {
   return (
-    <HeaderContainer>
-      <MainContainer>
-        <Logo $lgPercentWidth={25} />
+    <HeaderWrapper>
+      <Container>
+        <Logo $lgVw={10} $mdVw={22} />
         <Text
           as="title"
           variant="secondary"
@@ -16,8 +15,8 @@ const Header = () => {
         >
           Viva experiências gastronômicas <br /> no conforto da sua casa
         </Text>
-      </MainContainer>
-    </HeaderContainer>
+      </Container>
+    </HeaderWrapper>
   )
 }
 

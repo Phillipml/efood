@@ -1,4 +1,4 @@
-import type { FontSizeProps } from '@/types/sizes'
+import type { FontSizeProps } from '@/types/FontSizeProps'
 import type { ColorsVariants } from '@/types/theme-types'
 import { TextContent } from './styles'
 export type TextProps = {

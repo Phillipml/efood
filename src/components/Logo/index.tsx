@@ -1,23 +1,16 @@
-import type { PercentProps } from '@/types/sizes'
+import type { VwProps } from '@/types/sizes'
 import logo from '@assets/images/logo.svg'
-import { Link } from 'react-router-dom'
 import { LogoStyled } from './styles'
 
-const Logo = ({
-  $lgPercentWidth,
-  $mdPercentWidth,
-  $smPercentWidth
-}: PercentProps) => {
+const Logo = ({ $lgVw, $mdVw, $smVw }: VwProps) => {
   return (
-    <Link to="/">
-      <LogoStyled
-        src={logo}
-        alt="Efood logo"
-        $lgPercentWidth={$lgPercentWidth}
-        $mdPercentWidth={$mdPercentWidth}
-        $smPercentWidth={$smPercentWidth}
-      />
-    </Link>
+    <LogoStyled
+      src={logo}
+      alt="Efood logo"
+      $lgVw={$lgVw ?? 100}
+      $mdVw={$mdVw ?? 100}
+      $smVw={$smVw ?? 100}
+    />
   )
 }
 

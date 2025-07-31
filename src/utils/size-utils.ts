@@ -51,7 +51,8 @@ export const FontSize = ({
   const getSize = (value?: string) => {
     return !value
       ? '0.875rem'
-      : Object.entries(sizes).find(([k]) => k === value)?.[1] || '0.875rem'
+      : Object.entries(sizes).find(([size]) => size === value)?.[1] ||
+          '0.875rem'
   }
 
   return css`
@@ -71,59 +72,46 @@ export const FontSize = ({
   `
 }
 export const RemSize = (
-  tag: 'width' | 'height',
+  tag: string,
   {
     lgScreen,
     mdScreen,
     smScreen
   }: {
-    lgScreen: string
-    mdScreen: string
-    smScreen: string
+    lgScreen?: number
+    mdScreen?: number
+    smScreen?: number
   }
 ) => {
-  const sizes = {
-    sm: '0.5rem',
-    md: '1rem',
-    lg: '1.5rem',
-    xl: '2rem'
-  }
   const axis = tag
-  const getSize = (value: string) => {
-    return !value
-      ? '1rem'
-      : Object.entries(sizes).find(([k]) => k === value)?.[1]
+  const getSize = (value?: number) => {
+    if (!value) return '1rem'
+    const numberToRem = value / 16
+    return `${numberToRem}rem`
   }
 
-  const tabletQuery = mdScreen
-    ? `${tablet}{
-        ${axis}: ${getSize(mdScreen)}
-        }`
-    : ''
-  const mobileQuery = smScreen
-    ? `${tablet}{
-          ${axis} ${getSize(smScreen)}
-          }`
-    : ''
-  const css = `
-      ${axis}: ${getSize(lgScreen)};
-    ${tabletQuery}
-    ${mobileQuery}
-      `
+  let css = `${axis}: ${getSize(lgScreen)};`
+
+  if (mdScreen) {
+    css += `@media (max-width: 1024px) { ${axis}: ${getSize(mdScreen)}; }`
+  }
+
+  if (smScreen) {
+    css += `@media (max-width: 768px) { ${axis}: ${getSize(smScreen)}; }`
+  }
 
   return css
 }
-
 export const ViewportSize = (
   unit: 'vw' | 'vh',
   {
     lgScreen,
     mdScreen,
     smScreen
-  }: { lgScreen: number; mdScreen: number; smScreen: number }
+  }: { lgScreen?: number; mdScreen?: number; smScreen?: number }
 ) => {
   const axis = unit === 'vw' ? 'width' : 'heigth'
-  const value = (value: number) => (!value ? `100${unit}` : `${value}${unit};`)
+  const value = (value?: number) => (!value ? `100${unit}` : `${value}${unit};`)
   const tabletQuery = mdScreen
     ? `${tablet}{
       ${axis}: ${value(mdScreen)}
