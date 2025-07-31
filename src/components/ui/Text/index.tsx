@@ -9,7 +9,7 @@ export type TextProps = {
 export const Text = ({
   children,
   as = 'p',
-  color = 'primary',
+  color = 'tertiary',
   darkTheme,
   lightTheme,
   alignCenter = false,

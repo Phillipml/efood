@@ -5,9 +5,15 @@ declare module 'styled-components' {
     secondary: string
     tertiary: string
     quaternary: string
+    quinary: string
   }
 }
-export type Variant = 'primary' | 'secondary' | 'tertiary' | 'quaternary'
+export type Variant =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'quaternary'
+  | 'quinary'
 
 export type ColorsVariants = {
   color?: Variant

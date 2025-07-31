@@ -84,22 +84,18 @@ export const pxToRem = (
     smScreen?: number
   }
 ) => {
-  const axis = tag
+  tag
   const getSize = (value?: number) => {
     if (!value) return '1rem'
     const numberToRem = value / 16
     return `${numberToRem}rem`
   }
-
-  let css = `${axis}: ${getSize(lgScreen)};`
-
-  if (mdScreen) {
-    css += `@media (max-width: 1024px) { ${axis}: ${getSize(mdScreen)}; }`
-  }
-
-  if (smScreen) {
-    css += `@media (max-width: 768px) { ${axis}: ${getSize(smScreen)}; }`
-  }
+  const tabletQuery = `${tablet}{ ${tag}: ${getSize(mdScreen)}; }`
+  const mobileQuery = `${mobile}{ ${tag}: ${getSize(smScreen)}; }`
+  const css = `
+  ${tag}: ${getSize(lgScreen)};
+  ${mdScreen ? tabletQuery : ''}
+  ${smScreen ? mobileQuery : ''}`
 
   return css
 }

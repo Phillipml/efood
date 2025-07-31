@@ -1,5 +1,7 @@
+import CardList from '@/components/layout/CardList'
+
 const Home = () => {
-  return <div>Home</div>
+  return <CardList />
 }
 
 export default Home
