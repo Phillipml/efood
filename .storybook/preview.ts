@@ -1,5 +1,5 @@
 import { withThemeFromJSXProvider } from '@storybook/addon-themes'
-import { Preview } from '@storybook/react'
+import type { Preview } from '@storybook/react'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyles from '../src/styles/reset'
 import { DarkTheme, LightTheme } from '../src/styles/theme'
