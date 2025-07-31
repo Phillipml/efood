@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     height: 100vh;
     margin: 0 auto;
     color: ${({ theme }) => theme.primary};
-    background-color: ${({ theme }) => theme.tertiary};
+    background-color: ${({ theme }) => theme.primary};
 
 
   }

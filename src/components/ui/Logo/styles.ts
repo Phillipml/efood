@@ -1,14 +1,16 @@
-import type { VwProps } from '@/types/sizes'
+import type { VwProps } from '@/types'
 import { ViewportSize } from '@/utils/size-utils'
 import styled, { css } from 'styled-components'
 
 export const LogoStyled = styled.img<VwProps>`
-  ${({ theme, $lgVw, $mdVw, $smVw }) => css`
-    color: ${theme.tertiary};
+  ${({ $lgVw, $mdVw, $smVw }) => css`
     ${ViewportSize('vw', {
       lgScreen: $lgVw,
       mdScreen: $mdVw,
       smScreen: $smVw
     })}
   `}
+`
+export const IconStyled = styled(LogoStyled)`
+  color: ${({ theme }) => theme.secondary};
 `

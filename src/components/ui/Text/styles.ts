@@ -4,8 +4,20 @@ import styled, { css } from 'styled-components'
 import type { TextProps } from '.'
 
 export const TextContent = styled.p<Omit<TextProps, 'children' | 'as'>>`
-  ${({ $lgFontSize, $mdFontSize, $smFontSize, variant, alignCenter }) => css`
-    color: ${setColor(variant)};
+  ${({
+    $lgFontSize,
+    $mdFontSize,
+    $smFontSize,
+    color,
+    darkTheme,
+    lightTheme,
+    alignCenter
+  }) => css`
+    color: ${setColor({
+      unique: color,
+      dark: darkTheme,
+      light: lightTheme
+    })};
     ${FontSize({
       lgScreen: $lgFontSize,
       mdScreen: $mdFontSize,

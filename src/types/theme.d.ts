@@ -7,6 +7,10 @@ declare module 'styled-components' {
     quaternary: string
   }
 }
+export type Variant = 'primary' | 'secondary' | 'tertiary' | 'quaternary'
+
 export type ColorsVariants = {
-  variant: 'primary' | 'secondary' | 'tertiary' | 'quaternary'
+  color?: Variant
+  darkTheme?: Variant
+  lightTheme?: Variant
 }

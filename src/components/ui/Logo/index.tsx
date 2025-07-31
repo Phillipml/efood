@@ -1,8 +1,9 @@
 import type { VwProps } from '@/types'
 import logo from '@assets/images/logo.svg'
-import { LogoStyled } from './styles'
+import icon from '@assets/images/icon.svg'
+import { IconStyled, LogoStyled } from './styles'
 
-const Logo = ({ $lgVw, $mdVw, $smVw }: VwProps) => {
+export const Logo = ({ $lgVw, $mdVw, $smVw }: VwProps) => {
   return (
     <LogoStyled
       src={logo}
@@ -14,4 +15,14 @@ const Logo = ({ $lgVw, $mdVw, $smVw }: VwProps) => {
   )
 }
 
-export default Logo
+export const Icon = ({ $lgVw, $mdVw, $smVw }: VwProps) => {
+  return (
+    <IconStyled
+      src={icon}
+      alt="Efood logo"
+      $lgVw={$lgVw ?? 100}
+      $mdVw={$mdVw ?? 100}
+      $smVw={$smVw ?? 100}
+    />
+  )
+}
