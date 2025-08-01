@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components'
+import { DarkTheme } from '@/styles/theme'
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -13,14 +14,31 @@ export const GlobalStyle = createGlobalStyle`
     height: 100vh;
     margin: 0 auto;
     color: ${({ theme }) => theme.primary};
-    background-color: ${({ theme }) => theme.tertiary};
+    background-color: ${({ theme }) => theme.primary};
 
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      background: ${({ theme }) => theme.secondary};
+      
+    }
+    &::-webkit-scrollbar-thumb {
+      border: 1px solid ${({ theme }) => theme.quaternary};
+      background: ${DarkTheme.primary};
+      box-shadow:  0 0px 20px 15px ${({ theme }) => theme.quaternary};
+      border-radius: 10px;
 
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: ${({ theme }) => theme.tertiary};
+    }
   }
 `
 export default GlobalStyle
 export const MainContainer = styled.div`
-  max-width: 1400px;
+  max-width: 1024px;
   width: 100%;
   margin: 0 auto;
   padding: 2rem;

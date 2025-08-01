@@ -9,7 +9,9 @@ export type TextProps = {
 export const Text = ({
   children,
   as = 'p',
-  variant = 'primary',
+  color = 'tertiary',
+  darkTheme,
+  lightTheme,
   alignCenter = false,
   $lgFontSize,
   $mdFontSize,
@@ -23,7 +25,9 @@ export const Text = ({
           $lgFontSize={$lgFontSize}
           $mdFontSize={$mdFontSize}
           $smFontSize={$smFontSize}
-          variant={variant}
+          color={color}
+          darkTheme={darkTheme}
+          lightTheme={lightTheme}
           alignCenter={alignCenter}
         >
           {children}
@@ -34,7 +38,9 @@ export const Text = ({
           $lgFontSize={$lgFontSize}
           $mdFontSize={$mdFontSize}
           $smFontSize={$smFontSize}
-          variant={variant}
+          color={color}
+          darkTheme={darkTheme}
+          lightTheme={lightTheme}
           alignCenter={alignCenter}
         >
           {children}
