@@ -1,8 +1,17 @@
 import { Logo } from '@/components/ui/Logo'
 import Text from '@/components/ui/Text'
 import { Container, HeaderWrapper } from './styles'
+import { useLocation } from 'react-router-dom'
+import { RestaurantHeader } from './RestaurantHeader'
 
 const Header = () => {
+  const location = useLocation()
+  const isRestaurant = location.pathname === '/restaurant'
+
+  if (isRestaurant) {
+    return <RestaurantHeader />
+  }
+
   return (
     <HeaderWrapper>
       <Container>
@@ -20,4 +29,5 @@ const Header = () => {
     </HeaderWrapper>
   )
 }
+
 export default Header

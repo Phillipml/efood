@@ -1,6 +1,8 @@
 import { FaStar } from 'react-icons/fa6'
 import Text from '@/components/ui/Text'
-import { Container, Rating, Button } from './styles'
+import { Container, Rating } from './styles'
+import Button from '@/components/ui/Button'
+import type { ColorsVariants } from '@/types'
 
 type CardProps = {
   image: string
@@ -8,10 +10,23 @@ type CardProps = {
   rating: string
   description: string
   buttonTxt: string
-}
-const Card = ({ image, name, rating, description, buttonTxt }: CardProps) => {
+  $lgPercent?: number
+  inverted?: boolean
+} & ColorsVariants
+const Card = ({
+  image,
+  name,
+  rating,
+  description,
+  buttonTxt,
+  $lgPercent,
+  color,
+  darkTheme = 'secondary',
+  lightTheme = 'primary',
+  inverted
+}: CardProps) => {
   return (
-    <Container>
+    <Container color={color} darkTheme={darkTheme} lightTheme={lightTheme}>
       <img src={image} alt={name + ' image'} />
       <div>
         <div>
@@ -27,7 +42,9 @@ const Card = ({ image, name, rating, description, buttonTxt }: CardProps) => {
         </div>
         <Text>{description}</Text>
 
-        <Button>{buttonTxt}</Button>
+        <Button $lgPercent={$lgPercent} inverted={inverted}>
+          {buttonTxt}
+        </Button>
       </div>
     </Container>
   )

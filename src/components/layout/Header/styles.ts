@@ -13,7 +13,7 @@ export const Container = styled(MainContainer)`
   height: 100%;
 `
 
-export const HeaderWrapper = styled.div<ColorsVariants>`
+export const HeaderWrapper = styled.header<ColorsVariants>`
   position: relative;
   width: 100%;
   height: 384px;

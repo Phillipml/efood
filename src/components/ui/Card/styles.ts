@@ -3,14 +3,15 @@ import { FontSize, PercentSize } from '@/utils/size-utils'
 import type { ColorsVariants } from '@/types'
 import { setColor } from '@/utils/color-utils'
 export const Container = styled.div<ColorsVariants>`
-  ${({ theme, lightTheme, darkTheme }) => css`
+  ${({ theme, color, lightTheme, darkTheme }) => css`
     position: relative;
     display: grid;
     ${PercentSize('width', { lgScreen: 100 })};
     height: auto;
     background-color: ${setColor({
-      light: (lightTheme = 'primary'),
-      dark: (darkTheme = 'secondary')
+      unique: color,
+      light: lightTheme,
+      dark: darkTheme
     })};
     border: 1px solid ${theme.tertiary};
     > img {
@@ -40,14 +41,4 @@ export const Rating = styled.div`
     color: ${({ theme }) => theme.quaternary};
     ${FontSize({ lgScreen: 'lg' })}
   }
-`
-export const Button = styled.button`
-  ${PercentSize('width', { lgScreen: 25 })}
-  padding: 4px 6px;
-  font-weight: bold;
-  text-align: center;
-  border: none;
-  color: ${({ theme }) => theme.secondary};
-  background-color: ${({ theme }) => theme.tertiary};
-  cursor: pointer;
 `
