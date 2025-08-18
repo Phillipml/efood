@@ -16,15 +16,17 @@ export const Container = styled(MainContainer)`
 export const HeaderWrapper = styled.header<ColorsVariants>`
   position: relative;
   width: 100%;
-  height: 384px;
+  ${pxToRem('height', { lgScreen: 384 })}
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   ${pxToRem('padding', { lgScreen: 2 })};
-  background-color: ${({ color = 'secondary', darkTheme = 'quaternary' }) =>
-    setColor({ unique: color, dark: darkTheme })};
-  ${Container} {
+  background-color: ${({
+      $defaultColor = 'secondary',
+      $darkTheme = 'quaternary'
+    }) => setColor({ unique: $defaultColor, dark: $darkTheme })}
+    ${Container} {
     z-index: 1;
   }
   &::after {

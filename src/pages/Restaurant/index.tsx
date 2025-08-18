@@ -1,10 +1,17 @@
 import CardList from '@/components/layout/CardList'
-
 const Restaurant = () => {
   return (
-    <div>
-      <CardList $lgPercent={100} inverted={true} />
-    </div>
+    <>
+      <CardList
+        $lgPercent={100}
+        $lightTheme="tertiary"
+        $textColor="secondary"
+        $textDarkTheme="tertiary"
+        buttonTxt="Adicionar"
+        $buttonTextColor="tertiary"
+        $buttonColor="primary"
+      />
+    </>
   )
 }
 

@@ -15,13 +15,13 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <Container>
-        <Logo $lgVw={10} $mdVw={22} />
+        <Logo $lgRem={186} />
         <Text
           as="title"
-          color="tertiary"
-          darkTheme="primary"
+          $defaultColor="tertiary"
+          $darkTheme="primary"
           $lgFontSize="xl"
-          alignCenter={true}
+          $alignCenter={true}
         >
           Viva experiências gastronômicas <br /> no conforto da sua casa
         </Text>

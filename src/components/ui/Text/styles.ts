@@ -8,21 +8,21 @@ export const TextContent = styled.p<Omit<TextProps, 'children' | 'as'>>`
     $lgFontSize,
     $mdFontSize,
     $smFontSize,
-    color,
-    darkTheme,
-    lightTheme,
-    alignCenter
+    $defaultColor,
+    $darkTheme,
+    $lightTheme,
+    $alignCenter
   }) => css`
     color: ${setColor({
-      unique: color,
-      dark: darkTheme,
-      light: lightTheme
-    })};
+      unique: $defaultColor,
+      dark: $darkTheme,
+      light: $lightTheme
+    })}
     ${FontSize({
       lgScreen: $lgFontSize,
       mdScreen: $mdFontSize,
       smScreen: $smFontSize
     })}
-    text-align: ${alignCenter ? 'center' : 'left'};
+    text-align: ${$alignCenter ? 'center' : 'left'};
   `}
 `

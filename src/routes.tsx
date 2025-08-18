@@ -3,8 +3,8 @@ import { Route, Routes } from 'react-router-dom'
 import Restaurant from './pages/Restaurant'
 const RoutesApp = () => (
   <Routes>
-    <Route path="/" element={<Restaurant />} />
-    <Route path="/restaurant" element={<Home />} />
+    <Route path="/" element={<Home />} />
+    <Route path="/restaurant" element={<Restaurant />} />
   </Routes>
 )
 

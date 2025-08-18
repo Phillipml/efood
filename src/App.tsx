@@ -1,21 +1,23 @@
-import { DarkTheme, LightTheme } from '@styles/theme'
+import { $darkTheme, $lightTheme } from '@styles/theme'
 import { useState } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import ThemeButton from './components/ui/ThemeButton'
 import GlobalStyle from './styles/reset'
 import RoutesApp from './routes'
-import { RestaurantHeader } from './components/layout/Header/RestaurantHeader'
+import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
 
 function App() {
-  const [isDarkTheme, setIsDarkTheme] = useState(false)
+  const [isdarkTheme, setIsdarkTheme] = useState(false)
   return (
     <BrowserRouter>
-      <ThemeProvider theme={isDarkTheme ? DarkTheme : LightTheme}>
+      <ThemeProvider theme={isdarkTheme ? $darkTheme : $lightTheme}>
         <GlobalStyle />
-        <RestaurantHeader />
+        <Header />
         <RoutesApp />
-        <ThemeButton onClick={() => setIsDarkTheme(!isDarkTheme)} />
+        <Footer />
+        <ThemeButton onClick={() => setIsdarkTheme(!isdarkTheme)} />
       </ThemeProvider>
     </BrowserRouter>
   )

@@ -3,16 +3,16 @@ import { TextContent } from './styles'
 export type TextProps = {
   children: React.ReactNode
   as?: 'p' | 'span' | 'title'
-  alignCenter?: boolean
+  $alignCenter?: boolean
 } & FontSizeProps &
   ColorsVariants
 export const Text = ({
   children,
   as = 'p',
-  color = 'tertiary',
-  darkTheme,
-  lightTheme,
-  alignCenter = false,
+  $defaultColor = 'tertiary',
+  $darkTheme,
+  $lightTheme,
+  $alignCenter = false,
   $lgFontSize,
   $mdFontSize,
   $smFontSize
@@ -25,10 +25,10 @@ export const Text = ({
           $lgFontSize={$lgFontSize}
           $mdFontSize={$mdFontSize}
           $smFontSize={$smFontSize}
-          color={color}
-          darkTheme={darkTheme}
-          lightTheme={lightTheme}
-          alignCenter={alignCenter}
+          $defaultColor={$defaultColor}
+          $darkTheme={$darkTheme}
+          $lightTheme={$lightTheme}
+          $alignCenter={$alignCenter}
         >
           {children}
         </TextContent>
@@ -38,10 +38,10 @@ export const Text = ({
           $lgFontSize={$lgFontSize}
           $mdFontSize={$mdFontSize}
           $smFontSize={$smFontSize}
-          color={color}
-          darkTheme={darkTheme}
-          lightTheme={lightTheme}
-          alignCenter={alignCenter}
+          $defaultColor={$defaultColor}
+          $darkTheme={$darkTheme}
+          $lightTheme={$lightTheme}
+          $alignCenter={$alignCenter}
         >
           {children}
         </TextContent>

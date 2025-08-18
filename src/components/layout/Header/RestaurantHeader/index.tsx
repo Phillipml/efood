@@ -7,20 +7,20 @@ export const RestaurantHeader = () => {
       <RestaurantContainer>
         <Text
           as="title"
-          color="tertiary"
-          darkTheme="primary"
+          $defaultColor="tertiary"
+          $darkTheme="primary"
           $lgFontSize="lg"
-          alignCenter={true}
+          $alignCenter={true}
         >
           Restaurantes
         </Text>
-        <Logo $lgVw={10} $mdVw={22} />
+        <Logo $lgRem={186} />
         <Text
           as="title"
-          color="tertiary"
-          darkTheme="primary"
+          $defaultColor="tertiary"
+          $darkTheme="primary"
           $lgFontSize="lg"
-          alignCenter={true}
+          $alignCenter={true}
         >
           0 produto(s) no carrinho
         </Text>

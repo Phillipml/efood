@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components'
-import { DarkTheme } from '@/styles/theme'
+import { $darkTheme } from '@/styles/theme'
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -26,7 +26,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     &::-webkit-scrollbar-thumb {
       border: 1px solid ${({ theme }) => theme.quaternary};
-      background: ${DarkTheme.primary};
+      background: ${$darkTheme.primary};
       box-shadow:  0 0px 20px 15px ${({ theme }) => theme.quaternary};
       border-radius: 10px;
 

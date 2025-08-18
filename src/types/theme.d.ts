@@ -16,7 +16,7 @@ export type Variant =
   | 'quinary'
 
 export type ColorsVariants = {
-  color?: Variant
-  darkTheme?: Variant
-  lightTheme?: Variant
+  $defaultColor?: Variant
+  $darkTheme?: Variant
+  $lightTheme?: Variant
 }

@@ -13,10 +13,11 @@ export const setColor = ({
   const theme = useTheme()
 
   const colors = {
-    primary: theme.primary,
-    secondary: theme.secondary,
-    tertiary: theme.tertiary,
-    quaternary: theme.quaternary
+    primary: `${theme.primary};`,
+    secondary: `${theme.secondary};`,
+    tertiary: `${theme.tertiary};`,
+    quaternary: `${theme.quaternary};`,
+    quinary: `${theme.quinary}`
   }
 
   const getColor = (variant: string) => {

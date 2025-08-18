@@ -1,16 +1,21 @@
 import { FontSize, PercentSize } from '@/utils/size-utils'
 import styled, { css } from 'styled-components'
 import type { ButtonTypes } from './'
+import { setColor } from '@/utils/color-utils'
 export const ButtonStyled = styled.button<Omit<ButtonTypes, 'children'>>`
   ${({
-    inverted,
-    theme,
     $lgFontSize,
     $mdFontSize,
     $smFontSize,
     $lgPercent,
     $mdPercent,
-    $smPercent
+    $smPercent,
+    $buttonColor,
+    $buttonDarkThemeColor,
+    $buttonLightThemeColor,
+    $buttonTextColor,
+    $buttonTextLightTheme,
+    $buttonTextDarkTheme
   }) => css`
     ${PercentSize('width', {
       lgScreen: $lgPercent,
@@ -22,8 +27,16 @@ export const ButtonStyled = styled.button<Omit<ButtonTypes, 'children'>>`
       mdScreen: $mdFontSize,
       smScreen: $smFontSize
     })}
-    color: ${inverted ? theme.tertiary : theme.secondary};
-    background-color: ${inverted ? theme.secondary : theme.tertiary};
+    background-color: ${setColor({
+      unique: $buttonColor,
+      dark: $buttonDarkThemeColor,
+      light: $buttonLightThemeColor
+    })}
+    color: ${setColor({
+      unique: $buttonTextColor,
+      dark: $buttonTextLightTheme,
+      light: $buttonTextDarkTheme
+    })}
   `}
   padding: 4px 6px;
   font-weight: bold;
