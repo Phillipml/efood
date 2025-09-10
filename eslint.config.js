@@ -22,5 +22,11 @@ export default tseslint.config([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+    ignores: [
+      ".storybook/**/*",
+      ".jest/**/*",
+      "**/*.stories.tsx",
+      "**/*.test.tsx"
+    ]
   },
 ], storybook.configs["flat/recommended"]);

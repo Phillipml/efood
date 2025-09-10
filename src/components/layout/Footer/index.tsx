@@ -24,7 +24,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <Text $defaultColor="tertiary" $darkTheme="primary" $alignCenter={true}>
+        <Text $textColor="tertiary" $textDarkTheme="primary"$alignCenter={true}>
           A efood é uma plataforma para divulgação de estabelecimentos, a
           responsibilidade pela entrega, qualidade dos produtos é toda do
           estabelecimento contratado.

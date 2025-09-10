@@ -7,8 +7,8 @@ export const RestaurantHeader = () => {
       <RestaurantContainer>
         <Text
           as="title"
-          $defaultColor="tertiary"
-          $darkTheme="primary"
+          $textColor="tertiary"
+          $textDarkTheme="primary"
           $lgFontSize="lg"
           $alignCenter={true}
         >
@@ -17,8 +17,8 @@ export const RestaurantHeader = () => {
         <Logo $lgRem={186} />
         <Text
           as="title"
-          $defaultColor="tertiary"
-          $darkTheme="primary"
+          $textColor="tertiary"
+          $textDarkTheme="primary"
           $lgFontSize="lg"
           $alignCenter={true}
         >

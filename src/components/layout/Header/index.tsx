@@ -18,8 +18,8 @@ const Header = () => {
         <Logo $lgRem={186} />
         <Text
           as="title"
-          $defaultColor="tertiary"
-          $darkTheme="primary"
+          $textColor="tertiary"
+          $textDarkTheme="primary"
           $lgFontSize="xl"
           $alignCenter={true}
         >
