@@ -1,12 +1,16 @@
 import styled, { css } from 'styled-components'
 import { FontSize, PercentSize } from '@/utils/size-utils'
-import type { ColorsVariants } from '@/types'
+import type { ColorsVariants, PercentProps } from '@/types'
 import { setColor } from '@/utils/color-utils'
-export const Container = styled.div<ColorsVariants>`
-  ${({ theme, $defaultColor, $lightTheme, $darkTheme }) => css`
+
+type ContainerProps = ColorsVariants & PercentProps
+export const Container = styled.div<ContainerProps>`
+  ${({ theme, $defaultColor, $lightTheme, $darkTheme, $lgPercent, $mdPercent, $smPercent}) => css`
     position: relative;
     display: grid;
-    ${PercentSize('width', { lgScreen: 100 })};
+    align-items: center;
+    justify-content:center;
+    ${PercentSize('width', { lgScreen: $lgPercent ?? 100, mdScreen: $mdPercent, smScreen: $smPercent})};
     height: auto;
     background-color: ${setColor({
       unique: $defaultColor,
@@ -20,7 +24,8 @@ export const Container = styled.div<ColorsVariants>`
     }
     > div {
       display: grid;
-      justify-content: space-between;
+      align-items: center;
+      justify-content: center;
       gap: 1rem;
       height: 100%;
       padding: 0.5rem;

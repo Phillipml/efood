@@ -10,6 +10,7 @@ export const FooterWraper = styled.footer<ColorsVariants>`
     $defaultColor = 'secondary',
     $darkTheme = 'quaternary'
   }) => setColor({ unique: $defaultColor, dark: $darkTheme })};
+  padding:2.5rem 0;
 `
 export const Container = styled(MainContainer)`
   display: flex;
@@ -27,7 +28,7 @@ export const Container = styled(MainContainer)`
       display: flex;
       flex-flow: row;
       justify-content: space-around;
-      width: 80%;
+      width: 50%;
       ${pxToRem('margin-top', { lgScreen: 32 })}
       a {
         display: flex;

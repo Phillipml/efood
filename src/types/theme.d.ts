@@ -20,3 +20,9 @@ export type ColorsVariants = {
   $darkTheme?: Variant
   $lightTheme?: Variant
 }
+
+export type TextColorsVariants = {
+  $textColor?: Variant
+  $textDarkTheme?: Variant
+  $textLightTheme?: Variant
+}

@@ -14,8 +14,8 @@ export const ButtonStyled = styled.button<Omit<ButtonTypes, 'children'>>`
     $buttonDarkThemeColor,
     $buttonLightThemeColor,
     $buttonTextColor,
+    $buttonTextDarkTheme,
     $buttonTextLightTheme,
-    $buttonTextDarkTheme
   }) => css`
     ${PercentSize('width', {
       lgScreen: $lgPercent,
@@ -34,8 +34,8 @@ export const ButtonStyled = styled.button<Omit<ButtonTypes, 'children'>>`
     })}
     color: ${setColor({
       unique: $buttonTextColor,
-      dark: $buttonTextLightTheme,
-      light: $buttonTextDarkTheme
+      dark: $buttonTextDarkTheme,
+      light: $buttonTextLightTheme
     })}
   `}
   padding: 4px 6px;

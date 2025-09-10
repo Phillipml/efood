@@ -3,7 +3,7 @@ const Restaurant = () => {
   return (
     <>
       <CardList
-        $lgPercent={100}
+        $buttonSize={100}
         $lightTheme="tertiary"
         $textColor="secondary"
         $textDarkTheme="tertiary"

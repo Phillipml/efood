@@ -1,4 +1,4 @@
-import { Logo } from '@/components/ui/Logo'
+import { Logo } from '@/components/ui/Brand'
 import Text from '@/components/ui/Text'
 import { Container } from './styles'
 import { FaFacebookF, FaTwitter } from 'react-icons/fa'

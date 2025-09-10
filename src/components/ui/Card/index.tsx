@@ -2,45 +2,50 @@ import { FaStar } from 'react-icons/fa6'
 import Text from '@/components/ui/Text'
 import { Container, Rating } from './styles'
 import Button, { type ButtonTypes } from '@/components/ui/Button'
-import type { ColorsVariants, Variant } from '@/types'
+import type { ColorsVariants, TextColorsVariants } from '@/types'
 
 export type CardProps = {
   image: string
   name: string
-  rating: string
+  rating: number
   description: string
   buttonTxt: string
-  $textColor?: Variant
-  $textDarkTheme?: Variant
-  $textLightTheme?: Variant
+  $buttonSize?: number
 } & ButtonTypes &
-  ColorsVariants
+  ColorsVariants & TextColorsVariants
 const Card = ({
   image,
   name,
   rating,
   description,
   buttonTxt,
-  $lgPercent,
+  $buttonSize,
   $defaultColor,
   $darkTheme = 'secondary',
   $lightTheme = 'primary',
   $buttonColor,
   $buttonDarkThemeColor,
   $buttonLightThemeColor,
-  $textColor,
-  $textDarkTheme,
-  $textLightTheme,
   $buttonTextColor,
   $buttonTextDarkTheme,
   $buttonTextLightTheme,
-  onClick
+  $textColor,
+  $textDarkTheme,
+  $textLightTheme,
+  onClick,
+  $lgPercent,
+  $mdPercent,
+  $smPercent
 }: CardProps) => {
   return (
     <Container
       $defaultColor={$defaultColor}
       $darkTheme={$darkTheme}
       $lightTheme={$lightTheme}
+      $lgPercent={$lgPercent}
+      $mdPercent={$mdPercent}
+      $smPercent={$smPercent}
+
     >
       <img src={image} alt={name + ' image'} />
       <div>
@@ -48,9 +53,9 @@ const Card = ({
           <Text
             as="title"
             $lgFontSize="lg"
-            $defaultColor={$textColor}
-            $darkTheme={$textDarkTheme}
-            $lightTheme={$textLightTheme}
+            $textColor={$textColor}
+            $textDarkTheme={$textDarkTheme}
+            $textLightTheme={$textLightTheme}
           >
             {name}
           </Text>
@@ -58,9 +63,9 @@ const Card = ({
             <Text
               as="span"
               $lgFontSize="lg"
-              $defaultColor={$textColor}
-              $darkTheme={$textDarkTheme}
-              $lightTheme={$textLightTheme}
+              $textColor={$textColor}
+              $textDarkTheme={$textDarkTheme}
+              $textLightTheme={$textLightTheme}
             >
               {rating}
             </Text>
@@ -68,15 +73,15 @@ const Card = ({
           </Rating>
         </div>
         <Text
-          $defaultColor={$textColor}
-          $darkTheme={$textDarkTheme}
-          $lightTheme={$textLightTheme}
+          $textColor={$textColor}
+          $textDarkTheme={$textDarkTheme}
+          $textLightTheme={$textLightTheme}
         >
           {description}
         </Text>
 
         <Button
-          $lgPercent={$lgPercent}
+          $lgPercent={$buttonSize}
           $buttonColor={$buttonColor}
           $buttonDarkThemeColor={$buttonDarkThemeColor}
           $buttonLightThemeColor={$buttonLightThemeColor}

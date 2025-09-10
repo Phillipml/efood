@@ -15,7 +15,6 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0 auto;
     color: ${({ theme }) => theme.primary};
     background-color: ${({ theme }) => theme.primary};
-
     &::-webkit-scrollbar {
       width: 10px;
       height: 10px;

@@ -8,15 +8,15 @@ export const TextContent = styled.p<Omit<TextProps, 'children' | 'as'>>`
     $lgFontSize,
     $mdFontSize,
     $smFontSize,
-    $defaultColor,
-    $darkTheme,
-    $lightTheme,
+    $textColor,
+    $textDarkTheme,
+    $textLightTheme,
     $alignCenter
   }) => css`
     color: ${setColor({
-      unique: $defaultColor,
-      dark: $darkTheme,
-      light: $lightTheme
+      unique: $textColor,
+      dark: $textDarkTheme,
+      light: $textLightTheme
     })}
     ${FontSize({
       lgScreen: $lgFontSize,
