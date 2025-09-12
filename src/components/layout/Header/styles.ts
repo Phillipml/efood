@@ -23,9 +23,10 @@ export const HeaderWrapper = styled.header<ColorsVariants>`
   align-items: center;
   ${pxToRem('padding', { lgScreen: 2 })};
   background-color: ${({
+      theme,
       $defaultColor = 'secondary',
       $darkTheme = 'quaternary'
-    }) => setColor({ unique: $defaultColor, dark: $darkTheme })}
+    }) => setColor(theme,{ unique: $defaultColor, dark: $darkTheme })}
     ${Container} {
     z-index: 1;
   }

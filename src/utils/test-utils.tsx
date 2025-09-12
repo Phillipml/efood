@@ -10,5 +10,5 @@ const customRender = (
 ) =>
   render(<ThemeProvider theme={$darkTheme}>{ui}</ThemeProvider>, renderOptions)
 
-export * from '@testing-library/react'
+export {screen, fireEvent,waitFor,act,cleanup,renderHook,waitForElementToBeRemoved} from '@testing-library/react'
 export { customRender as render }

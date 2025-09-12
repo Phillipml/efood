@@ -5,6 +5,7 @@ import type { TextProps } from '.'
 
 export const TextContent = styled.p<Omit<TextProps, 'children' | 'as'>>`
   ${({
+    theme,
     $lgFontSize,
     $mdFontSize,
     $smFontSize,
@@ -13,7 +14,8 @@ export const TextContent = styled.p<Omit<TextProps, 'children' | 'as'>>`
     $textLightTheme,
     $alignCenter
   }) => css`
-    color: ${setColor({
+    color: ${setColor(theme,
+    {
       unique: $textColor,
       dark: $textDarkTheme,
       light: $textLightTheme

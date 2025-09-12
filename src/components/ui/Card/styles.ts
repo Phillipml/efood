@@ -10,9 +10,9 @@ export const Container = styled.div<ContainerProps>`
     display: grid;
     align-items: center;
     justify-content:center;
-    ${PercentSize('width', { lgScreen: $lgPercent ?? 100, mdScreen: $mdPercent, smScreen: $smPercent})};
+    ${PercentSize('width', { lgScreen: $lgPercent, mdScreen: $mdPercent, smScreen: $smPercent})};
     height: auto;
-    background-color: ${setColor({
+    background-color: ${setColor(theme,{
       unique: $defaultColor,
       light: $lightTheme,
       dark: $darkTheme

@@ -84,7 +84,6 @@ export const pxToRem = (
     smScreen?: number
   }
 ) => {
-  tag
   const getSize = (value?: number) => {
     if (!value) return '1rem'
     const numberToRem = value / 16

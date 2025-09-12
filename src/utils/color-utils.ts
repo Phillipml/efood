@@ -1,17 +1,17 @@
 import type { Variant } from '@/types'
-import { useTheme } from 'styled-components'
+import type { DefaultTheme } from 'styled-components'
 
-export const setColor = ({
+export const setColor = ( theme:DefaultTheme,
+  {
   unique,
   dark,
-  light
+  light,
 }: {
   unique?: Variant
   dark?: Variant
   light?: Variant
+  
 }) => {
-  const theme = useTheme()
-
   const colors = {
     primary: `${theme.primary};`,
     secondary: `${theme.secondary};`,
@@ -23,23 +23,24 @@ export const setColor = ({
   const getColor = (variant: string) => {
     return Object.entries(colors).find(([color]) => color === variant)?.[1]
   }
-
+  const isLightTheme = theme.primary === '#FFF8F2'
+  const isDarkTheme = theme.primary === '#4B0D0D'
   switch (true) {
     case !dark && !light:
       return getColor(unique || 'primary')
 
     case !dark && !!light:
-      return theme.primary === '#FFF8F2'
+      return isLightTheme
         ? getColor(light!)
         : getColor(unique || 'primary')
 
     case !!dark && !light:
-      return theme.primary === '#4B0D0D'
+      return isDarkTheme
         ? getColor(dark!)
         : getColor(unique || 'primary')
 
     case !!dark && !!light:
-      return theme.primary === '#4B0D0D' ? getColor(dark!) : getColor(light!)
+      return isDarkTheme ? getColor(dark!) : getColor(light!)
 
     default:
       return getColor(unique || 'primary')

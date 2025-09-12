@@ -7,9 +7,10 @@ import styled from 'styled-components'
 export const FooterWraper = styled.footer<ColorsVariants>`
   width: 100%;
   background-color: ${({
+    theme,
     $defaultColor = 'secondary',
     $darkTheme = 'quaternary'
-  }) => setColor({ unique: $defaultColor, dark: $darkTheme })};
+  }) => setColor(theme,{ unique: $defaultColor, dark: $darkTheme })};
   padding:2.5rem 0;
 `
 export const Container = styled(MainContainer)`

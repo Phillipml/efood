@@ -4,6 +4,7 @@ import type { ButtonTypes } from './'
 import { setColor } from '@/utils/color-utils'
 export const ButtonStyled = styled.button<Omit<ButtonTypes, 'children'>>`
   ${({
+    theme,
     $lgFontSize,
     $mdFontSize,
     $smFontSize,
@@ -27,12 +28,12 @@ export const ButtonStyled = styled.button<Omit<ButtonTypes, 'children'>>`
       mdScreen: $mdFontSize,
       smScreen: $smFontSize
     })}
-    background-color: ${setColor({
+    background-color: ${setColor(theme,{
       unique: $buttonColor,
       dark: $buttonDarkThemeColor,
       light: $buttonLightThemeColor
     })}
-    color: ${setColor({
+    color: ${setColor(theme,{
       unique: $buttonTextColor,
       dark: $buttonTextDarkTheme,
       light: $buttonTextLightTheme
