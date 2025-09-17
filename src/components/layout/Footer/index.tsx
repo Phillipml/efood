@@ -11,7 +11,7 @@ const Footer = () => {
     <FooterWraper>
       <Container>
         <div>
-          <Logo $lgRem={186} />
+          <Logo $lgRem={125} />
           <div>
             <Link to="/">
               <ImInstagram />
@@ -24,7 +24,11 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <Text $textColor="tertiary" $textDarkTheme="primary"$alignCenter={true}>
+        <Text
+          $textColor="tertiary"
+          $textDarkTheme="primary"
+          $alignCenter={true}
+        >
           A efood é uma plataforma para divulgação de estabelecimentos, a
           responsibilidade pela entrega, qualidade dos produtos é toda do
           estabelecimento contratado.

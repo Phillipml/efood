@@ -14,7 +14,7 @@ export const RestaurantHeader = () => {
         >
           Restaurantes
         </Text>
-        <Logo $lgRem={186} />
+        <Logo $lgRem={125} />
         <Text
           as="title"
           $textColor="tertiary"

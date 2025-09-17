@@ -10,8 +10,8 @@ export const FooterWraper = styled.footer<ColorsVariants>`
     theme,
     $defaultColor = 'secondary',
     $darkTheme = 'quaternary'
-  }) => setColor(theme,{ unique: $defaultColor, dark: $darkTheme })};
-  padding:2.5rem 0;
+  }) => setColor(theme, { unique: $defaultColor, dark: $darkTheme })};
+  padding: 2.5rem 0;
 `
 export const Container = styled(MainContainer)`
   display: flex;
@@ -24,12 +24,14 @@ export const Container = styled(MainContainer)`
     flex-direction: column;
     ${PercentSize('width', { lgScreen: 30, mdScreen: 40 })};
     align-items: center;
-    ${pxToRem('padding-bottom', { lgScreen: 32 })}
+    ${pxToRem('margin-bottom', { lgScreen: 80 })}
     div {
       display: flex;
       flex-flow: row;
       justify-content: space-around;
-      width: 50%;
+      align-items: center;
+      ${pxToRem('width', { lgScreen: 125 })};
+      height: auto;
       ${pxToRem('margin-top', { lgScreen: 32 })}
       a {
         display: flex;

@@ -1,9 +1,11 @@
 import { MainContainer } from '@/styles/reset'
 import { pxToRem } from '@utils/size-utils'
-import styled from 'styled-components'
+import { css, styled } from 'styled-components'
 import iconSvg from '@assets/images/icon.svg?raw'
-import type { ColorsVariants } from '@/types'
+import type { ColorsVariants, RemProps } from '@/types'
 import { setColor } from '@/utils/color-utils'
+
+type LogoProps = ColorsVariants & RemProps
 
 export const Container = styled(MainContainer)`
   display: flex;
@@ -13,21 +15,34 @@ export const Container = styled(MainContainer)`
   height: 100%;
 `
 
-export const HeaderWrapper = styled.header<ColorsVariants>`
+export const HeaderWrapper = styled.header<LogoProps>`
+  ${({
+    theme,
+    $defaultColor = 'secondary',
+    $darkTheme = 'quaternary',
+    $lgRem,
+    $mdRem,
+    $smRem
+  }) => css`
+    background-color: ${setColor(theme, {
+      unique: $defaultColor,
+      dark: $darkTheme
+    })};
+    ${pxToRem('height', {
+      lgScreen: $lgRem || 384,
+      mdScreen: $mdRem,
+      smScreen: $smRem
+    })}
+  `}
   position: relative;
   width: 100%;
-  ${pxToRem('height', { lgScreen: 384 })}
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   ${pxToRem('padding', { lgScreen: 2 })};
-  background-color: ${({
-      theme,
-      $defaultColor = 'secondary',
-      $darkTheme = 'quaternary'
-    }) => setColor(theme,{ unique: $defaultColor, dark: $darkTheme })}
-    ${Container} {
+
+  ${Container} {
     z-index: 1;
   }
   &::after {

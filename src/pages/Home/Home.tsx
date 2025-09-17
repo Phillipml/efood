@@ -9,7 +9,7 @@ const Home = () => {
 
   return (
     <CardList
-      $buttonSize={25}
+      $buttonSize={14}
       $textDarkTheme="tertiary"
       buttonTxt="Saiba Mais"
       onClick={goToRestaurant}

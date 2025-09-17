@@ -12,7 +12,8 @@ export type CardProps = {
   buttonTxt: string
   $buttonSize?: number
 } & ButtonTypes &
-  ColorsVariants & TextColorsVariants
+  ColorsVariants &
+  TextColorsVariants
 const Card = ({
   image,
   name,
@@ -45,7 +46,6 @@ const Card = ({
       $lgPercent={$lgPercent}
       $mdPercent={$mdPercent}
       $smPercent={$smPercent}
-
     >
       <img src={image} alt={name + ' image'} />
       <div>

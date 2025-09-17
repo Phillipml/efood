@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <Container>
-        <Logo $lgRem={186} />
+        <Logo $lgRem={125} $smRem={125} />
         <Text
           as="title"
           $textColor="tertiary"
