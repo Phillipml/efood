@@ -3,7 +3,6 @@ import ThemeButton from '.'
 
 export default {
   title: 'ThemeButton',
-  component: ThemeButton,
-  tags: ['autodocs']
+  component: ThemeButton
 } as Meta
 export const Default: StoryObj<typeof ThemeButton> = {}

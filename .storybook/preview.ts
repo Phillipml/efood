@@ -16,6 +16,7 @@ export const decorators = [
   })
 ]
 const preview: Preview = {
+  tags: ['autodocs'],
   parameters: {
     actions: { argTypeRegex: '^on[A-Z].*' },
     controls: {
@@ -26,3 +27,4 @@ const preview: Preview = {
     }
   }
 }
+export default preview

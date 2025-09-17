@@ -11,7 +11,6 @@ export default {
   title: 'Card',
   component: Card,
   layout: 'centered',
-  tags: ['autodocs'],
   argTypes: {
     image: {
       control: false,

@@ -4,7 +4,6 @@ import CardList from '.'
 export default {
   title: 'Card List',
   component: CardList,
-  tags: ['autodocs'],
   parameters: {
     layout: 'padded'
   },
@@ -43,7 +42,6 @@ export const Mobile: Story = {
     buttonTxt: 'Texto do botão'
   },
   globals: {
-    // 👇 Override viewport for this story
     viewport: { value: 'mobile1', isRotated: false }
   }
 }
