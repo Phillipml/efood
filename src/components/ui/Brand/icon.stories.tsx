@@ -1,21 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { RemProps } from '@utils/storybook-controls'
 import { Icon } from '.'
-import { BrowserRouter } from 'react-router-dom'
-
 export default {
-  title: 'Icon',
+  title: 'ui/Icon',
   component: Icon,
   parameters: {
     layout: 'centered'
   },
-  decorators: [
-    (Story) => (
-      <BrowserRouter>
-        <Story />
-      </BrowserRouter>
-    )
-  ],
   ...RemProps
 } as Meta
 

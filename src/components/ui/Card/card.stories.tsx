@@ -8,7 +8,7 @@ import {
 import Card from '.'
 
 export default {
-  title: 'Card',
+  title: 'ui/Card',
   component: Card,
   layout: 'centered',
   argTypes: {

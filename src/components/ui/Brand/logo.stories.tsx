@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { RemProps } from '@utils/storybook-controls'
 import { Logo } from '.'
-import { BrowserRouter } from 'react-router-dom'
 
 export default {
-  title: 'Logo',
+  title: 'ui/Logo',
   component: Logo,
   parameters: {
     layout: 'centered',
@@ -14,13 +13,6 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => (
-      <BrowserRouter>
-        <Story />
-      </BrowserRouter>
-    )
-  ],
   ...RemProps
 } as Meta
 

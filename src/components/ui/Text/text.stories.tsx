@@ -4,7 +4,7 @@ import { FaPalette } from 'react-icons/fa6'
 import Text from '.'
 
 export default {
-  title: 'Text-Title',
+  title: 'ui/Text-Title',
   component: Text,
   parameters: {
     layout: 'padded'

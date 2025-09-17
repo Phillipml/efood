@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { buttonColorsVariants, colorsVariants } from '@utils/storybook-controls'
 import CardList from '.'
 export default {
-  title: 'Card List',
+  title: 'layout/Card List',
   component: CardList,
   parameters: {
     layout: 'padded'

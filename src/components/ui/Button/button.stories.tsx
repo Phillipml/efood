@@ -7,7 +7,7 @@ import {
 import Button from '.'
 
 export default {
-  title: 'Button',
+  title: 'ui/Button',
   component: Button,
   parameters: {
     layout: 'centered'

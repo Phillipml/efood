@@ -3,6 +3,8 @@ import type { Preview } from '@storybook/react'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyles from '../src/styles/reset'
 import { $darkTheme, $lightTheme } from '../src/styles/theme'
+import { BrowserRouter } from 'react-router-dom'
+import { withRouter } from 'storybook-addon-remix-react-router'
 
 export const decorators = [
   withThemeFromJSXProvider({
@@ -13,7 +15,8 @@ export const decorators = [
     defaultTheme: 'light',
     Provider: ThemeProvider,
     GlobalStyles
-  })
+  }),
+  withRouter
 ]
 const preview: Preview = {
   tags: ['autodocs'],
