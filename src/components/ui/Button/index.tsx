@@ -1,4 +1,4 @@
-import type { FontSizeProps, PercentProps, Variant } from '@/types'
+import type { FontSizeProps, Variant } from '@/types'
 import { ButtonStyled } from './styles'
 export type ButtonTypes = {
   children?: string
@@ -8,17 +8,19 @@ export type ButtonTypes = {
   $buttonTextColor?: Variant
   $buttonTextDarkTheme?: Variant
   $buttonTextLightTheme?: Variant
+  $lgButtonPercent?: number
+  $mdButtonPercent?: number
+  $smButtonPercent?: number
   onClick?: () => void
-} & PercentProps &
-  FontSizeProps
+} & FontSizeProps
 const Button = ({
   children = 'Texto Botão',
   $lgFontSize = 'md',
   $mdFontSize,
   $smFontSize,
-  $lgPercent,
-  $mdPercent,
-  $smPercent,
+  $lgButtonPercent,
+  $mdButtonPercent,
+  $smButtonPercent,
   $buttonColor = 'tertiary',
   $buttonDarkThemeColor,
   $buttonLightThemeColor,
@@ -32,9 +34,9 @@ const Button = ({
       $lgFontSize={$lgFontSize}
       $mdFontSize={$mdFontSize}
       $smFontSize={$smFontSize}
-      $lgPercent={$lgPercent}
-      $mdPercent={$mdPercent}
-      $smPercent={$smPercent}
+      $lgButtonPercent={$lgButtonPercent}
+      $mdButtonPercent={$mdButtonPercent}
+      $smButtonPercent={$smButtonPercent}
       $buttonColor={$buttonColor}
       $buttonDarkThemeColor={$buttonDarkThemeColor}
       $buttonLightThemeColor={$buttonLightThemeColor}

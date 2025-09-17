@@ -8,32 +8,32 @@ export const ButtonStyled = styled.button<Omit<ButtonTypes, 'children'>>`
     $lgFontSize,
     $mdFontSize,
     $smFontSize,
-    $lgPercent,
-    $mdPercent,
-    $smPercent,
+    $lgButtonPercent,
+    $mdButtonPercent,
+    $smButtonPercent,
     $buttonColor,
     $buttonDarkThemeColor,
     $buttonLightThemeColor,
     $buttonTextColor,
     $buttonTextDarkTheme,
-    $buttonTextLightTheme,
+    $buttonTextLightTheme
   }) => css`
     ${PercentSize('width', {
-      lgScreen: $lgPercent,
-      mdScreen: $mdPercent,
-      smScreen: $smPercent
+      lgScreen: $lgButtonPercent,
+      mdScreen: $mdButtonPercent,
+      smScreen: $smButtonPercent
     })};
     ${FontSize({
       lgScreen: $lgFontSize,
       mdScreen: $mdFontSize,
       smScreen: $smFontSize
     })}
-    background-color: ${setColor(theme,{
+    background-color: ${setColor(theme, {
       unique: $buttonColor,
       dark: $buttonDarkThemeColor,
       light: $buttonLightThemeColor
     })}
-    color: ${setColor(theme,{
+    color: ${setColor(theme, {
       unique: $buttonTextColor,
       dark: $buttonTextDarkTheme,
       light: $buttonTextLightTheme

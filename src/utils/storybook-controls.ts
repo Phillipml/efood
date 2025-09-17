@@ -55,6 +55,24 @@ export const PercentSizes = {
     description: 'Escolher porcentagem referente ao width para telas pequenas'
   }
 }
+
+export const ButtonPercentSizes = {
+  $lgButtonPercent: {
+    control: 'number',
+    description:
+      'Escolher porcentagem referente ao width do botão para telas maiores'
+  },
+  $mdButtonPercent: {
+    control: 'number',
+    description:
+      'Escolher porcentagem referente ao width do botão para telas médias'
+  },
+  $smButtonPercent: {
+    control: 'number',
+    description:
+      'Escolher porcentagem referente ao width do botão para telas pequenas'
+  }
+}
 export const colorsVariants = {
   $defaultColor: {
     control: 'select',

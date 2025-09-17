@@ -2,7 +2,7 @@ import { FaStar } from 'react-icons/fa6'
 import Text from '@/components/ui/Text'
 import { Container, Rating } from './styles'
 import Button, { type ButtonTypes } from '@/components/ui/Button'
-import type { ColorsVariants, TextColorsVariants } from '@/types'
+import type { ColorsVariants, TextColorsVariants, PercentProps } from '@/types'
 
 export type CardProps = {
   image: string
@@ -10,17 +10,16 @@ export type CardProps = {
   rating: number
   description: string
   buttonTxt: string
-  $buttonSize?: number
 } & ButtonTypes &
   ColorsVariants &
-  TextColorsVariants
+  TextColorsVariants &
+  PercentProps
 const Card = ({
   image,
   name,
   rating,
   description,
   buttonTxt,
-  $buttonSize,
   $defaultColor,
   $darkTheme = 'secondary',
   $lightTheme = 'primary',
@@ -33,6 +32,9 @@ const Card = ({
   $textColor,
   $textDarkTheme,
   $textLightTheme,
+  $lgButtonPercent,
+  $mdButtonPercent,
+  $smButtonPercent,
   onClick,
   $lgPercent,
   $mdPercent,
@@ -81,7 +83,9 @@ const Card = ({
         </Text>
 
         <Button
-          $lgPercent={$buttonSize}
+          $lgButtonPercent={$lgButtonPercent}
+          $mdButtonPercent={$mdButtonPercent}
+          $smButtonPercent={$smButtonPercent}
           $buttonColor={$buttonColor}
           $buttonDarkThemeColor={$buttonDarkThemeColor}
           $buttonLightThemeColor={$buttonLightThemeColor}

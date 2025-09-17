@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import {
   fontSizes,
   buttonColorsVariants,
-  PercentSizes
+  ButtonPercentSizes
 } from '@/utils/storybook-controls'
 import Button from '.'
 
@@ -19,7 +19,7 @@ export default {
     },
     ...buttonColorsVariants,
     ...fontSizes,
-    ...PercentSizes,
+    ...ButtonPercentSizes,
     onClick: {
       action: 'clicked'
     }

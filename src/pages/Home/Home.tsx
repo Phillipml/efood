@@ -9,7 +9,8 @@ const Home = () => {
 
   return (
     <CardList
-      $buttonSize={14}
+      $lgButtonPercent={24}
+      $mdButtonPercent={28}
       $textDarkTheme="tertiary"
       buttonTxt="Saiba Mais"
       onClick={goToRestaurant}
