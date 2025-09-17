@@ -30,18 +30,20 @@ export const Default: Story = {
   args: {
     $darkTheme: 'secondary',
     $lightTheme: 'primary',
-    $buttonSize: 25,
-    buttonTxt: 'Texto do botão'
+    $lgButtonPercent: 24,
+    $mdButtonPercent: 28,
+    buttonTxt: 'Saiba Mais'
   }
 }
 export const Mobile: Story = {
   args: {
     $darkTheme: 'secondary',
     $lightTheme: 'primary',
-    $buttonSize: 25,
-    buttonTxt: 'Texto do botão'
+    $lgButtonPercent: 24,
+    $mdButtonPercent: 28,
+    buttonTxt: 'Saiba Mais'
   },
   globals: {
-    viewport: { value: 'mobile1', isRotated: false }
+    viewport: { value: 'mobile2', isRotated: false }
   }
 }
