@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import ThemeButton from '.'
 
 export default {
-  title: 'ThemeButton',
+  title: 'ui/ThemeButton',
   component: ThemeButton
 } as Meta
 export const Default: StoryObj<typeof ThemeButton> = {}

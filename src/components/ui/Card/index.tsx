@@ -1,33 +1,101 @@
 import { FaStar } from 'react-icons/fa6'
 import Text from '@/components/ui/Text'
-import { Container, Rating, Button } from './styles'
+import { Container, Rating } from './styles'
+import Button, { type ButtonTypes } from '@/components/ui/Button'
+import type { ColorsVariants, TextColorsVariants, PercentProps } from '@/types'
 
-type CardProps = {
+export type CardProps = {
   image: string
   name: string
-  rating: string
+  rating: number
   description: string
   buttonTxt: string
-}
-const Card = ({ image, name, rating, description, buttonTxt }: CardProps) => {
+} & ButtonTypes &
+  ColorsVariants &
+  TextColorsVariants &
+  PercentProps
+const Card = ({
+  image,
+  name,
+  rating,
+  description,
+  buttonTxt,
+  $defaultColor,
+  $darkTheme = 'secondary',
+  $lightTheme = 'primary',
+  $buttonColor,
+  $buttonDarkThemeColor,
+  $buttonLightThemeColor,
+  $buttonTextColor,
+  $buttonTextDarkTheme,
+  $buttonTextLightTheme,
+  $textColor,
+  $textDarkTheme,
+  $textLightTheme,
+  $lgButtonPercent,
+  $mdButtonPercent,
+  $smButtonPercent,
+  onClick,
+  $lgPercent,
+  $mdPercent,
+  $smPercent
+}: CardProps) => {
   return (
-    <Container>
+    <Container
+      $defaultColor={$defaultColor}
+      $darkTheme={$darkTheme}
+      $lightTheme={$lightTheme}
+      $lgPercent={$lgPercent}
+      $mdPercent={$mdPercent}
+      $smPercent={$smPercent}
+    >
       <img src={image} alt={name + ' image'} />
       <div>
         <div>
-          <Text as="title" $lgFontSize="lg">
+          <Text
+            as="title"
+            $lgFontSize="lg"
+            $textColor={$textColor}
+            $textDarkTheme={$textDarkTheme}
+            $textLightTheme={$textLightTheme}
+          >
             {name}
           </Text>
           <Rating>
-            <Text as="span" $lgFontSize="lg">
+            <Text
+              as="span"
+              $lgFontSize="lg"
+              $textColor={$textColor}
+              $textDarkTheme={$textDarkTheme}
+              $textLightTheme={$textLightTheme}
+            >
               {rating}
             </Text>
             <FaStar />
           </Rating>
         </div>
-        <Text>{description}</Text>
+        <Text
+          $textColor={$textColor}
+          $textDarkTheme={$textDarkTheme}
+          $textLightTheme={$textLightTheme}
+        >
+          {description}
+        </Text>
 
-        <Button>{buttonTxt}</Button>
+        <Button
+          $lgButtonPercent={$lgButtonPercent}
+          $mdButtonPercent={$mdButtonPercent}
+          $smButtonPercent={$smButtonPercent}
+          $buttonColor={$buttonColor}
+          $buttonDarkThemeColor={$buttonDarkThemeColor}
+          $buttonLightThemeColor={$buttonLightThemeColor}
+          $buttonTextColor={$buttonTextColor}
+          $buttonTextDarkTheme={$buttonTextDarkTheme}
+          $buttonTextLightTheme={$buttonTextLightTheme}
+          onClick={onClick}
+        >
+          {buttonTxt}
+        </Button>
       </div>
     </Container>
   )

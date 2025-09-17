@@ -1,17 +1,22 @@
 import styled, { css } from 'styled-components'
 import { FontSize, PercentSize } from '@/utils/size-utils'
-import type { ColorsVariants } from '@/types'
+import type { ColorsVariants, PercentProps } from '@/types'
 import { setColor } from '@/utils/color-utils'
-export const Container = styled.div<ColorsVariants>`
-  ${({ theme, lightTheme, darkTheme }) => css`
+
+type ContainerProps = ColorsVariants & PercentProps
+export const Container = styled.div<ContainerProps>`
+  ${({ theme, $defaultColor, $lightTheme, $darkTheme, $lgPercent, $mdPercent, $smPercent}) => css`
     position: relative;
     display: grid;
-    ${PercentSize('width', { lgScreen: 100 })};
+    align-items: center;
+    justify-content:center;
+    ${PercentSize('width', { lgScreen: $lgPercent, mdScreen: $mdPercent, smScreen: $smPercent})};
     height: auto;
-    background-color: ${setColor({
-      light: (lightTheme = 'primary'),
-      dark: (darkTheme = 'secondary')
-    })};
+    background-color: ${setColor(theme,{
+      unique: $defaultColor,
+      light: $lightTheme,
+      dark: $darkTheme
+    })}
     border: 1px solid ${theme.tertiary};
     > img {
       width: 100%;
@@ -19,7 +24,8 @@ export const Container = styled.div<ColorsVariants>`
     }
     > div {
       display: grid;
-      justify-content: space-between;
+      align-items: center;
+      justify-content: center;
       gap: 1rem;
       height: 100%;
       padding: 0.5rem;
@@ -40,14 +46,4 @@ export const Rating = styled.div`
     color: ${({ theme }) => theme.quaternary};
     ${FontSize({ lgScreen: 'lg' })}
   }
-`
-export const Button = styled.button`
-  ${PercentSize('width', { lgScreen: 25 })}
-  padding: 4px 6px;
-  font-weight: bold;
-  text-align: center;
-  border: none;
-  color: ${({ theme }) => theme.secondary};
-  background-color: ${({ theme }) => theme.tertiary};
-  cursor: pointer;
 `

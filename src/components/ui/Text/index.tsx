@@ -1,18 +1,18 @@
-import type { FontSizeProps, ColorsVariants } from '@/types'
+import type { FontSizeProps, TextColorsVariants } from '@/types'
 import { TextContent } from './styles'
 export type TextProps = {
   children: React.ReactNode
   as?: 'p' | 'span' | 'title'
-  alignCenter?: boolean
+  $alignCenter?: boolean
 } & FontSizeProps &
-  ColorsVariants
+  TextColorsVariants
 export const Text = ({
   children,
   as = 'p',
-  color = 'tertiary',
-  darkTheme,
-  lightTheme,
-  alignCenter = false,
+  $textColor = 'tertiary',
+  $textDarkTheme,
+  $textLightTheme,
+  $alignCenter = false,
   $lgFontSize,
   $mdFontSize,
   $smFontSize
@@ -22,13 +22,13 @@ export const Text = ({
       {as === 'title' ? (
         <TextContent
           as="h2"
-          $lgFontSize={$lgFontSize}
+          $lgFontSize={$lgFontSize ?? 'xl'}
           $mdFontSize={$mdFontSize}
           $smFontSize={$smFontSize}
-          color={color}
-          darkTheme={darkTheme}
-          lightTheme={lightTheme}
-          alignCenter={alignCenter}
+          $textColor={$textColor}
+          $textDarkTheme={$textDarkTheme}
+          $textLightTheme={$textLightTheme}
+          $alignCenter={$alignCenter ?? true}
         >
           {children}
         </TextContent>
@@ -38,10 +38,10 @@ export const Text = ({
           $lgFontSize={$lgFontSize}
           $mdFontSize={$mdFontSize}
           $smFontSize={$smFontSize}
-          color={color}
-          darkTheme={darkTheme}
-          lightTheme={lightTheme}
-          alignCenter={alignCenter}
+          $textColor={$textColor}
+          $textDarkTheme={$textDarkTheme}
+          $textLightTheme={$textLightTheme}
+          $alignCenter={$alignCenter}
         >
           {children}
         </TextContent>

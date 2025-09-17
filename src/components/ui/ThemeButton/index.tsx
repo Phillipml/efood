@@ -1,10 +1,10 @@
 import { FaMoon, FaSun } from 'react-icons/fa6'
 import { useTheme } from 'styled-components'
 import { ThemeBtn } from './styles'
-type ThemeButtonProps = {
+type ThemebuttonColorsVariants = {
   onClick: () => void
 }
-const ThemeButton = ({ onClick }: ThemeButtonProps) => {
+const ThemeButton = ({ onClick }: ThemebuttonColorsVariants) => {
   const theme = useTheme()
   return (
     <>

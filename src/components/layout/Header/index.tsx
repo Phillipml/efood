@@ -1,18 +1,27 @@
-import { Logo } from '@/components/ui/Logo'
+import { Logo } from '@/components/ui/Brand'
 import Text from '@/components/ui/Text'
 import { Container, HeaderWrapper } from './styles'
+import { useLocation } from 'react-router-dom'
+import { RestaurantHeader } from './RestaurantHeader'
 
 const Header = () => {
+  const location = useLocation()
+  const isRestaurant = location.pathname === '/restaurant'
+
+  if (isRestaurant) {
+    return <RestaurantHeader />
+  }
+
   return (
     <HeaderWrapper>
       <Container>
-        <Logo $lgVw={10} $mdVw={22} />
+        <Logo $lgRem={125} $smRem={125} />
         <Text
           as="title"
-          color="tertiary"
-          darkTheme="primary"
+          $textColor="tertiary"
+          $textDarkTheme="primary"
           $lgFontSize="xl"
-          alignCenter={true}
+          $alignCenter={true}
         >
           Viva experiências gastronômicas <br /> no conforto da sua casa
         </Text>
@@ -20,4 +29,5 @@ const Header = () => {
     </HeaderWrapper>
   )
 }
+
 export default Header

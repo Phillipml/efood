@@ -5,24 +5,26 @@ import type { TextProps } from '.'
 
 export const TextContent = styled.p<Omit<TextProps, 'children' | 'as'>>`
   ${({
+    theme,
     $lgFontSize,
     $mdFontSize,
     $smFontSize,
-    color,
-    darkTheme,
-    lightTheme,
-    alignCenter
+    $textColor,
+    $textDarkTheme,
+    $textLightTheme,
+    $alignCenter
   }) => css`
-    color: ${setColor({
-      unique: color,
-      dark: darkTheme,
-      light: lightTheme
-    })};
+    color: ${setColor(theme,
+    {
+      unique: $textColor,
+      dark: $textDarkTheme,
+      light: $textLightTheme
+    })}
     ${FontSize({
       lgScreen: $lgFontSize,
       mdScreen: $mdFontSize,
       smScreen: $smFontSize
     })}
-    text-align: ${alignCenter ? 'center' : 'left'};
+    text-align: ${$alignCenter ? 'center' : 'left'};
   `}
 `

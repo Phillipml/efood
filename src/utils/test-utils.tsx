@@ -1,4 +1,4 @@
-import { DarkTheme } from '@/styles/theme'
+import { $darkTheme } from '@/styles/theme'
 import { render, type RenderOptions } from '@testing-library/react'
 import type { ReactElement } from 'react'
 import { ThemeProvider } from 'styled-components'
@@ -8,7 +8,7 @@ const customRender = (
   ui: ReactElement,
   { ...renderOptions }: CustomRenderProps = {}
 ) =>
-  render(<ThemeProvider theme={DarkTheme}>{ui}</ThemeProvider>, renderOptions)
+  render(<ThemeProvider theme={$darkTheme}>{ui}</ThemeProvider>, renderOptions)
 
-export * from '@testing-library/react'
+export {screen, fireEvent,waitFor,act,cleanup,renderHook,waitForElementToBeRemoved} from '@testing-library/react'
 export { customRender as render }
