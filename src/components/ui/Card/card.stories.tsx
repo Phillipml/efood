@@ -3,8 +3,8 @@ import {
   colorsVariants,
   buttonColorsVariants,
   textColorsVariants,
-  PercentSizes
-} from '@utils/storybook-controls'
+  ButtonPercentSizes
+} from '@/utils/storybook-controls'
 import Card from '.'
 
 export default {
@@ -31,7 +31,7 @@ export default {
     ...colorsVariants,
     ...textColorsVariants,
     ...buttonColorsVariants,
-    ...PercentSizes
+    ...ButtonPercentSizes
   }
 } as Meta
 
