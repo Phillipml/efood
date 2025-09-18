@@ -1,69 +1,155 @@
-# React + TypeScript + Vite
+# eFood
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Uma aplicação moderna de delivery de comida construída com React, TypeScript e Styled Components.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Página Inicial** - Catálogo de restaurantes
+- **Página de Restaurantes** - Lista detalhada de estabelecimentos
+- **Tema Escuro/Claro** - Toggle entre temas
+- **Design Responsivo** - Desktop, tablet e mobile
+- **Sistema de Design** - Componentes reutilizáveis
 
-## Expanding the ESLint configuration
+## Tecnologias
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 19** + **TypeScript**
+- **Vite** - Build tool
+- **Styled Components** - CSS-in-JS
+- **React Router** - Roteamento
+- **Storybook** - Desenvolvimento de componentes
+- **Jest** - Testes unitários
+- **Playwright** - Testes E2E
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Como Executar
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+```bash
+# Clone e instale
+git clone https://github.com/Phillipml/efood.git
+cd efood
+npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Execute o projeto
+npm run dev
+
+# Acesse http://localhost:3000
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Scripts Disponíveis
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Desenvolvimento
+npm run dev              # Servidor de desenvolvimento
+npm run dev-host         # Com acesso externo
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Build
+npm run build            # Build de produção
+npm run preview          # Preview do build
+
+# Testes
+npm run test             # Testes unitários
+npm run test:watch       # Testes em modo watch
+npm run test:coverage    # Testes com cobertura
+npm run test:playwright  # Testes E2E
+
+# Storybook
+npm run storybook        # Inicia Storybook
+npm run build-storybook  # Build do Storybook
+
+# Qualidade
+npm run lint             # ESLint
 ```
+
+## Estrutura do Projeto
+
+```
+src/
+├── components/          # Componentes reutilizáveis
+│   ├── ui/             # Componentes de interface
+│   └── layout/         # Componentes de layout
+├── pages/              # Páginas da aplicação
+├── hooks/              # Hooks customizados
+├── utils/              # Funções utilitárias
+├── styles/             # Estilos globais
+├── types/              # Definições de tipos
+└── assets/             # Recursos estáticos
+```
+
+## Componentes Principais
+
+### Button
+
+Botão customizável com suporte a temas e responsividade.
+
+```tsx
+<Button
+  $buttonColor="primary"
+  $lgButtonPercent={50}
+  onClick={() => console.log('Clicado!')}
+>
+  Clique aqui
+</Button>
+```
+
+### Card
+
+Card para exibir informações de restaurantes.
+
+```tsx
+<Card
+  image="/restaurant.jpg"
+  name="Restaurante Exemplo"
+  rating={4.5}
+  description="Deliciosa comida caseira"
+  buttonTxt="Ver Cardápio"
+/>
+```
+
+### Text
+
+Componente de texto flexível.
+
+```tsx
+<Text as="title" $textColor="tertiary" $lgFontSize="xl" $alignCenter={true}>
+  Título Principal
+</Text>
+```
+
+## Testes
+
+### Testes Unitários (Jest)
+
+```bash
+npm run test
+```
+
+### Testes E2E (Playwright)
+
+```bash
+npm run test:playwright
+```
+
+## Storybook
+
+Acesse o Storybook para ver todos os componentes:
+
+```bash
+npm run storybook
+```
+
+## Deploy
+
+```bash
+# Build de produção
+npm run build
+
+# Preview local
+npm run preview
+```
+
+## Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+**Desenvolvido com React + TypeScript**
