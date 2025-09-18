@@ -96,7 +96,8 @@ describe('color-utils', () => {
     describe('Casos edge', () => {
       it('retorna undefined para variante inexistente', () => {
         const result = setColor(mockLightTheme, {
-          unique: 'inexistente'
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          unique: 'inexistente' as any
         })
         expect(result).toBeUndefined()
       })
