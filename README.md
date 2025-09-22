@@ -4,11 +4,13 @@ Uma aplicação moderna de delivery de comida construída com React, TypeScript 
 
 ## Funcionalidades
 
-- **Página Inicial** - Catálogo de restaurantes
+- **Página Inicial** - Catálogo de restaurantes com navegação
 - **Página de Restaurantes** - Lista detalhada de estabelecimentos
+- **Roteamento** - Navegação entre páginas com React Router
 - **Tema Escuro/Claro** - Toggle entre temas
 - **Design Responsivo** - Desktop, tablet e mobile
 - **Sistema de Design** - Componentes reutilizáveis
+- **Testes Completos** - Cobertura de testes unitários e E2E
 
 ## Tecnologias
 
@@ -71,7 +73,17 @@ src/
 ├── utils/              # Funções utilitárias
 ├── styles/             # Estilos globais
 ├── types/              # Definições de tipos
-└── assets/             # Recursos estáticos
+├── assets/             # Recursos estáticos
+└── *.test.tsx          # Testes unitários
+
+testes/
+├── e2e/                # Testes end-to-end (Playwright)
+└── components/         # Testes de componentes
+
+configuração/
+├── .jest/              # Configuração do Jest
+├── jest.config.cjs     # Configuração principal do Jest
+└── playwright.config.ts # Configuração do Playwright
 ```
 
 ## Componentes Principais
@@ -118,11 +130,43 @@ Componente de texto flexível.
 
 ### Testes Unitários (Jest)
 
+O projeto utiliza Jest para testes unitários com cobertura completa dos componentes e funcionalidades.
+
 ```bash
+# Executar todos os testes
 npm run test
+
+# Testes em modo watch
+npm run test:watch
+
+# Testes com cobertura de código
+npm run test:coverage
+
+# Executar teste específico
+npm test -- src/routes.test.tsx
+```
+
+#### Cobertura de Testes
+
+- **Rotas** - Testes completos de navegação e renderização
+- **Componentes** - Testes de renderização e interação
+- **Utilitários** - Testes de funções auxiliares
+- **Hooks** - Testes de lógica customizada
+
+#### Exemplo de Teste de Rotas
+
+```tsx
+describe('Routes', () => {
+  it('renderiza rota home corretamente', () => {
+    renderWithProviders(<RoutesApp />, ['/'])
+    expect(screen.getByTestId('card-button')).toHaveTextContent('Saiba Mais')
+  })
+})
 ```
 
 ### Testes E2E (Playwright)
+
+Testes end-to-end para validar fluxos completos da aplicação.
 
 ```bash
 npm run test:playwright
@@ -135,6 +179,35 @@ Acesse o Storybook para ver todos os componentes:
 ```bash
 npm run storybook
 ```
+
+## Qualidade de Código
+
+### Linting e Formatação
+
+```bash
+# Executar ESLint
+npm run lint
+
+# Verificar tipos TypeScript
+npx tsc --noEmit
+```
+
+### Cobertura de Testes
+
+O projeto mantém alta cobertura de testes:
+
+- **Rotas**: 100% - Navegação e renderização
+- **Componentes**: Cobertura completa dos props e interações
+- **Utilitários**: 100% - Funções auxiliares testadas
+- **Hooks**: Cobertura completa da lógica customizada
+
+### Boas Práticas
+
+- **TypeScript** - Tipagem forte em todo o projeto
+- **Testes** - Cobertura completa com Jest e Playwright
+- **Componentes** - Design system consistente
+- **Performance** - Otimizações com Vite
+- **Acessibilidade** - Componentes acessíveis
 
 ## Deploy
 
