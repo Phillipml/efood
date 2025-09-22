@@ -10,7 +10,8 @@ Uma aplicação moderna de delivery de comida construída com React, TypeScript 
 - **Tema Escuro/Claro** - Toggle entre temas
 - **Design Responsivo** - Desktop, tablet e mobile
 - **Sistema de Design** - Componentes reutilizáveis
-- **Testes Completos** - Cobertura de testes unitários e E2E
+- **Testes Completos** - 87 testes unitários + E2E
+- **Cobertura Total** - Componentes UI, rotas e utilitários
 
 ## Tecnologias
 
@@ -19,7 +20,8 @@ Uma aplicação moderna de delivery de comida construída com React, TypeScript 
 - **Styled Components** - CSS-in-JS
 - **React Router** - Roteamento
 - **Storybook** - Desenvolvimento de componentes
-- **Jest** - Testes unitários
+- **Jest** - Testes unitários com cobertura completa
+- **Testing Library** - Testes de componentes React
 - **Playwright** - Testes E2E
 
 ## Como Executar
@@ -67,14 +69,19 @@ npm run lint             # ESLint
 src/
 ├── components/          # Componentes reutilizáveis
 │   ├── ui/             # Componentes de interface
+│   │   ├── Button/     # Botão com testes completos
+│   │   ├── Text/       # Texto com testes completos
+│   │   ├── Card/       # Card com testes completos
+│   │   ├── ThemeButton/# Botão de tema com testes
+│   │   └── Brand/      # Logo e Icon com testes
 │   └── layout/         # Componentes de layout
 ├── pages/              # Páginas da aplicação
 ├── hooks/              # Hooks customizados
-├── utils/              # Funções utilitárias
+├── utils/              # Funções utilitárias com testes
 ├── styles/             # Estilos globais
 ├── types/              # Definições de tipos
 ├── assets/             # Recursos estáticos
-└── *.test.tsx          # Testes unitários
+└── *.test.tsx          # Testes unitários (87 testes)
 
 testes/
 ├── e2e/                # Testes end-to-end (Playwright)
@@ -144,6 +151,12 @@ npm run test:coverage
 
 # Executar teste específico
 npm test -- src/routes.test.tsx
+
+# Executar testes de componentes UI
+npm test -- --testPathPatterns="components/ui"
+
+# Executar testes de utilitários
+npm test -- --testPathPatterns="utils"
 ```
 
 #### Cobertura de Testes
@@ -160,6 +173,20 @@ describe('Routes', () => {
   it('renderiza rota home corretamente', () => {
     renderWithProviders(<RoutesApp />, ['/'])
     expect(screen.getByTestId('card-button')).toHaveTextContent('Saiba Mais')
+  })
+})
+```
+
+#### Exemplo de Teste de Componentes UI
+
+```tsx
+describe('Button Component', () => {
+  it('executa onClick quando clicado', () => {
+    const handleClick = jest.fn()
+    renderWithTheme(<Button onClick={handleClick}>Clique</Button>)
+
+    fireEvent.click(screen.getByText('Clique'))
+    expect(handleClick).toHaveBeenCalledTimes(1)
   })
 })
 ```
@@ -194,12 +221,28 @@ npx tsc --noEmit
 
 ### Cobertura de Testes
 
-O projeto mantém alta cobertura de testes:
+O projeto mantém alta cobertura de testes com **87 testes passando**:
 
-- **Rotas**: 100% - Navegação e renderização
-- **Componentes**: Cobertura completa dos props e interações
-- **Utilitários**: 100% - Funções auxiliares testadas
-- **Hooks**: Cobertura completa da lógica customizada
+#### **Componentes UI (49 testes)**
+
+- **Button Component** (8 testes) - Renderização, props, onClick, estilos
+- **Text Component** (9 testes) - Elementos HTML, props, children, ícones
+- **Card Component** (12 testes) - Imagem, rating, descrição, botões, temas
+- **ThemeButton Component** (7 testes) - Ícones de tema, onClick, estilos
+- **Brand Components** (13 testes) - Logo e Icon com props responsivas
+
+#### **Funcionalidades Core (38 testes)**
+
+- **Rotas** (7 testes) - Navegação e renderização com React Router
+- **Utilitários** (31 testes) - Funções de cor e tamanho com 100% de cobertura
+- **Hooks** - Cobertura completa da lógica customizada
+
+#### **Estatísticas**
+
+- ✅ **87 testes passando**
+- ✅ **0 testes falhando**
+- ✅ **9 suites de teste**
+- ✅ **Cobertura completa** de componentes críticos
 
 ### Boas Práticas
 
