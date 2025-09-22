@@ -19,6 +19,7 @@ module.exports = {
   modulePaths: ['<rootDir>/src/', '<rootDir>/.jest'],
   moduleNameMapper: {
     '\\.css$': 'identity-obj-proxy',
+    '\\.(svg|png|jpg|jpeg|gif|ico)$': 'jest-transform-stub',
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@assets/(.*)$': '<rootDir>/src/assets/$1',
     '^@components/(.*)$': '<rootDir>/src/components/$1',
