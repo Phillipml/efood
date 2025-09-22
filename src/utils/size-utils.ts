@@ -1,6 +1,5 @@
 import type { FontSizeOptions } from '@/types'
 import { mobile, tablet } from '@styles/breakpoints'
-import { css } from 'styled-components'
 export const PercentSize = (
   tag: string,
   {
@@ -22,8 +21,8 @@ export const PercentSize = (
   }`
     : ''
   const mobileQuery = smScreen
-    ? ` ${mobile}{
-      ${tag}: ${getPercentNumber(smScreen || mdScreen || lgScreen || 100)};
+    ? `${mobile}{
+    ${tag}: ${getPercentNumber(smScreen || mdScreen || lgScreen || 100)};
     }`
     : ''
 
@@ -50,27 +49,21 @@ export const FontSize = ({
     xl: '2.25rem'
   }
   const getSize = (value?: string) => {
-    return !value
+    const remSize = !value
       ? '0.875rem'
       : Object.entries(sizes).find(([size]) => size === value)?.[1] ||
-          '0.875rem'
+        '0.875rem'
+    return `font-size: ${remSize};`
   }
+  const mdQuery = `${tablet}{${getSize(mdScreen)}};`
+  const smQuery = `${mobile}{${getSize(smScreen)}};`
 
-  return css`
-    font-size: ${getSize(lgScreen)};
-    ${mdScreen &&
-    css`
-      @media (max-width: 1024px) {
-        font-size: ${getSize(mdScreen)};
-      }
-    `}
-    ${smScreen &&
-    css`
-      @media (max-width: 768px) {
-        font-size: ${getSize(smScreen)};
-      }
-    `}
+  const css = `
+    ${getSize(lgScreen)};
+    ${mdScreen ? mdQuery : ''}
+    ${smScreen ? smQuery : ''}
   `
+  return css
 }
 export const pxToRem = (
   tag: string,
@@ -107,15 +100,23 @@ export const ViewportSize = (
   }: { lgScreen?: number; mdScreen?: number; smScreen?: number }
 ) => {
   const axis = unit === 'vw' ? 'width' : 'heigth'
-  const value = (value?: number) => (!value ? `100${unit}` : `${value}${unit};`)
+  const value = (value?: number) => {
+    if (value === 0) {
+      return `0${unit};`
+    }
+    if (!value) {
+      return `100${unit};`
+    }
+    return `${value}${unit};`
+  }
   const tabletQuery = mdScreen
     ? `${tablet}{
       ${axis}: ${value(mdScreen)}
       }`
     : ''
   const mobileQuery = smScreen
-    ? `${tablet}{
-        ${axis} ${value(smScreen)}
+    ? `${mobile}{
+        ${axis}: ${value(smScreen)}
         }`
     : ''
   const css = `
