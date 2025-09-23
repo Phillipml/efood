@@ -12,6 +12,7 @@ Uma aplicação moderna de delivery de comida construída com React, TypeScript 
 - **Sistema de Design** - Componentes reutilizáveis e acessíveis
 - **Testes Completos** - 147+ testes unitários + E2E
 - **Cobertura Total** - 97.41% de cobertura geral (113/116 statements)
+- **Mocks Organizados** - Sistema de mocks reutilizáveis e centralizados
 - **TypeScript** - Tipagem forte em todo o projeto
 
 ## Tecnologias
@@ -82,6 +83,7 @@ src/
 ├── pages/              # Páginas da aplicação
 ├── hooks/              # Hooks customizados (useTheme, useThemeState)
 ├── utils/              # Funções utilitárias com testes
+│   └── __mocks__/      # Sistema de mocks organizados
 ├── styles/             # Estilos globais
 ├── types/              # Definições de tipos
 ├── assets/             # Recursos estáticos
@@ -96,6 +98,57 @@ configuração/
 ├── jest.config.cjs     # Configuração principal do Jest
 └── playwright.config.ts # Configuração do Playwright
 ```
+
+## Sistema de Mocks
+
+O projeto possui um sistema completo de mocks organizados em `src/utils/__mocks__/`:
+
+### **Estrutura de Mocks**
+
+- **`components.tsx`** - Mocks de componentes React reutilizáveis
+- **`hooks.ts`** - Mocks de hooks customizados (useTheme, useNavigate, etc.)
+- **`router.ts`** - Mocks do React Router
+- **`render-utils.tsx`** - Utilitários de renderização para testes
+- **`jest-setup.ts`** - Configurações globais do Jest
+- **`themes.ts`** - Temas mock para testes
+- **`index.ts`** - Exporta todos os mocks centralizadamente
+
+### **Como Usar os Mocks**
+
+```tsx
+// Importar utilitários de teste
+import {
+  renderWithThemeAndRouter,
+  mockNavigate,
+  MockHeader,
+  resetAllMocks
+} from '@/utils/test-utils'
+
+// Importar mocks específicos
+import { mockUseThemeState } from '@/utils/__mocks__/hooks'
+
+// Exemplo de teste
+describe('MeuComponente', () => {
+  beforeEach(() => {
+    resetAllMocks()
+  })
+
+  it('testa navegação', () => {
+    renderWithThemeAndRouter(<MeuComponente />)
+
+    fireEvent.click(screen.getByText('Navegar'))
+    expect(mockNavigate).toHaveBeenCalledWith('/rota')
+  })
+})
+```
+
+### **Benefícios**
+
+- ✅ **Reutilização** - Mocks centralizados e reutilizáveis
+- ✅ **Consistência** - Padrões uniformes em todos os testes
+- ✅ **Manutenibilidade** - Fácil de atualizar e manter
+- ✅ **Produtividade** - Menos código repetitivo
+- ✅ **Type Safety** - Mocks tipados com TypeScript
 
 ## Componentes Principais
 
@@ -216,6 +269,9 @@ npm test -- --testPathPatterns="layout"
 
 # Executar testes de páginas
 npm test -- --testPathPatterns="pages"
+
+# Executar testes com mocks organizados
+npm test -- --testPathPatterns="mocks"
 ```
 
 #### Cobertura de Testes
@@ -226,6 +282,7 @@ npm test -- --testPathPatterns="pages"
 - **Páginas** - Testes de renderização e navegação
 - **Utilitários** - Testes de funções auxiliares
 - **Hooks** - Testes de lógica customizada
+- **Mocks** - Sistema organizado de mocks reutilizáveis
 
 #### Exemplo de Teste de Rotas
 

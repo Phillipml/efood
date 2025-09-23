@@ -1,53 +1,39 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import App from './App'
-import { mockLightTheme } from './utils/__mocks__/themes'
-
-const mockToggleTheme = jest.fn()
+import { mockUseThemeState, resetAllMocks } from './utils/test-utils'
 
 jest.mock('./hooks/useTheme', () => ({
-  useThemeState: () => ({
-    currentTheme: mockLightTheme,
-    toggleTheme: mockToggleTheme
-  })
+  useThemeState: () => mockUseThemeState
 }))
 
-jest.mock('./components/layout/Header', () => {
-  return function MockHeader() {
-    return <div data-testid="header">Header</div>
-  }
-})
-
-jest.mock('./components/layout/Footer', () => {
-  return function MockFooter() {
-    return <div data-testid="footer">Footer</div>
-  }
-})
-
-jest.mock('./components/ui/ThemeButton', () => {
-  return function MockThemeButton({ onClick }: { onClick: () => void }) {
-    return (
-      <button data-testid="theme-button" onClick={onClick}>
-        Theme Button
-      </button>
-    )
-  }
-})
-
-jest.mock('./routes', () => {
-  return function MockRoutesApp() {
-    return <div data-testid="routes">Routes</div>
-  }
-})
-
-jest.mock('./styles/reset', () => {
-  return function MockGlobalStyle() {
-    return <div data-testid="global-style">Global Style</div>
-  }
-})
+jest.mock('./components/layout/Header', () => ({
+  __esModule: true,
+  default: () => <div data-testid="header">Header</div>
+}))
+jest.mock('./components/layout/Footer', () => ({
+  __esModule: true,
+  default: () => <div data-testid="footer">Footer</div>
+}))
+jest.mock('./components/ui/ThemeButton', () => ({
+  __esModule: true,
+  default: ({ onClick }: { onClick: () => void }) => (
+    <button data-testid="theme-button" onClick={onClick}>
+      Theme Button
+    </button>
+  )
+}))
+jest.mock('./routes', () => ({
+  __esModule: true,
+  default: () => <div data-testid="routes">Routes</div>
+}))
+jest.mock('./styles/reset', () => ({
+  __esModule: true,
+  default: () => <div data-testid="global-style">Global Style</div>
+}))
 
 describe('App Component', () => {
   beforeEach(() => {
-    mockToggleTheme.mockClear()
+    resetAllMocks()
   })
 
   it('renderiza sem quebrar', () => {
@@ -111,7 +97,7 @@ describe('App Component', () => {
     const themeButton = screen.getByTestId('theme-button')
     fireEvent.click(themeButton)
 
-    expect(mockToggleTheme).toHaveBeenCalledTimes(1)
+    expect(mockUseThemeState.toggleTheme).toHaveBeenCalledTimes(1)
   })
 
   it('aplica tema correto', () => {
@@ -147,6 +133,6 @@ describe('App Component', () => {
     fireEvent.click(themeButton)
     fireEvent.click(themeButton)
 
-    expect(mockToggleTheme).toHaveBeenCalledTimes(3)
+    expect(mockUseThemeState.toggleTheme).toHaveBeenCalledTimes(3)
   })
 })
