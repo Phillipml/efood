@@ -11,7 +11,9 @@ module.exports = {
     '!src/**/*.stories.tsx',
     '!src/styles/**/*.ts',
     '!src/types/**/*.d.ts',
-    '!src/utils/**/*.ts',
+    '!src/utils/__mocks__/**/*.ts',
+    '!src/utils/storybook-controls.ts',
+    '!src/utils/test-utils.tsx',
     '!src/hooks/**/*.ts',
     '!src/**/mock.ts(x)?'
   ],
