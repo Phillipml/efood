@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const MockHeader = () => <div data-testid="header">Header</div>
 
 export const MockFooter = () => <div data-testid="footer">Footer</div>
