@@ -10,8 +10,9 @@ Uma aplicação moderna de delivery de comida construída com React, TypeScript 
 - **Sistema de Temas** - Toggle entre tema escuro/claro com persistência
 - **Design Responsivo** - Desktop, tablet e mobile
 - **Sistema de Design** - Componentes reutilizáveis e acessíveis
-- **Testes Completos** - 136+ testes unitários + E2E
-- **Cobertura Total** - Componentes UI, layout, rotas, hooks e utilitários
+- **Testes Completos** - 147+ testes unitários + E2E
+- **Cobertura Total** - 97.41% de cobertura geral (113/116 statements)
+- **Mocks Organizados** - Sistema de mocks reutilizáveis e centralizados
 - **TypeScript** - Tipagem forte em todo o projeto
 
 ## Tecnologias
@@ -82,10 +83,11 @@ src/
 ├── pages/              # Páginas da aplicação
 ├── hooks/              # Hooks customizados (useTheme, useThemeState)
 ├── utils/              # Funções utilitárias com testes
+│   └── __mocks__/      # Sistema de mocks organizados
 ├── styles/             # Estilos globais
 ├── types/              # Definições de tipos
 ├── assets/             # Recursos estáticos
-└── *.test.tsx          # Testes unitários (136+ testes)
+└── *.test.tsx          # Testes unitários (147+ testes)
 
 testes/
 ├── e2e/                # Testes end-to-end (Playwright)
@@ -96,6 +98,57 @@ configuração/
 ├── jest.config.cjs     # Configuração principal do Jest
 └── playwright.config.ts # Configuração do Playwright
 ```
+
+## Sistema de Mocks
+
+O projeto possui um sistema completo de mocks organizados em `src/utils/__mocks__/`:
+
+### **Estrutura de Mocks**
+
+- **`components.tsx`** - Mocks de componentes React reutilizáveis
+- **`hooks.ts`** - Mocks de hooks customizados (useTheme, useNavigate, etc.)
+- **`router.ts`** - Mocks do React Router
+- **`render-utils.tsx`** - Utilitários de renderização para testes
+- **`jest-setup.ts`** - Configurações globais do Jest
+- **`themes.ts`** - Temas mock para testes
+- **`index.ts`** - Exporta todos os mocks centralizadamente
+
+### **Como Usar os Mocks**
+
+```tsx
+// Importar utilitários de teste
+import {
+  renderWithThemeAndRouter,
+  mockNavigate,
+  MockHeader,
+  resetAllMocks
+} from '@/utils/test-utils'
+
+// Importar mocks específicos
+import { mockUseThemeState } from '@/utils/__mocks__/hooks'
+
+// Exemplo de teste
+describe('MeuComponente', () => {
+  beforeEach(() => {
+    resetAllMocks()
+  })
+
+  it('testa navegação', () => {
+    renderWithThemeAndRouter(<MeuComponente />)
+
+    fireEvent.click(screen.getByText('Navegar'))
+    expect(mockNavigate).toHaveBeenCalledWith('/rota')
+  })
+})
+```
+
+### **Benefícios**
+
+- ✅ **Reutilização** - Mocks centralizados e reutilizáveis
+- ✅ **Consistência** - Padrões uniformes em todos os testes
+- ✅ **Manutenibilidade** - Fácil de atualizar e manter
+- ✅ **Produtividade** - Menos código repetitivo
+- ✅ **Type Safety** - Mocks tipados com TypeScript
 
 ## Componentes Principais
 
@@ -216,6 +269,9 @@ npm test -- --testPathPatterns="layout"
 
 # Executar testes de páginas
 npm test -- --testPathPatterns="pages"
+
+# Executar testes com mocks organizados
+npm test -- --testPathPatterns="mocks"
 ```
 
 #### Cobertura de Testes
@@ -226,6 +282,7 @@ npm test -- --testPathPatterns="pages"
 - **Páginas** - Testes de renderização e navegação
 - **Utilitários** - Testes de funções auxiliares
 - **Hooks** - Testes de lógica customizada
+- **Mocks** - Sistema organizado de mocks reutilizáveis
 
 #### Exemplo de Teste de Rotas
 
@@ -296,6 +353,30 @@ describe('Home Page', () => {
 })
 ```
 
+#### Exemplo de Teste do App Component
+
+```tsx
+describe('App Component', () => {
+  it('renderiza sem quebrar', () => {
+    render(<App />)
+
+    expect(screen.getByTestId('header')).toBeInTheDocument()
+    expect(screen.getByTestId('footer')).toBeInTheDocument()
+    expect(screen.getByTestId('routes')).toBeInTheDocument()
+    expect(screen.getByTestId('theme-button')).toBeInTheDocument()
+  })
+
+  it('toggle de tema funciona', () => {
+    render(<App />)
+
+    const themeButton = screen.getByTestId('theme-button')
+    fireEvent.click(themeButton)
+
+    expect(mockToggleTheme).toHaveBeenCalledTimes(1)
+  })
+})
+```
+
 ### Testes E2E (Playwright)
 
 Testes end-to-end para validar fluxos completos da aplicação.
@@ -326,7 +407,7 @@ npx tsc --noEmit
 
 ### Cobertura de Testes
 
-O projeto mantém alta cobertura de testes com **136+ testes passando**:
+O projeto mantém alta cobertura de testes com **147+ testes passando**:
 
 #### **Componentes UI (49 testes)**
 
@@ -348,21 +429,34 @@ O projeto mantém alta cobertura de testes com **136+ testes passando**:
 - **Home Page** (6 testes) - CardList, props, navegação, renderização
 - **Restaurant Page** (7 testes) - CardList, props, renderização, estilos
 
+#### **App Component (11 testes)**
+
+- **App Component** (11 testes) - Renderização, ThemeProvider, BrowserRouter, Header, RoutesApp, Footer, ThemeButton, toggle de tema
+
 #### **Funcionalidades Core (38+ testes)**
 
 - **Rotas** (7 testes) - Navegação e renderização com React Router
 - **Utilitários** (31 testes) - Funções de cor e tamanho com 100% de cobertura
 - **Hooks** (10+ testes) - useTheme e useThemeState com cobertura completa
 
-#### **Estatísticas**
+#### **Estatísticas de Cobertura**
 
-- ✅ **136+ testes passando**
+- ✅ **147+ testes passando**
 - ✅ **0 testes falhando**
-- ✅ **16+ suites de teste**
-- ✅ **Cobertura completa** de componentes críticos
+- ✅ **17+ suites de teste**
+- ✅ **97.41% Statements** (113/116)
+- ✅ **88.23% Branches** (90/102)
+- ✅ **100% Functions** (40/40)
+- ✅ **97.36% Lines** (111/114)
+
+#### **Cobertura por Categoria**
+
+- ✅ **Componentes UI** - 100% de cobertura
+- ✅ **Componentes Layout** - 100% de cobertura
+- ✅ **Páginas** - 100% de cobertura
+- ✅ **App Component** - 100% de cobertura
+- ✅ **Utilitários** - 98.07% de cobertura
 - ✅ **Sistema de temas** totalmente testado
-- ✅ **Componentes de layout** totalmente testados
-- ✅ **Páginas** totalmente testadas
 
 ### Boas Práticas
 

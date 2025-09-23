@@ -1,34 +1,24 @@
-import { render, screen } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
-import { MemoryRouter } from 'react-router-dom'
+import { screen } from '@testing-library/react'
 import Restaurant from './index'
-import { $lightTheme } from '@/styles/theme'
-
-const renderWithTheme = (component: React.ReactElement) => {
-  return render(
-    <MemoryRouter>
-      <ThemeProvider theme={$lightTheme}>{component}</ThemeProvider>
-    </MemoryRouter>
-  )
-}
+import { renderWithThemeAndRouter } from '@/utils/test-utils'
 
 describe('Restaurant Page', () => {
   it('renderiza CardList', () => {
-    renderWithTheme(<Restaurant />)
+    renderWithThemeAndRouter(<Restaurant />)
 
     const cards = screen.getAllByText('Hioki Sushi')
     expect(cards.length).toBeGreaterThan(0)
   })
 
   it('passa props corretas para CardList', () => {
-    renderWithTheme(<Restaurant />)
+    renderWithThemeAndRouter(<Restaurant />)
 
     const buttons = screen.getAllByText('Adicionar')
     expect(buttons).toHaveLength(7)
   })
 
   it('renderiza sem quebrar', () => {
-    renderWithTheme(<Restaurant />)
+    renderWithThemeAndRouter(<Restaurant />)
 
     expect(screen.getAllByText('Hioki Sushi')).toHaveLength(7)
     expect(screen.getAllByText('Adicionar')).toHaveLength(7)
@@ -36,7 +26,7 @@ describe('Restaurant Page', () => {
   })
 
   it('aplica estilos corretos do tema', () => {
-    renderWithTheme(<Restaurant />)
+    renderWithThemeAndRouter(<Restaurant />)
 
     const cards = screen.getAllByText('Hioki Sushi')
     expect(cards).toHaveLength(7)
@@ -46,7 +36,7 @@ describe('Restaurant Page', () => {
   })
 
   it('renderiza com props de tema específicas', () => {
-    renderWithTheme(<Restaurant />)
+    renderWithThemeAndRouter(<Restaurant />)
 
     const buttons = screen.getAllByText('Adicionar')
     expect(buttons).toHaveLength(7)
@@ -56,7 +46,7 @@ describe('Restaurant Page', () => {
   })
 
   it('renderiza com estrutura correta', () => {
-    renderWithTheme(<Restaurant />)
+    renderWithThemeAndRouter(<Restaurant />)
 
     const cards = screen.getAllByText('Hioki Sushi')
     const buttons = screen.getAllByText('Adicionar')
@@ -68,7 +58,7 @@ describe('Restaurant Page', () => {
   })
 
   it('aplica props de botão corretas', () => {
-    renderWithTheme(<Restaurant />)
+    renderWithThemeAndRouter(<Restaurant />)
 
     const buttons = screen.getAllByText('Adicionar')
     expect(buttons).toHaveLength(7)
