@@ -30,13 +30,6 @@ export class TestHelpers {
     expect(this.page.url()).toBe(`${TEST_DATA.BASE_URL}${expectedUrl}`)
   }
 
-  async takeScreenshot(name: string) {
-    await this.page.screenshot({
-      path: `test-results/screenshots/${name}.png`,
-      fullPage: true
-    })
-  }
-
   async measurePerformance() {
     const metrics = await this.page.evaluate(() => {
       const navigation = performance.getEntriesByType(
@@ -146,22 +139,5 @@ export class TestHelpers {
       await element.first().hover()
       await this.page.waitForTimeout(100)
     }
-  }
-
-  async assertHoverEffect(selector: string) {
-    const element = this.page.locator(selector)
-    const beforeHover = await element.evaluate(
-      (el) => window.getComputedStyle(el).transform
-    )
-
-    await this.hoverElement(selector)
-
-    const afterHover = await element.evaluate(
-      (el) => window.getComputedStyle(el).transform
-    )
-
-    // Verifica se há algum efeito de hover (pode ser transform, opacity, etc.)
-    const hasHoverEffect = beforeHover !== afterHover
-    expect(hasHoverEffect).toBeTruthy()
   }
 }

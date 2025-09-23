@@ -57,7 +57,7 @@ test.describe('Cross-Browser', () => {
   })
 
   test('Edge funciona (se habilitado)', async ({ page, browserName }) => {
-    if (browserName === 'msedge') {
+    if (browserName === 'chromium') {
       await homePage.goto()
       await homePage.waitForLoad()
 

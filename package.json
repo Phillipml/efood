@@ -14,7 +14,8 @@
     "test": "jest --maxWorker=50% --coverage=false",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:playwright": "playwright test --headed --config=playwright.config.ts --project=chromium",
+    "test:playwright": "npx playwright test --reporter=line --max-failures=10",
+    "test:playwright:chromium": "playwright test --headed --config=playwright.config.ts --project=chromium",
     "test:playwright:helper": "npx playwright codegen http://localhost:3000"
   },
   "dependencies": {
