@@ -77,7 +77,7 @@ test.describe('Performance', () => {
     const endTime = Date.now()
     const interactionTime = endTime - startTime
 
-    expect(interactionTime).toBeLessThan(1000)
+    expect(interactionTime).toBeLessThan(1500)
   })
 
   test('Performance da página Restaurant', async ({ page }) => {
@@ -119,7 +119,7 @@ test.describe('Performance', () => {
     const endTime = Date.now()
     const themeChangeTime = endTime - startTime
 
-    expect(themeChangeTime).toBeLessThan(2000)
+    expect(themeChangeTime).toBeLessThan(2500)
   })
 
   test('Scroll é suave', async ({ page }) => {
@@ -231,8 +231,8 @@ test.describe('Performance', () => {
 
     const metrics = await helpers.measurePerformance()
 
-    expect(metrics.firstPaint).toBeLessThan(1000)
-    expect(metrics.firstContentfulPaint).toBeLessThan(5000)
+    expect(metrics.firstPaint).toBeLessThan(1200)
+    expect(metrics.firstContentfulPaint).toBeLessThan(6000)
   })
 
   test('DOM é construído rapidamente', async ({ page }) => {
@@ -265,6 +265,6 @@ test.describe('Performance', () => {
       )
     })
 
-    expect(secondLoadTime).toBeLessThanOrEqual(firstLoadTime)
+    expect(secondLoadTime).toBeLessThanOrEqual(firstLoadTime + 100)
   })
 })

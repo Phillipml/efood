@@ -1,8 +1,22 @@
 import Card, { type CardProps } from '@/components/ui/Card'
 import { Container } from './styles'
-import hioki from '@assets/images/hioki.png'
 
-type cardListType = Omit<CardProps, 'image' | 'name' | 'rating' | 'description'>
+export type CardData = {
+  id: string
+  image: string
+  name: string
+  rating?: number
+  description: string
+  isFeatured?: boolean
+  foodType?: string
+}
+
+type cardListType = Omit<
+  CardProps,
+  'image' | 'name' | 'rating' | 'description' | 'isFeatured' | 'foodType'
+> & {
+  cards: CardData[]
+}
 
 const CardList = ({
   buttonTxt,
@@ -21,171 +35,39 @@ const CardList = ({
   $textColor,
   $textDarkTheme,
   $textLightTheme,
-  onClick
+  onClick,
+  cards
 }: cardListType) => {
   return (
     <Container>
-      <Card
-        image={hioki}
-        name="Hioki Sushi"
-        description="Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida.Experimente o Japão sem sair do lar com nosso delivery!"
-        rating={4.9}
-        $lgButtonPercent={$lgButtonPercent}
-        $mdButtonPercent={$mdButtonPercent}
-        $smButtonPercent={$smButtonPercent}
-        $defaultColor={$defaultColor}
-        $darkTheme={$darkTheme}
-        $lightTheme={$lightTheme}
-        $buttonColor={$buttonColor}
-        $buttonDarkThemeColor={$buttonDarkThemeColor}
-        $buttonLightThemeColor={$buttonLightThemeColor}
-        buttonTxt={buttonTxt}
-        $buttonTextColor={$buttonTextColor}
-        $buttonTextDarkTheme={$buttonTextDarkTheme}
-        $buttonTextLightTheme={$buttonTextLightTheme}
-        $textColor={$textColor}
-        $textDarkTheme={$textDarkTheme}
-        $textLightTheme={$textLightTheme}
-        onClick={onClick}
-      />
-      <Card
-        image={hioki}
-        name="Hioki Sushi"
-        description="Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida.Experimente o Japão sem sair do lar com nosso delivery!"
-        rating={4.9}
-        $lgButtonPercent={$lgButtonPercent}
-        $mdButtonPercent={$mdButtonPercent}
-        $smButtonPercent={$smButtonPercent}
-        $defaultColor={$defaultColor}
-        $darkTheme={$darkTheme}
-        $lightTheme={$lightTheme}
-        $buttonColor={$buttonColor}
-        $buttonDarkThemeColor={$buttonDarkThemeColor}
-        $buttonLightThemeColor={$buttonLightThemeColor}
-        buttonTxt={buttonTxt}
-        $buttonTextColor={$buttonTextColor}
-        $buttonTextDarkTheme={$buttonTextDarkTheme}
-        $buttonTextLightTheme={$buttonTextLightTheme}
-        $textColor={$textColor}
-        $textDarkTheme={$textDarkTheme}
-        $textLightTheme={$textLightTheme}
-        onClick={onClick}
-      />
-      <Card
-        image={hioki}
-        name="Hioki Sushi"
-        description="Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida.Experimente o Japão sem sair do lar com nosso delivery!"
-        rating={4.9}
-        $lgButtonPercent={$lgButtonPercent}
-        $mdButtonPercent={$mdButtonPercent}
-        $smButtonPercent={$smButtonPercent}
-        $defaultColor={$defaultColor}
-        $darkTheme={$darkTheme}
-        $lightTheme={$lightTheme}
-        $buttonColor={$buttonColor}
-        $buttonDarkThemeColor={$buttonDarkThemeColor}
-        $buttonLightThemeColor={$buttonLightThemeColor}
-        buttonTxt={buttonTxt}
-        $buttonTextColor={$buttonTextColor}
-        $buttonTextDarkTheme={$buttonTextDarkTheme}
-        $buttonTextLightTheme={$buttonTextLightTheme}
-        $textColor={$textColor}
-        $textDarkTheme={$textDarkTheme}
-        $textLightTheme={$textLightTheme}
-        onClick={onClick}
-      />
-      <Card
-        image={hioki}
-        name="Hioki Sushi"
-        description="Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida.Experimente o Japão sem sair do lar com nosso delivery!"
-        rating={4.9}
-        $lgButtonPercent={$lgButtonPercent}
-        $mdButtonPercent={$mdButtonPercent}
-        $smButtonPercent={$smButtonPercent}
-        $defaultColor={$defaultColor}
-        $darkTheme={$darkTheme}
-        $lightTheme={$lightTheme}
-        $buttonColor={$buttonColor}
-        $buttonDarkThemeColor={$buttonDarkThemeColor}
-        $buttonLightThemeColor={$buttonLightThemeColor}
-        buttonTxt={buttonTxt}
-        $buttonTextColor={$buttonTextColor}
-        $buttonTextDarkTheme={$buttonTextDarkTheme}
-        $buttonTextLightTheme={$buttonTextLightTheme}
-        $textColor={$textColor}
-        $textDarkTheme={$textDarkTheme}
-        $textLightTheme={$textLightTheme}
-        onClick={onClick}
-      />
-      <Card
-        image={hioki}
-        name="Hioki Sushi"
-        description="Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida.Experimente o Japão sem sair do lar com nosso delivery!"
-        rating={4.9}
-        $lgButtonPercent={$lgButtonPercent}
-        $mdButtonPercent={$mdButtonPercent}
-        $smButtonPercent={$smButtonPercent}
-        $defaultColor={$defaultColor}
-        $darkTheme={$darkTheme}
-        $lightTheme={$lightTheme}
-        $buttonColor={$buttonColor}
-        $buttonDarkThemeColor={$buttonDarkThemeColor}
-        $buttonLightThemeColor={$buttonLightThemeColor}
-        buttonTxt={buttonTxt}
-        $buttonTextColor={$buttonTextColor}
-        $buttonTextDarkTheme={$buttonTextDarkTheme}
-        $buttonTextLightTheme={$buttonTextLightTheme}
-        $textColor={$textColor}
-        $textDarkTheme={$textDarkTheme}
-        $textLightTheme={$textLightTheme}
-        onClick={onClick}
-      />
-      <Card
-        image={hioki}
-        name="Hioki Sushi"
-        description="Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida.Experimente o Japão sem sair do lar com nosso delivery!"
-        rating={4.9}
-        $lgButtonPercent={$lgButtonPercent}
-        $mdButtonPercent={$mdButtonPercent}
-        $smButtonPercent={$smButtonPercent}
-        $defaultColor={$defaultColor}
-        $darkTheme={$darkTheme}
-        $lightTheme={$lightTheme}
-        $buttonColor={$buttonColor}
-        $buttonDarkThemeColor={$buttonDarkThemeColor}
-        $buttonLightThemeColor={$buttonLightThemeColor}
-        buttonTxt={buttonTxt}
-        $buttonTextColor={$buttonTextColor}
-        $buttonTextDarkTheme={$buttonTextDarkTheme}
-        $buttonTextLightTheme={$buttonTextLightTheme}
-        $textColor={$textColor}
-        $textDarkTheme={$textDarkTheme}
-        $textLightTheme={$textLightTheme}
-        onClick={onClick}
-      />
-      <Card
-        image={hioki}
-        name="Hioki Sushi"
-        description="Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida.Experimente o Japão sem sair do lar com nosso delivery!"
-        rating={4.9}
-        $lgButtonPercent={$lgButtonPercent}
-        $mdButtonPercent={$mdButtonPercent}
-        $smButtonPercent={$smButtonPercent}
-        $defaultColor={$defaultColor}
-        $darkTheme={$darkTheme}
-        $lightTheme={$lightTheme}
-        $buttonColor={$buttonColor}
-        $buttonDarkThemeColor={$buttonDarkThemeColor}
-        $buttonLightThemeColor={$buttonLightThemeColor}
-        buttonTxt={buttonTxt}
-        $buttonTextColor={$buttonTextColor}
-        $buttonTextDarkTheme={$buttonTextDarkTheme}
-        $buttonTextLightTheme={$buttonTextLightTheme}
-        $textColor={$textColor}
-        $textDarkTheme={$textDarkTheme}
-        $textLightTheme={$textLightTheme}
-        onClick={onClick}
-      />
+      {cards.map((card) => (
+        <Card
+          key={card.id}
+          image={card.image}
+          name={card.name}
+          description={card.description}
+          rating={card.rating}
+          isFeatured={card.isFeatured}
+          foodType={card.foodType}
+          $lgButtonPercent={$lgButtonPercent}
+          $mdButtonPercent={$mdButtonPercent}
+          $smButtonPercent={$smButtonPercent}
+          $defaultColor={$defaultColor}
+          $darkTheme={$darkTheme}
+          $lightTheme={$lightTheme}
+          $buttonColor={$buttonColor}
+          $buttonDarkThemeColor={$buttonDarkThemeColor}
+          $buttonLightThemeColor={$buttonLightThemeColor}
+          buttonTxt={buttonTxt}
+          $buttonTextColor={$buttonTextColor}
+          $buttonTextDarkTheme={$buttonTextDarkTheme}
+          $buttonTextLightTheme={$buttonTextLightTheme}
+          $textColor={$textColor}
+          $textDarkTheme={$textDarkTheme}
+          $textLightTheme={$textLightTheme}
+          onClick={onClick}
+        />
+      ))}
     </Container>
   )
 }

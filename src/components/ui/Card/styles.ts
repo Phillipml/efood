@@ -5,14 +5,22 @@ import { setColor } from '@/utils/color-utils'
 
 type ContainerProps = ColorsVariants & PercentProps
 export const Container = styled.div<ContainerProps>`
-  ${({ theme, $defaultColor, $lightTheme, $darkTheme, $lgPercent, $mdPercent, $smPercent}) => css`
+  ${({
+    theme,
+    $defaultColor,
+    $lightTheme,
+    $darkTheme,
+    $lgPercent,
+    $mdPercent,
+    $smPercent
+  }) => css`
     position: relative;
     display: grid;
     align-items: center;
     justify-content:center;
-    ${PercentSize('width', { lgScreen: $lgPercent, mdScreen: $mdPercent, smScreen: $smPercent})};
+    ${PercentSize('width', { lgScreen: $lgPercent, mdScreen: $mdPercent, smScreen: $smPercent })};
     height: auto;
-    background-color: ${setColor(theme,{
+    background-color: ${setColor(theme, {
       unique: $defaultColor,
       light: $lightTheme,
       dark: $darkTheme
@@ -34,6 +42,13 @@ export const Container = styled.div<ContainerProps>`
         align-items: center;
         justify-content: space-between;
       }
+    }
+    
+    > div:first-child {
+      display: flex !important;
+      flex-direction: row !important;
+      gap: 0.5rem !important;
+      flex-wrap: nowrap !important;
     }
   `}
 `

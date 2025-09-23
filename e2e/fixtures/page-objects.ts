@@ -16,13 +16,23 @@ export class HomePage {
     this.header = page.locator('header')
     this.footer = page.locator('footer')
     this.logo = page.locator('img[alt*="logo"], img[alt*="Logo"]').first()
-    this.themeButton = page.locator('button').last()
+    this.themeButton = page
+      .locator('button')
+      .filter({ hasText: /theme|Theme|🌙|☀️/ })
+      .or(page.locator('button[style*="position: fixed"]'))
+      .or(page.locator('button').last())
     this.cardList = page
-      .locator('div')
+      .locator('[data-testid="card-list"], .card-list, div')
       .filter({ hasText: 'Hioki Sushi' })
       .first()
       .locator('..')
-    this.cards = page.locator('div').filter({ hasText: 'Hioki Sushi' })
+    this.cards = page
+      .locator('div')
+      .filter({
+        hasText:
+          /Hioki Sushi|Pizza Palace|Burger King|Taco Bell|Sushi Master|Pasta House/
+      })
+      .filter({ hasText: /Saiba Mais/ })
     this.learnMoreButtons = page
       .locator('button')
       .filter({ hasText: 'Saiba Mais' })
@@ -86,10 +96,10 @@ export class RestaurantPage {
       .or(page.locator('text=/carrinho/'))
     this.cardList = page
       .locator('div')
-      .filter({ hasText: 'Hioki Sushi' })
+      .filter({ hasText: 'Sushi Salmão' })
       .first()
       .locator('..')
-    this.cards = page.locator('div').filter({ hasText: 'Hioki Sushi' })
+    this.cards = page.locator('div').filter({ hasText: 'Sushi Salmão' })
     this.addButtons = page.locator('button').filter({ hasText: 'Adicionar' })
   }
 
