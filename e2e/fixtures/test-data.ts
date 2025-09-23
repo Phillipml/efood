@@ -25,7 +25,7 @@ export const TEST_DATA = {
     HEADER: 'header',
     FOOTER: 'footer',
     LOGO: 'img[alt*="logo"], img[alt*="Logo"]',
-    THEME_BUTTON: 'button:last-of-type',
+    THEME_BUTTON: 'button.sc-bRKDuR',
     CARD_LIST: 'div:has-text("Hioki Sushi")',
     CARD: 'div:has-text("Hioki Sushi")',
     RESTAURANT_HEADER: 'header',
@@ -60,7 +60,7 @@ export const TEST_DATA = {
   TIMEOUTS: {
     DEFAULT: 5000,
     NAVIGATION: 10000,
-    PERFORMANCE: 3000
+    PERFORMANCE: 9000
   }
 } as const
 

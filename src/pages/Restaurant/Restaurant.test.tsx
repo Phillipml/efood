@@ -6,62 +6,72 @@ describe('Restaurant Page', () => {
   it('renderiza CardList', () => {
     renderWithThemeAndRouter(<Restaurant />)
 
-    const cards = screen.getAllByText('Hioki Sushi')
-    expect(cards.length).toBeGreaterThan(0)
+    expect(screen.getByText('Sushi Salmão')).toBeInTheDocument()
+    expect(screen.getByText('Temaki Especial')).toBeInTheDocument()
+    expect(screen.getByText('Sashimi Mix')).toBeInTheDocument()
+    expect(screen.getByText('Combo Sushi')).toBeInTheDocument()
   })
 
   it('passa props corretas para CardList', () => {
     renderWithThemeAndRouter(<Restaurant />)
 
     const buttons = screen.getAllByText('Adicionar')
-    expect(buttons).toHaveLength(7)
+    expect(buttons).toHaveLength(4)
   })
 
   it('renderiza sem quebrar', () => {
     renderWithThemeAndRouter(<Restaurant />)
 
-    expect(screen.getAllByText('Hioki Sushi')).toHaveLength(7)
-    expect(screen.getAllByText('Adicionar')).toHaveLength(7)
-    expect(screen.getAllByText('4.9')).toHaveLength(7)
+    expect(screen.getByText('Sushi Salmão')).toBeInTheDocument()
+    expect(screen.getByText('Temaki Especial')).toBeInTheDocument()
+    expect(screen.getByText('Sashimi Mix')).toBeInTheDocument()
+    expect(screen.getByText('Combo Sushi')).toBeInTheDocument()
+    expect(screen.getAllByText('Adicionar')).toHaveLength(4)
+  })
+
+  it('não renderiza ratings', () => {
+    renderWithThemeAndRouter(<Restaurant />)
+
+    expect(screen.queryByText('4.9')).not.toBeInTheDocument()
+    expect(screen.queryByText('4.7')).not.toBeInTheDocument()
+    expect(screen.queryByText('4.8')).not.toBeInTheDocument()
+    expect(screen.queryByText('4.6')).not.toBeInTheDocument()
+  })
+
+  it('não renderiza tags', () => {
+    renderWithThemeAndRouter(<Restaurant />)
+
+    expect(screen.queryByText('Destaque da semana')).not.toBeInTheDocument()
+    expect(screen.queryByText('Japonês')).not.toBeInTheDocument()
+    expect(screen.queryByText('Italiano')).not.toBeInTheDocument()
   })
 
   it('aplica estilos corretos do tema', () => {
     renderWithThemeAndRouter(<Restaurant />)
 
-    const cards = screen.getAllByText('Hioki Sushi')
-    expect(cards).toHaveLength(7)
-
     const buttons = screen.getAllByText('Adicionar')
-    expect(buttons).toHaveLength(7)
+    expect(buttons).toHaveLength(4)
   })
 
   it('renderiza com props de tema específicas', () => {
     renderWithThemeAndRouter(<Restaurant />)
 
     const buttons = screen.getAllByText('Adicionar')
-    expect(buttons).toHaveLength(7)
-
-    const cards = screen.getAllByText('Hioki Sushi')
-    expect(cards).toHaveLength(7)
+    expect(buttons).toHaveLength(4)
   })
 
   it('renderiza com estrutura correta', () => {
     renderWithThemeAndRouter(<Restaurant />)
 
-    const cards = screen.getAllByText('Hioki Sushi')
     const buttons = screen.getAllByText('Adicionar')
-    const ratings = screen.getAllByText('4.9')
-
-    expect(cards).toHaveLength(7)
-    expect(buttons).toHaveLength(7)
-    expect(ratings).toHaveLength(7)
+    expect(buttons).toHaveLength(4)
   })
 
   it('aplica props de botão corretas', () => {
     renderWithThemeAndRouter(<Restaurant />)
 
     const buttons = screen.getAllByText('Adicionar')
-    expect(buttons).toHaveLength(7)
+    expect(buttons).toHaveLength(4)
 
     buttons.forEach((button) => {
       expect(button).toHaveTextContent('Adicionar')

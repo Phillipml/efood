@@ -11,7 +11,7 @@ export class TestHelpers {
 
   async assertTheme(expectedTheme: 'light' | 'dark') {
     const body = this.page.locator('body')
-    const classList = await body.getAttribute('class')
+    const classList = (await body.getAttribute('class')) || ''
 
     if (expectedTheme === 'dark') {
       expect(classList).toContain('dark')

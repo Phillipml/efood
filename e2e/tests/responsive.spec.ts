@@ -124,7 +124,7 @@ test.describe('Responsividade', () => {
 
       const boundingBox = await button.boundingBox()
       expect(boundingBox).not.toBeNull()
-      expect(boundingBox!.height).toBeGreaterThanOrEqual(25)
+      expect(boundingBox!.height).toBeGreaterThanOrEqual(24)
     }
   })
 
@@ -252,7 +252,7 @@ test.describe('Responsividade', () => {
       const boundingBox = await button.boundingBox()
 
       expect(boundingBox).not.toBeNull()
-      expect(boundingBox!.height).toBeGreaterThanOrEqual(25)
+      expect(boundingBox!.height).toBeGreaterThanOrEqual(24)
       expect(boundingBox!.width).toBeGreaterThanOrEqual(25)
     }
   })

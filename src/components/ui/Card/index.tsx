@@ -3,13 +3,16 @@ import Text from '@/components/ui/Text'
 import { Container, Rating } from './styles'
 import Button, { type ButtonTypes } from '@/components/ui/Button'
 import type { ColorsVariants, TextColorsVariants, PercentProps } from '@/types'
+import TagList from '@/components/ui/TagList'
 
 export type CardProps = {
   image: string
   name: string
-  rating: number
+  rating?: number
   description: string
   buttonTxt: string
+  isFeatured?: boolean
+  foodType?: string
 } & ButtonTypes &
   ColorsVariants &
   TextColorsVariants &
@@ -20,6 +23,8 @@ const Card = ({
   rating,
   description,
   buttonTxt,
+  isFeatured = false,
+  foodType,
   $defaultColor,
   $darkTheme = 'secondary',
   $lightTheme = 'primary',
@@ -49,6 +54,7 @@ const Card = ({
       $mdPercent={$mdPercent}
       $smPercent={$smPercent}
     >
+      <TagList isFeatured={isFeatured} foodType={foodType} />
       <img src={image} alt={name + ' image'} />
       <div>
         <div>
@@ -61,18 +67,20 @@ const Card = ({
           >
             {name}
           </Text>
-          <Rating>
-            <Text
-              as="span"
-              $lgFontSize="lg"
-              $textColor={$textColor}
-              $textDarkTheme={$textDarkTheme}
-              $textLightTheme={$textLightTheme}
-            >
-              {rating}
-            </Text>
-            <FaStar />
-          </Rating>
+          {rating && (
+            <Rating>
+              <Text
+                as="span"
+                $lgFontSize="lg"
+                $textColor={$textColor}
+                $textDarkTheme={$textDarkTheme}
+                $textLightTheme={$textLightTheme}
+              >
+                {rating}
+              </Text>
+              <FaStar />
+            </Rating>
+          )}
         </div>
         <Text
           $textColor={$textColor}

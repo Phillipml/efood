@@ -191,6 +191,9 @@ test.describe('Página Restaurant', () => {
   })
 
   test('Navegação de volta funciona', async ({ page }) => {
+    await page.goto(TEST_DATA.HOME_URL)
+    await page.waitForTimeout(500)
+
     await restaurantPage.goto()
     await restaurantPage.waitForLoad()
 

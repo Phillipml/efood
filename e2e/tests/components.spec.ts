@@ -102,6 +102,54 @@ test.describe('Componentes UI', () => {
     await page.waitForTimeout(500)
   })
 
+  test('Card: Renderiza tags corretamente na Home', async ({ page }) => {
+    await homePage.goto()
+    await homePage.waitForLoad()
+
+    const cards = await homePage.cards.count()
+    expect(cards).toBeGreaterThanOrEqual(6)
+
+    const featuredTag = page.locator('text=Destaque da semana')
+    await expect(featuredTag.first()).toBeVisible()
+
+    const foodTypeTags = page
+      .locator('text=Japonês')
+      .or(page.locator('text=Italiano'))
+      .or(page.locator('text=Mexicano'))
+    const foodTypeCount = await foodTypeTags.count()
+    expect(foodTypeCount).toBeGreaterThan(0)
+  })
+
+  test('Card: Renderiza ratings na Home', async ({ page }) => {
+    await homePage.goto()
+    await homePage.waitForLoad()
+
+    const ratingElements = page.locator('text=/4\\.[0-9]/')
+    const ratingCount = await ratingElements.count()
+    expect(ratingCount).toBeGreaterThan(0)
+  })
+
+  test('Card: Não renderiza tags na página Restaurant', async ({ page }) => {
+    await restaurantPage.goto()
+    await restaurantPage.waitForLoad()
+
+    const featuredTag = page.locator('text=Destaque da semana')
+    await expect(featuredTag).toHaveCount(0)
+
+    const foodTypeTags = page.locator(
+      'text=Japonês, text=Italiano, text=Mexicano'
+    )
+    await expect(foodTypeTags).toHaveCount(0)
+  })
+
+  test('Card: Não renderiza ratings na página Restaurant', async ({ page }) => {
+    await restaurantPage.goto()
+    await restaurantPage.waitForLoad()
+
+    const ratingElements = page.locator('text=/4\\.[0-9]/')
+    await expect(ratingElements).toHaveCount(0)
+  })
+
   test('Text: Renderiza corretamente', async ({ page }) => {
     await homePage.goto()
     await homePage.waitForLoad()

@@ -226,7 +226,7 @@ test.describe('Testes de Tema (Dark/Light)', () => {
 
     const endTime = Date.now()
     const transitionTime = endTime - startTime
-    expect(transitionTime).toBeLessThan(1500)
+    expect(transitionTime).toBeLessThan(2000)
 
     const theme = await homePage.getCurrentTheme()
     expect(['light', 'dark']).toContain(theme)

@@ -19,7 +19,17 @@ export const useTheme = () => {
 
 export const useThemeState = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false)
-  const toggleTheme = () => setIsDarkTheme(!isDarkTheme)
+
+  const toggleTheme = () => {
+    const newTheme = !isDarkTheme
+    setIsDarkTheme(newTheme)
+
+    // Apply theme class to body
+    if (typeof document !== 'undefined') {
+      document.body.className = newTheme ? 'dark' : 'light'
+    }
+  }
+
   const currentTheme = isDarkTheme ? $darkTheme : $lightTheme
 
   return {

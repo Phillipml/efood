@@ -122,4 +122,45 @@ describe('Card Component', () => {
 
     expect(screen.getByText('Fazer Pedido')).toBeInTheDocument()
   })
+
+  it('renderiza tag de destaque quando isFeatured é true', () => {
+    renderWithTheme(<Card {...mockCardProps} isFeatured={true} />)
+
+    expect(screen.getByText('Destaque da semana')).toBeInTheDocument()
+  })
+
+  it('renderiza tag de tipo de comida quando foodType é fornecido', () => {
+    renderWithTheme(<Card {...mockCardProps} foodType="Japonês" />)
+
+    expect(screen.getByText('Japonês')).toBeInTheDocument()
+  })
+
+  it('renderiza ambas as tags quando isFeatured e foodType são fornecidos', () => {
+    renderWithTheme(
+      <Card {...mockCardProps} isFeatured={true} foodType="Italiano" />
+    )
+
+    expect(screen.getByText('Destaque da semana')).toBeInTheDocument()
+    expect(screen.getByText('Italiano')).toBeInTheDocument()
+  })
+
+  it('não renderiza tags quando isFeatured e foodType não são fornecidos', () => {
+    renderWithTheme(<Card {...mockCardProps} />)
+
+    expect(screen.queryByText('Destaque da semana')).not.toBeInTheDocument()
+    expect(screen.queryByText('Japonês')).not.toBeInTheDocument()
+  })
+
+  it('não renderiza rating quando rating não é fornecido', () => {
+    const { rating, ...propsWithoutRating } = mockCardProps
+    renderWithTheme(<Card {...propsWithoutRating} />)
+
+    expect(screen.queryByText('4.5')).not.toBeInTheDocument()
+  })
+
+  it('renderiza rating quando rating é fornecido', () => {
+    renderWithTheme(<Card {...mockCardProps} rating={4.8} />)
+
+    expect(screen.getByText('4.8')).toBeInTheDocument()
+  })
 })
