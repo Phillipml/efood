@@ -10,8 +10,8 @@ Uma aplicação moderna de delivery de comida construída com React, TypeScript 
 - **Sistema de Temas** - Toggle entre tema escuro/claro com persistência
 - **Design Responsivo** - Desktop, tablet e mobile
 - **Sistema de Design** - Componentes reutilizáveis e acessíveis
-- **Testes Completos** - 87+ testes unitários + E2E
-- **Cobertura Total** - Componentes UI, rotas, hooks e utilitários
+- **Testes Completos** - 115+ testes unitários + E2E
+- **Cobertura Total** - Componentes UI, layout, rotas, hooks e utilitários
 - **TypeScript** - Tipagem forte em todo o projeto
 
 ## Tecnologias
@@ -75,14 +75,17 @@ src/
 │   │   ├── Card/       # Card com testes completos
 │   │   ├── ThemeButton/# Botão de tema com testes
 │   │   └── Brand/      # Logo e Icon com testes
-│   └── layout/         # Componentes de layout
+│   └── layout/         # Componentes de layout com testes completos
+│       ├── Header/     # Header principal e RestaurantHeader
+│       ├── CardList/   # Lista de cards de restaurantes
+│       └── Footer/     # Rodapé com redes sociais
 ├── pages/              # Páginas da aplicação
 ├── hooks/              # Hooks customizados (useTheme, useThemeState)
 ├── utils/              # Funções utilitárias com testes
 ├── styles/             # Estilos globais
 ├── types/              # Definições de tipos
 ├── assets/             # Recursos estáticos
-└── *.test.tsx          # Testes unitários (87 testes)
+└── *.test.tsx          # Testes unitários (115+ testes)
 
 testes/
 ├── e2e/                # Testes end-to-end (Playwright)
@@ -146,6 +149,43 @@ const { isDarkTheme, toggleTheme, currentTheme } = useThemeState()
 const { currentTheme, toggleTheme } = useTheme()
 ```
 
+### Componentes de Layout
+
+#### Header
+
+Header principal com navegação e logo.
+
+```tsx
+<Header /> // Renderiza automaticamente baseado na rota
+```
+
+#### RestaurantHeader
+
+Header específico para páginas de restaurantes.
+
+```tsx
+<RestaurantHeader /> // Título, logo e contador de carrinho
+```
+
+#### CardList
+
+Lista de cards de restaurantes com dados dinâmicos.
+
+```tsx
+<CardList
+  buttonTxt="Ver Cardápio"
+  onClick={() => console.log('Card clicado')}
+/>
+```
+
+#### Footer
+
+Rodapé com logo e links de redes sociais.
+
+```tsx
+<Footer /> // Logo, texto institucional e ícones sociais
+```
+
 ## Testes
 
 ### Testes Unitários (Jest)
@@ -170,12 +210,16 @@ npm test -- --testPathPatterns="components/ui"
 
 # Executar testes de utilitários
 npm test -- --testPathPatterns="utils"
+
+# Executar testes de componentes de layout
+npm test -- --testPathPatterns="layout"
 ```
 
 #### Cobertura de Testes
 
 - **Rotas** - Testes completos de navegação e renderização
-- **Componentes** - Testes de renderização e interação
+- **Componentes UI** - Testes de renderização e interação
+- **Componentes Layout** - Testes de estrutura e funcionalidade
 - **Utilitários** - Testes de funções auxiliares
 - **Hooks** - Testes de lógica customizada
 
@@ -200,6 +244,28 @@ describe('Button Component', () => {
 
     fireEvent.click(screen.getByText('Clique'))
     expect(handleClick).toHaveBeenCalledTimes(1)
+  })
+})
+```
+
+#### Exemplo de Teste de Componentes Layout
+
+```tsx
+describe('CardList Component', () => {
+  it('renderiza múltiplos Cards', () => {
+    renderWithTheme(<CardList buttonTxt="Ver Cardápio" />)
+
+    const cards = screen.getAllByText('Hioki Sushi')
+    expect(cards).toHaveLength(7)
+  })
+
+  it('executa onClick quando especificado', () => {
+    const mockOnClick = jest.fn()
+    renderWithTheme(<CardList buttonTxt="Ver Cardápio" onClick={mockOnClick} />)
+
+    const buttons = screen.getAllByText('Ver Cardápio')
+    fireEvent.click(buttons[0])
+    expect(mockOnClick).toHaveBeenCalledTimes(1)
   })
 })
 ```
@@ -234,7 +300,7 @@ npx tsc --noEmit
 
 ### Cobertura de Testes
 
-O projeto mantém alta cobertura de testes com **87 testes passando**:
+O projeto mantém alta cobertura de testes com **115+ testes passando**:
 
 #### **Componentes UI (49 testes)**
 
@@ -244,6 +310,13 @@ O projeto mantém alta cobertura de testes com **87 testes passando**:
 - **ThemeButton Component** (7 testes) - Ícones de tema, onClick, estilos
 - **Brand Components** (13 testes) - Logo e Icon com props responsivas
 
+#### **Componentes Layout (28 testes)**
+
+- **Header Component** (6 testes) - HeaderWrapper, Container, Logo, Text, rota home
+- **RestaurantHeader Component** (7 testes) - HeaderRestaurantWrap, RestaurantContainer, título, Logo, contador de carrinho
+- **CardList Component** (7 testes) - Container, múltiplos Cards, props, onClick, dados corretos
+- **Footer Component** (8 testes) - Footer, conteúdo, ícones sociais, Container, logo, texto, links
+
 #### **Funcionalidades Core (38+ testes)**
 
 - **Rotas** (7 testes) - Navegação e renderização com React Router
@@ -252,11 +325,12 @@ O projeto mantém alta cobertura de testes com **87 testes passando**:
 
 #### **Estatísticas**
 
-- ✅ **87+ testes passando**
+- ✅ **115+ testes passando**
 - ✅ **0 testes falhando**
-- ✅ **9+ suites de teste**
+- ✅ **13+ suites de teste**
 - ✅ **Cobertura completa** de componentes críticos
 - ✅ **Sistema de temas** totalmente testado
+- ✅ **Componentes de layout** totalmente testados
 
 ### Boas Práticas
 
