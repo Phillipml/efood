@@ -33,7 +33,6 @@ export const Container = styled.div<ContainerProps>`
     > div {
       display: grid;
       align-items: center;
-      justify-content: center;
       gap: 1rem;
       height: 100%;
       padding: 0.5rem;

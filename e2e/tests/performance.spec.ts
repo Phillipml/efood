@@ -249,20 +249,20 @@ test.describe('Performance', () => {
     await homePage.waitForLoad()
 
     const firstLoadTime = await page.evaluate(() => {
-      return (
-        performance.getEntriesByType('navigation')[0].loadEventEnd -
-        performance.getEntriesByType('navigation')[0].loadEventStart
-      )
+      const nav = performance.getEntriesByType(
+        'navigation'
+      )[0] as PerformanceNavigationTiming
+      return nav.loadEventEnd - nav.loadEventStart
     })
 
     await page.reload()
     await homePage.waitForLoad()
 
     const secondLoadTime = await page.evaluate(() => {
-      return (
-        performance.getEntriesByType('navigation')[0].loadEventEnd -
-        performance.getEntriesByType('navigation')[0].loadEventStart
-      )
+      const nav = performance.getEntriesByType(
+        'navigation'
+      )[0] as PerformanceNavigationTiming
+      return nav.loadEventEnd - nav.loadEventStart
     })
 
     expect(secondLoadTime).toBeLessThanOrEqual(firstLoadTime + 100)
