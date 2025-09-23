@@ -1,24 +1,30 @@
-import { $darkTheme, $lightTheme } from '@styles/theme'
-import { useState } from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider as StyledThemeProvider } from 'styled-components'
+import { useThemeState } from './hooks/useTheme'
 import ThemeButton from './components/ui/ThemeButton'
 import GlobalStyle from './styles/reset'
 import RoutesApp from './routes'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
+function AppContent() {
+  const { currentTheme, toggleTheme } = useThemeState()
+
+  return (
+    <StyledThemeProvider theme={currentTheme}>
+      <GlobalStyle />
+      <Header />
+      <RoutesApp />
+      <Footer />
+      <ThemeButton onClick={toggleTheme} />
+    </StyledThemeProvider>
+  )
+}
+
 function App() {
-  const [isdarkTheme, setIsdarkTheme] = useState(false)
   return (
     <BrowserRouter>
-      <ThemeProvider theme={isdarkTheme ? $darkTheme : $lightTheme}>
-        <GlobalStyle />
-        <Header />
-        <RoutesApp />
-        <Footer />
-        <ThemeButton onClick={() => setIsdarkTheme(!isdarkTheme)} />
-      </ThemeProvider>
+      <AppContent />
     </BrowserRouter>
   )
 }

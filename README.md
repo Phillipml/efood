@@ -7,11 +7,12 @@ Uma aplicação moderna de delivery de comida construída com React, TypeScript 
 - **Página Inicial** - Catálogo de restaurantes com navegação
 - **Página de Restaurantes** - Lista detalhada de estabelecimentos
 - **Roteamento** - Navegação entre páginas com React Router
-- **Tema Escuro/Claro** - Toggle entre temas
+- **Sistema de Temas** - Toggle entre tema escuro/claro com persistência
 - **Design Responsivo** - Desktop, tablet e mobile
-- **Sistema de Design** - Componentes reutilizáveis
-- **Testes Completos** - 87 testes unitários + E2E
-- **Cobertura Total** - Componentes UI, rotas e utilitários
+- **Sistema de Design** - Componentes reutilizáveis e acessíveis
+- **Testes Completos** - 87+ testes unitários + E2E
+- **Cobertura Total** - Componentes UI, rotas, hooks e utilitários
+- **TypeScript** - Tipagem forte em todo o projeto
 
 ## Tecnologias
 
@@ -76,7 +77,7 @@ src/
 │   │   └── Brand/      # Logo e Icon com testes
 │   └── layout/         # Componentes de layout
 ├── pages/              # Páginas da aplicação
-├── hooks/              # Hooks customizados
+├── hooks/              # Hooks customizados (useTheme, useThemeState)
 ├── utils/              # Funções utilitárias com testes
 ├── styles/             # Estilos globais
 ├── types/              # Definições de tipos
@@ -131,6 +132,18 @@ Componente de texto flexível.
 <Text as="title" $textColor="tertiary" $lgFontSize="xl" $alignCenter={true}>
   Título Principal
 </Text>
+```
+
+### Sistema de Temas
+
+Sistema completo de gerenciamento de temas com hooks customizados.
+
+```tsx
+// Hook para gerenciar estado do tema
+const { isDarkTheme, toggleTheme, currentTheme } = useThemeState()
+
+// Hook para acessar tema em componentes (requer ThemeProvider)
+const { currentTheme, toggleTheme } = useTheme()
 ```
 
 ## Testes
@@ -231,18 +244,19 @@ O projeto mantém alta cobertura de testes com **87 testes passando**:
 - **ThemeButton Component** (7 testes) - Ícones de tema, onClick, estilos
 - **Brand Components** (13 testes) - Logo e Icon com props responsivas
 
-#### **Funcionalidades Core (38 testes)**
+#### **Funcionalidades Core (38+ testes)**
 
 - **Rotas** (7 testes) - Navegação e renderização com React Router
 - **Utilitários** (31 testes) - Funções de cor e tamanho com 100% de cobertura
-- **Hooks** - Cobertura completa da lógica customizada
+- **Hooks** (10+ testes) - useTheme e useThemeState com cobertura completa
 
 #### **Estatísticas**
 
-- ✅ **87 testes passando**
+- ✅ **87+ testes passando**
 - ✅ **0 testes falhando**
-- ✅ **9 suites de teste**
+- ✅ **9+ suites de teste**
 - ✅ **Cobertura completa** de componentes críticos
+- ✅ **Sistema de temas** totalmente testado
 
 ### Boas Práticas
 
