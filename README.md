@@ -10,7 +10,7 @@ Uma aplicação moderna de delivery de comida construída com React, TypeScript 
 - **Sistema de Temas** - Toggle entre tema escuro/claro com persistência
 - **Design Responsivo** - Desktop, tablet e mobile
 - **Sistema de Design** - Componentes reutilizáveis e acessíveis
-- **Testes Completos** - 115+ testes unitários + E2E
+- **Testes Completos** - 136+ testes unitários + E2E
 - **Cobertura Total** - Componentes UI, layout, rotas, hooks e utilitários
 - **TypeScript** - Tipagem forte em todo o projeto
 
@@ -85,7 +85,7 @@ src/
 ├── styles/             # Estilos globais
 ├── types/              # Definições de tipos
 ├── assets/             # Recursos estáticos
-└── *.test.tsx          # Testes unitários (115+ testes)
+└── *.test.tsx          # Testes unitários (136+ testes)
 
 testes/
 ├── e2e/                # Testes end-to-end (Playwright)
@@ -213,6 +213,9 @@ npm test -- --testPathPatterns="utils"
 
 # Executar testes de componentes de layout
 npm test -- --testPathPatterns="layout"
+
+# Executar testes de páginas
+npm test -- --testPathPatterns="pages"
 ```
 
 #### Cobertura de Testes
@@ -220,6 +223,7 @@ npm test -- --testPathPatterns="layout"
 - **Rotas** - Testes completos de navegação e renderização
 - **Componentes UI** - Testes de renderização e interação
 - **Componentes Layout** - Testes de estrutura e funcionalidade
+- **Páginas** - Testes de renderização e navegação
 - **Utilitários** - Testes de funções auxiliares
 - **Hooks** - Testes de lógica customizada
 
@@ -270,6 +274,28 @@ describe('CardList Component', () => {
 })
 ```
 
+#### Exemplo de Teste de Páginas
+
+```tsx
+describe('Home Page', () => {
+  it('executa navegação quando onClick é chamado', () => {
+    renderWithTheme(<Home />)
+
+    const buttons = screen.getAllByText('Saiba Mais')
+    fireEvent.click(buttons[0])
+
+    expect(mockNavigate).toHaveBeenCalledWith('/restaurant')
+  })
+
+  it('passa props corretas para CardList', () => {
+    renderWithTheme(<Home />)
+
+    const buttons = screen.getAllByText('Saiba Mais')
+    expect(buttons).toHaveLength(7)
+  })
+})
+```
+
 ### Testes E2E (Playwright)
 
 Testes end-to-end para validar fluxos completos da aplicação.
@@ -300,7 +326,7 @@ npx tsc --noEmit
 
 ### Cobertura de Testes
 
-O projeto mantém alta cobertura de testes com **115+ testes passando**:
+O projeto mantém alta cobertura de testes com **136+ testes passando**:
 
 #### **Componentes UI (49 testes)**
 
@@ -317,6 +343,11 @@ O projeto mantém alta cobertura de testes com **115+ testes passando**:
 - **CardList Component** (7 testes) - Container, múltiplos Cards, props, onClick, dados corretos
 - **Footer Component** (8 testes) - Footer, conteúdo, ícones sociais, Container, logo, texto, links
 
+#### **Páginas (13 testes)**
+
+- **Home Page** (6 testes) - CardList, props, navegação, renderização
+- **Restaurant Page** (7 testes) - CardList, props, renderização, estilos
+
 #### **Funcionalidades Core (38+ testes)**
 
 - **Rotas** (7 testes) - Navegação e renderização com React Router
@@ -325,12 +356,13 @@ O projeto mantém alta cobertura de testes com **115+ testes passando**:
 
 #### **Estatísticas**
 
-- ✅ **115+ testes passando**
+- ✅ **136+ testes passando**
 - ✅ **0 testes falhando**
-- ✅ **13+ suites de teste**
+- ✅ **16+ suites de teste**
 - ✅ **Cobertura completa** de componentes críticos
 - ✅ **Sistema de temas** totalmente testado
 - ✅ **Componentes de layout** totalmente testados
+- ✅ **Páginas** totalmente testadas
 
 ### Boas Práticas
 
