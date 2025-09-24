@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test'
 import { HomePage, RestaurantPage } from '../fixtures/page-objects'
 import { TestHelpers } from '../utils/helpers'
-import { TEST_DATA } from '../fixtures/test-data'
 
 test.describe('Testes de Tema (Dark/Light)', () => {
   let homePage: HomePage
@@ -74,10 +73,6 @@ test.describe('Testes de Tema (Dark/Light)', () => {
 
     const themeButton = homePage.themeButton
     await expect(themeButton).toBeVisible()
-
-    const lightIconState = await themeButton.evaluate(
-      (el) => window.getComputedStyle(el).content
-    )
 
     await homePage.clickThemeButton()
     await page.waitForTimeout(500)

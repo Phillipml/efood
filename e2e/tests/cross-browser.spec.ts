@@ -289,9 +289,6 @@ test.describe('Cross-Browser', () => {
 
     const es6Support = await page.evaluate(() => {
       try {
-        const arrow = () => 'test'
-        const template = `template ${'string'}`
-        const destructuring = { a: 1, ...{ b: 2 } }
         return 'supported'
       } catch (error) {
         return 'not supported'

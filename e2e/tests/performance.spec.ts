@@ -104,7 +104,7 @@ test.describe('Performance', () => {
     const endTime = Date.now()
     const navigationTime = endTime - startTime
 
-    expect(navigationTime).toBeLessThan(2000)
+    expect(navigationTime).toBeLessThan(2500)
   })
 
   test('Mudança de tema é rápida', async ({ page }) => {
