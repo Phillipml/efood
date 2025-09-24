@@ -14,7 +14,6 @@ export const Container = styled.div<ContainerProps>`
     $mdPercent,
     $smPercent
   }) => css`
-    z-index: 1;
     position: relative;
     display: grid;
     align-items: center;

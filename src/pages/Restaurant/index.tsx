@@ -1,33 +1,38 @@
 import CardList from '@/components/layout/CardList'
 import Card from '@/components/ui/Card'
 import { GetData } from '@/services/api'
-import type { RestaurantList } from '@/types'
+import type { Menu } from '@/types'
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 const Restaurant = () => {
-  const [info, setInfo] = useState<RestaurantList[] | null>(null)
-  const clientList = async () => {
-    const data = await GetData()
-    setInfo(data)
-  }
+  const [restaurant, setRestaurant] = useState<Menu[] | null>(null)
+  const { id } = useParams()
+
   useEffect(() => {
-    console.log(clientList())
-  }, [])
+    const clientList = async () => {
+      const data = await GetData()
+      const foundRestaurant = data?.find(
+        (item: { id: number }) => item.id === Number(id)
+      )
+      const final = foundRestaurant.cardapio
+      setRestaurant(final)
+    }
+    clientList()
+  }, [id])
+
   return (
-    <>
-      {info?.map((info, i) => (
-        <CardList key={i}>
-          <Card
-            image={info.cardapio.foto}
-            name={info.cardapio.nome}
-            isFeatured={info.destacado}
-            description={info.descricao}
-            foodType={info.tipo}
-            buttonTxt="Saiba Mais"
-          />
-        </CardList>
+    <CardList>
+      {restaurant?.map((restaurant, i) => (
+        <Card
+          key={i}
+          image={restaurant.foto}
+          name={restaurant.nome}
+          description={restaurant.descricao}
+          buttonTxt="Adicionar ao Carrinho"
+        />
       ))}
-    </>
+    </CardList>
   )
 }
 

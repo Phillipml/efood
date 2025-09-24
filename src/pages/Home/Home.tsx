@@ -8,15 +8,15 @@ import Card from '@/components/ui/Card'
 const Home = () => {
   const [info, setInfo] = useState<RestaurantList[] | null>(null)
   const navigate = useNavigate()
-  const goToRestaurant = () => {
-    navigate('/restaurant')
+  const goToRestaurant = (idRestaurant: number) => {
+    navigate(`/restaurant/${idRestaurant}`)
   }
   const clientList = async () => {
     const data = await GetData()
     setInfo(data)
   }
   useEffect(() => {
-    console.log(clientList())
+    clientList()
   }, [])
 
   return (
@@ -31,7 +31,7 @@ const Home = () => {
           rating={info.avaliacao}
           foodType={info.tipo}
           buttonTxt="Saiba Mais"
-          onClick={goToRestaurant}
+          onClick={() => goToRestaurant(info.id)}
         />
       ))}
     </CardList>
