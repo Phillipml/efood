@@ -1,4 +1,4 @@
-import Home from '@/pages/Home/Home'
+import Home from '@/pages/Home'
 import { Route, Routes } from 'react-router-dom'
 import Restaurant from './pages/Restaurant'
 const RoutesApp = () => (
