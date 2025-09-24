@@ -10,10 +10,13 @@ Uma aplicação moderna de delivery de comida construída com React, TypeScript 
 - **Sistema de Temas** - Toggle entre tema escuro/claro com persistência
 - **Design Responsivo** - Desktop, tablet e mobile
 - **Sistema de Design** - Componentes reutilizáveis e acessíveis
-- **Testes Completos** - 147+ testes unitários + E2E
+- **Testes Completos** - 147+ testes unitários + 507 testes E2E
 - **Cobertura Total** - 97.41% de cobertura geral (113/116 statements)
 - **Mocks Organizados** - Sistema de mocks reutilizáveis e centralizados
 - **TypeScript** - Tipagem forte em todo o projeto
+- **Tags Dinâmicas** - Sistema de tags condicionais (Destaque da semana, tipo de comida)
+- **Rating Opcional** - Sistema de avaliação flexível
+- **Código Limpo** - Sem importações ou métodos não utilizados
 
 ## Tecnologias
 
@@ -168,17 +171,32 @@ Botão customizável com suporte a temas e responsividade.
 
 ### Card
 
-Card para exibir informações de restaurantes.
+Card para exibir informações de restaurantes com sistema de tags dinâmicas e rating opcional.
 
 ```tsx
 <Card
   image="/restaurant.jpg"
   name="Restaurante Exemplo"
-  rating={4.5}
+  rating={4.5} // Opcional - não exibe se não fornecido
   description="Deliciosa comida caseira"
   buttonTxt="Ver Cardápio"
+  isFeatured={true} // Exibe tag "Destaque da semana"
+  foodType="Japonês" // Exibe tag com tipo de comida
 />
 ```
+
+#### **Sistema de Tags Dinâmicas**
+
+- **`isFeatured`** - Exibe tag "Destaque da semana" quando `true`
+- **`foodType`** - Exibe tag com tipo de comida (ex: "Japonês", "Italiano")
+- **Tags condicionais** - Só exibe se pelo menos uma condição for verdadeira
+- **Posicionamento** - Tags sempre no canto superior direito do card
+
+#### **Rating Opcional**
+
+- **Rating flexível** - Só exibe se `rating` for fornecido
+- **Página Home** - Cards com ratings variados (4.3 a 4.9)
+- **Página Restaurant** - Cards sem ratings (foco no cardápio)
 
 ### Text
 
@@ -222,14 +240,40 @@ Header específico para páginas de restaurantes.
 
 #### CardList
 
-Lista de cards de restaurantes com dados dinâmicos.
+Lista de cards de restaurantes com dados dinâmicos e sistema de tags.
 
 ```tsx
 <CardList
   buttonTxt="Ver Cardápio"
   onClick={() => console.log('Card clicado')}
+  cards={[
+    {
+      id: '1',
+      image: '/restaurant1.jpg',
+      name: 'Hioki Sushi',
+      rating: 4.9,
+      description: 'Sushi tradicional',
+      isFeatured: true,
+      foodType: 'Japonês'
+    },
+    {
+      id: '2',
+      image: '/restaurant2.jpg',
+      name: 'Pizza Palace',
+      rating: 4.7,
+      description: 'Pizza italiana',
+      foodType: 'Italiano'
+    }
+  ]}
 />
 ```
+
+#### **Sistema de Dados Dinâmicos**
+
+- **Array de cards** - Recebe `CardData[]` com informações completas
+- **Tags condicionais** - Cada card pode ter `isFeatured` e/ou `foodType`
+- **Rating opcional** - Cards podem ter ou não rating
+- **Flexibilidade** - Diferentes configurações para Home e Restaurant
 
 #### Footer
 
@@ -379,10 +423,62 @@ describe('App Component', () => {
 
 ### Testes E2E (Playwright)
 
-Testes end-to-end para validar fluxos completos da aplicação.
+Testes end-to-end para validar fluxos completos da aplicação com **507 testes passando** em múltiplos navegadores.
 
 ```bash
+# Executar todos os testes E2E
 npm run test:playwright
+
+# Executar testes específicos
+npx playwright test e2e/tests/home.spec.ts
+npx playwright test e2e/tests/restaurant.spec.ts
+npx playwright test e2e/tests/components.spec.ts
+npx playwright test e2e/tests/performance.spec.ts
+npx playwright test e2e/tests/theme.spec.ts
+npx playwright test e2e/tests/responsive.spec.ts
+npx playwright test e2e/tests/accessibility.spec.ts
+npx playwright test e2e/tests/cross-browser.spec.ts
+npx playwright test e2e/tests/navigation.spec.ts
+npx playwright test e2e/tests/interactions.spec.ts
+```
+
+#### **Cobertura E2E Completa**
+
+- ✅ **507 testes passando** em Chromium, Firefox e WebKit
+- ✅ **Navegação** - Testes de roteamento entre páginas
+- ✅ **Componentes** - Validação de renderização e interação
+- ✅ **Performance** - Testes de carregamento e responsividade
+- ✅ **Temas** - Validação de toggle dark/light
+- ✅ **Responsividade** - Testes em mobile, tablet e desktop
+- ✅ **Acessibilidade** - Validação de padrões WCAG
+- ✅ **Cross-browser** - Compatibilidade entre navegadores
+- ✅ **Interações** - Testes de mouse, teclado e touch
+- ✅ **Funcionalidades** - Validação de todas as features
+
+#### **Exemplo de Teste E2E**
+
+```typescript
+test('Página Home carrega corretamente', async ({ page }) => {
+  await page.goto('/')
+
+  // Verificar elementos principais
+  await expect(page.locator('header')).toBeVisible()
+  await expect(page.locator('footer')).toBeVisible()
+  await expect(page.locator('[data-testid="card-list"]')).toBeVisible()
+
+  // Verificar cards de restaurantes
+  const cards = page.locator('[data-testid="card"]')
+  await expect(cards).toHaveCount(6)
+
+  // Verificar tags dinâmicas
+  await expect(page.locator('text=Destaque da semana')).toBeVisible()
+  await expect(page.locator('text=Japonês')).toBeVisible()
+  await expect(page.locator('text=Italiano')).toBeVisible()
+
+  // Verificar ratings
+  await expect(page.locator('text=4.9')).toBeVisible()
+  await expect(page.locator('text=4.7')).toBeVisible()
+})
 ```
 
 ## Storybook
@@ -407,7 +503,7 @@ npx tsc --noEmit
 
 ### Cobertura de Testes
 
-O projeto mantém alta cobertura de testes com **147+ testes passando**:
+O projeto mantém alta cobertura de testes com **147+ testes unitários + 507 testes E2E**:
 
 #### **Componentes UI (49 testes)**
 
@@ -441,9 +537,11 @@ O projeto mantém alta cobertura de testes com **147+ testes passando**:
 
 #### **Estatísticas de Cobertura**
 
-- ✅ **147+ testes passando**
+- ✅ **147+ testes unitários passando**
+- ✅ **507 testes E2E passando**
 - ✅ **0 testes falhando**
-- ✅ **17+ suites de teste**
+- ✅ **17+ suites de teste unitários**
+- ✅ **10+ suites de teste E2E**
 - ✅ **97.41% Statements** (113/116)
 - ✅ **88.23% Branches** (90/102)
 - ✅ **100% Functions** (40/40)
@@ -465,6 +563,10 @@ O projeto mantém alta cobertura de testes com **147+ testes passando**:
 - **Componentes** - Design system consistente
 - **Performance** - Otimizações com Vite
 - **Acessibilidade** - Componentes acessíveis
+- **Código Limpo** - Sem importações ou métodos não utilizados
+- **Tags Dinâmicas** - Sistema flexível de tags condicionais
+- **Rating Opcional** - Sistema de avaliação adaptável
+- **Cross-browser** - Compatibilidade total entre navegadores
 
 ## Deploy
 
