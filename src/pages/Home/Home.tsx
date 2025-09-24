@@ -1,16 +1,30 @@
 import CardList, { type CardData } from '@/components/layout/CardList'
 import { useNavigate } from 'react-router-dom'
 import hioki from '@assets/images/hioki.png'
+import { GetData } from '@/services/api'
+import { useEffect, useState } from 'react'
 
 const Home = () => {
+  const [info,setInfo] = useState([])
   const navigate = useNavigate()
   const goToRestaurant = () => {
     navigate('/restaurant')
   }
+  const card = async () => {
+    const data = await GetData()
+    setInfo(data)
+  }
+useEffect(() => {
+  const card()
+
+  return () => {
+    second
+  }
+}, [third])
 
   const cardsData: CardData[] = [
     {
-      id: '1',
+      id: card,
       image: hioki,
       name: 'Hioki Sushi',
       rating: 4.9,
