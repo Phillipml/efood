@@ -5,7 +5,7 @@ import { GetData } from '@/services/api'
 import { useEffect, useState } from 'react'
 
 const Home = () => {
-  const [info,setInfo] = useState([])
+  const [info, setInfo] = useState([])
   const navigate = useNavigate()
   const goToRestaurant = () => {
     navigate('/restaurant')
@@ -14,13 +14,11 @@ const Home = () => {
     const data = await GetData()
     setInfo(data)
   }
-useEffect(() => {
-  const card()
-
-  return () => {
-    second
-  }
-}, [third])
+  useEffect(() => {
+    return () => {
+      second
+    }
+  }, [info])
 
   const cardsData: CardData[] = [
     {
