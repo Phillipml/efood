@@ -1,47 +1,32 @@
-import CardList, { type CardData } from '@/components/layout/CardList'
-import hioki from '@assets/images/hioki.png'
+import CardList from '@/components/layout/CardList'
+import Card from '@/components/ui/Card'
+import { GetData } from '@/services/api'
+import type { RestaurantList } from '@/types'
+import { useEffect, useState } from 'react'
 
 const Restaurant = () => {
-  const cardsData: CardData[] = [
-    {
-      id: '1',
-      image: hioki,
-      name: 'Sushi Salmão',
-      description: 'Sushi de salmão fresco com arroz temperado e alga nori.'
-    },
-    {
-      id: '2',
-      image: hioki,
-      name: 'Temaki Especial',
-      description:
-        'Temaki com camarão, salmão e pepino, envolvido em alga nori.'
-    },
-    {
-      id: '3',
-      image: hioki,
-      name: 'Sashimi Mix',
-      description: 'Seleção de sashimis de salmão, atum e peixe branco.'
-    },
-    {
-      id: '4',
-      image: hioki,
-      name: 'Combo Sushi',
-      description: 'Combo completo com sushis, sashimis e temaki.'
-    }
-  ]
-
+  const [info, setInfo] = useState<RestaurantList[] | null>(null)
+  const clientList = async () => {
+    const data = await GetData()
+    setInfo(data)
+  }
+  useEffect(() => {
+    console.log(clientList())
+  }, [])
   return (
     <>
-      <CardList
-        cards={cardsData}
-        $lgButtonPercent={100}
-        $lightTheme="tertiary"
-        $textColor="secondary"
-        $textDarkTheme="tertiary"
-        buttonTxt="Adicionar"
-        $buttonTextColor="tertiary"
-        $buttonColor="primary"
-      />
+      {info?.map((info, i) => (
+        <CardList key={i}>
+          <Card
+            image={info.cardapio.foto}
+            name={info.cardapio.nome}
+            isFeatured={info.destacado}
+            description={info.descricao}
+            foodType={info.tipo}
+            buttonTxt="Saiba Mais"
+          />
+        </CardList>
+      ))}
     </>
   )
 }

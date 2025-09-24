@@ -1,13 +1,4 @@
-export type Menu = {
-  foto: string
-  preco: number
-  id: number
-  nome: string
-  descricao: string
-  porcao: string
-}
-
-export type Restaurant = {
+export interface RestaurantList {
   id: number
   titulo: string
   destacado: boolean
@@ -15,5 +6,12 @@ export type Restaurant = {
   avaliacao: number
   descricao: string
   capa: string
-  cardapio: [Menu]
+  cardapio: {
+    foto: string
+    preco: number
+    id: number
+    nome: string
+    descricao: string
+    porcao: string
+  }
 }

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { FontSize, PercentSize } from '@/utils/size-utils'
+import { FontSize, PercentSize, pxToRem } from '@/utils/size-utils'
 import type { ColorsVariants, PercentProps } from '@/types'
 import { setColor } from '@/utils/color-utils'
 
@@ -14,6 +14,7 @@ export const Container = styled.div<ContainerProps>`
     $mdPercent,
     $smPercent
   }) => css`
+    z-index: 1;
     position: relative;
     display: grid;
     align-items: center;
@@ -28,6 +29,7 @@ export const Container = styled.div<ContainerProps>`
     border: 1px solid ${theme.tertiary};
     > img {
       width: 100%;
+      ${pxToRem('height', { lgScreen: 168 })}
       object-fit: cover;
     }
     > div {
