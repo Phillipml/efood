@@ -6,7 +6,7 @@ import { RestaurantHeader } from './RestaurantHeader'
 
 const Header = () => {
   const location = useLocation()
-  const isRestaurant = location.pathname === '/restaurant'
+  const isRestaurant = location.pathname.startsWith(`/restaurant`)
 
   if (isRestaurant) {
     return <RestaurantHeader />

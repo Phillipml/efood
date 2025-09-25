@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     list-style: none;
   }
-  body {
+  body {z-index:1;
     width: 100%;
     height: 100vh;
     margin: 0 auto;
