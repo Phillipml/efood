@@ -5,6 +5,7 @@ import { GetData } from '@/services/api'
 import type { Menu } from '@/types'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { Modal } from './styles'
 
 const Restaurant = () => {
   const [restaurant, setRestaurant] = useState<Menu[] | null>(null)
@@ -30,13 +31,16 @@ const Restaurant = () => {
   ) : (
     <CardList>
       {restaurant?.map((restaurant, i) => (
-        <Card
-          key={i}
-          image={restaurant.foto}
-          name={restaurant.nome}
-          description={restaurant.descricao}
-          buttonTxt="Adicionar ao Carrinho"
-        />
+        <>
+          <Card
+            key={i}
+            image={restaurant.foto}
+            name={restaurant.nome}
+            description={restaurant.descricao}
+            buttonTxt="Adicionar ao Carrinho"
+          />
+          <Modal></Modal>
+        </>
       ))}
     </CardList>
   )

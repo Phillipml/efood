@@ -26,23 +26,25 @@ const Home = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <CardList>
-      {info?.map((info, i) => (
-        <Card
-          key={i}
-          image={info.capa}
-          name={info.titulo}
-          isFeatured={info.destacado}
-          description={info.descricao}
-          rating={info.avaliacao}
-          foodType={info.tipo}
-          buttonTxt="Saiba Mais"
-          $lgButtonPercent={24}
-          $mdButtonPercent={32}
-          onClick={() => goToRestaurant(info.id)}
-        />
-      ))}
-    </CardList>
+    <div>
+      <CardList>
+        {info?.map((info, i) => (
+          <Card
+            key={i}
+            image={info.capa}
+            name={info.titulo}
+            isFeatured={info.destacado}
+            description={info.descricao}
+            rating={info.avaliacao}
+            foodType={info.tipo}
+            buttonTxt="Saiba Mais"
+            $lgButtonPercent={24}
+            $mdButtonPercent={32}
+            onClick={() => goToRestaurant(info.id)}
+          />
+        ))}
+      </CardList>
+    </div>
   )
 }
 
