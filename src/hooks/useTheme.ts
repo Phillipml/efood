@@ -1,4 +1,4 @@
-import { useState, useContext, createContext } from 'react'
+import { useState, useContext, createContext, useEffect } from 'react'
 import { $darkTheme, $lightTheme } from '@/styles/theme'
 
 type ThemeContextType = {
@@ -18,16 +18,21 @@ export const useTheme = () => {
 }
 
 export const useThemeState = () => {
-  const [isDarkTheme, setIsDarkTheme] = useState(false)
+  const [isDarkTheme, setIsDarkTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const darkTheme = localStorage.getItem('efood-theme')
+      return darkTheme == 'true'
+    }
+    return false
+  })
+
+  useEffect(() => {
+    localStorage.setItem('efood-theme', String(isDarkTheme))
+  }, [isDarkTheme])
 
   const toggleTheme = () => {
     const newTheme = !isDarkTheme
     setIsDarkTheme(newTheme)
-
-    // Apply theme class to body
-    if (typeof document !== 'undefined') {
-      document.body.className = newTheme ? 'dark' : 'light'
-    }
   }
 
   const currentTheme = isDarkTheme ? $darkTheme : $lightTheme
