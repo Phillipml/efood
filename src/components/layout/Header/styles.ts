@@ -4,6 +4,7 @@ import { css, styled } from 'styled-components'
 import iconSvg from '@assets/images/icon.svg?raw'
 import type { ColorsVariants, RemProps } from '@/types'
 import { setColor } from '@/utils/color-utils'
+import { fadeIn } from '@/utils/styles-utils'
 
 type LogoProps = ColorsVariants & RemProps
 

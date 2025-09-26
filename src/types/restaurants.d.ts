@@ -14,5 +14,5 @@ export interface RestaurantList {
   avaliacao: number
   descricao: string
   capa: string
-  cardapio: Menu
+  cardapio: Menu[]
 }

@@ -10,6 +10,7 @@ import { ModalContent } from './styles'
 import Text from '@/components/ui/Text'
 import Button from '@/components/ui/Button'
 import { priceFormatter } from '@/utils/price-utils'
+import Hero from '@/components/ui/Hero'
 
 const Restaurant = () => {
   const [restaurant, setRestaurant] = useState<Menu[] | null>(null)
@@ -25,8 +26,8 @@ const Restaurant = () => {
       const foundRestaurant = data?.find(
         (item: { id: number }) => item.id === Number(id)
       )
-      const final = foundRestaurant.cardapio
-      setRestaurant(final)
+      const menu = foundRestaurant.cardapio
+      setRestaurant(menu)
       setIsLoading(false)
     }
     clientList()
@@ -44,6 +45,7 @@ const Restaurant = () => {
     <Loading />
   ) : (
     <>
+      <Hero />
       <Modal
         $isOpen={isOpen}
         onClose={() => setIsOpen(false)}
@@ -65,10 +67,10 @@ const Restaurant = () => {
               onClick={() => modalCloseHandle}
               $buttonColor="primary"
               $buttonTextColor="tertiary"
-              $lgButtonPercent={32}
+              $lgButtonPercent={38}
               $smButtonPercent={80}
             >
-              `Adicionar ao carrinho - {priceFormatter(modalItem?.preco)}`
+              Adicionar ao carrinho - {priceFormatter(modalItem?.preco)}
             </Button>
           </div>
         </ModalContent>

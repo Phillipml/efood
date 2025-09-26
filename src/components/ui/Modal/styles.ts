@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import type { ModalType } from '.'
+import { fadeIn } from '@/utils/styles-utils'
 export const ModalWrapper = styled.div<
   Omit<ModalType, 'children' | 'openClose'>
 >`
@@ -14,5 +15,6 @@ export const ModalWrapper = styled.div<
     align-items: center;
     justify-content: ${$justifyContent};
     background-color: rgba(0, 0, 0, 0.2);
+    ${fadeIn}
   `}
 `
