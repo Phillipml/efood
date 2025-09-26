@@ -9,6 +9,7 @@ import Modal from '@/components/ui/Modal/index'
 import { ModalContent } from './styles'
 import Text from '@/components/ui/Text'
 import Button from '@/components/ui/Button'
+import { priceFormatter } from '@/utils/price-utils'
 
 const Restaurant = () => {
   const [restaurant, setRestaurant] = useState<Menu[] | null>(null)
@@ -67,7 +68,7 @@ const Restaurant = () => {
               $lgButtonPercent={32}
               $smButtonPercent={80}
             >
-              Adicionar ao carrinho - {modalItem?.preco}
+              `Adicionar ao carrinho - {priceFormatter(modalItem?.preco)}`
             </Button>
           </div>
         </ModalContent>

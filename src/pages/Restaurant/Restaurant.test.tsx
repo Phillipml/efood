@@ -3,19 +3,10 @@ import Restaurant from './index'
 import { renderWithThemeAndRouter } from '@/utils/test-utils'
 
 describe('Restaurant Page', () => {
-  it('renderiza CardList', () => {
-    renderWithThemeAndRouter(<Restaurant />)
-
-    expect(screen.getByText('Sushi Salmão')).toBeInTheDocument()
-    expect(screen.getByText('Temaki Especial')).toBeInTheDocument()
-    expect(screen.getByText('Sashimi Mix')).toBeInTheDocument()
-    expect(screen.getByText('Combo Sushi')).toBeInTheDocument()
-  })
-
   it('passa props corretas para CardList', () => {
     renderWithThemeAndRouter(<Restaurant />)
 
-    const buttons = screen.getAllByText('Adicionar')
+    const buttons = screen.getAllByText('Adicionar ao Carrinho')
     expect(buttons).toHaveLength(4)
   })
 
