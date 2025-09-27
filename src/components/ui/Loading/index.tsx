@@ -5,6 +5,7 @@ function Loading() {
   const theme = useTheme()
   return (
     <div
+      data-testid="loading-container"
       style={{
         display: 'flex',
         justifyContent: 'center',
