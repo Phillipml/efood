@@ -1,157 +1,82 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
-import CardList, { type CardData } from '.'
+import CardList from '.'
 import { $lightTheme } from '@/styles/theme'
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider theme={$lightTheme}>{component}</ThemeProvider>)
 }
 
-const mockCardsData: CardData[] = [
-  {
-    id: '1',
-    image: 'https://example.com/restaurant1.jpg',
-    name: 'Restaurante 1',
-    rating: 4.5,
-    description: 'Descrição do restaurante 1',
-    isFeatured: true,
-    foodType: 'Japonês'
-  },
-  {
-    id: '2',
-    image: 'https://example.com/restaurant2.jpg',
-    name: 'Restaurante 2',
-    rating: 4.3,
-    description: 'Descrição do restaurante 2',
-    foodType: 'Italiano'
-  },
-  {
-    id: '3',
-    image: 'https://example.com/restaurant3.jpg',
-    name: 'Restaurante 3',
-    description: 'Descrição do restaurante 3'
-  }
-]
-
 describe('CardList Component', () => {
-  it('renderiza Container', () => {
-    renderWithTheme(<CardList cards={mockCardsData} buttonTxt="Ver Cardápio" />)
+  it('renderiza Container com children', () => {
+    const mockChildren = <div data-testid="test-child">Conteúdo de teste</div>
 
-    const cards = screen.getAllByText('Restaurante 1')
-    expect(cards.length).toBeGreaterThan(0)
+    renderWithTheme(<CardList>{mockChildren}</CardList>)
+
+    expect(screen.getByTestId('test-child')).toBeInTheDocument()
   })
 
-  it('renderiza múltiplos Cards', () => {
-    renderWithTheme(<CardList cards={mockCardsData} buttonTxt="Ver Cardápio" />)
-
-    expect(screen.getByText('Restaurante 1')).toBeInTheDocument()
-    expect(screen.getByText('Restaurante 2')).toBeInTheDocument()
-    expect(screen.getByText('Restaurante 3')).toBeInTheDocument()
-  })
-
-  it('passa props corretas para Cards', () => {
-    const mockOnClick = jest.fn()
-    const props = {
-      cards: mockCardsData,
-      buttonTxt: 'Ver Cardápio',
-      $lgButtonPercent: 50,
-      $mdButtonPercent: 75,
-      $smButtonPercent: 100,
-      $defaultColor: 'primary' as const,
-      $darkTheme: 'secondary' as const,
-      $lightTheme: 'primary' as const,
-      $buttonColor: 'tertiary' as const,
-      $buttonDarkThemeColor: 'primary' as const,
-      $buttonLightThemeColor: 'secondary' as const,
-      $buttonTextColor: 'primary' as const,
-      $buttonTextDarkTheme: 'secondary' as const,
-      $buttonTextLightTheme: 'primary' as const,
-      $textColor: 'tertiary' as const,
-      $textDarkTheme: 'primary' as const,
-      $textLightTheme: 'secondary' as const,
-      onClick: mockOnClick
-    }
-
-    renderWithTheme(<CardList {...props} />)
-
-    expect(screen.getByText('Restaurante 1')).toBeInTheDocument()
-    expect(screen.getByText('Restaurante 2')).toBeInTheDocument()
-    expect(screen.getByText('Restaurante 3')).toBeInTheDocument()
-  })
-
-  it('executa onClick quando especificado', () => {
-    const mockOnClick = jest.fn()
-    renderWithTheme(
-      <CardList
-        cards={mockCardsData}
-        buttonTxt="Ver Cardápio"
-        onClick={mockOnClick}
-      />
+  it('renderiza múltiplos children', () => {
+    const mockChildren = (
+      <>
+        <div data-testid="child-1">Child 1</div>
+        <div data-testid="child-2">Child 2</div>
+        <div data-testid="child-3">Child 3</div>
+      </>
     )
 
-    const buttons = screen.getAllByText('Ver Cardápio')
-    fireEvent.click(buttons[0])
+    renderWithTheme(<CardList>{mockChildren}</CardList>)
 
-    expect(mockOnClick).toHaveBeenCalledTimes(1)
+    expect(screen.getByTestId('child-1')).toBeInTheDocument()
+    expect(screen.getByTestId('child-2')).toBeInTheDocument()
+    expect(screen.getByTestId('child-3')).toBeInTheDocument()
   })
 
-  it('renderiza com dados corretos', () => {
-    renderWithTheme(<CardList cards={mockCardsData} buttonTxt="Ver Cardápio" />)
+  it('aceita key prop', () => {
+    const mockChildren = <div data-testid="test-child">Conteúdo de teste</div>
 
-    expect(screen.getByText('Restaurante 1')).toBeInTheDocument()
-    expect(screen.getByText('Restaurante 2')).toBeInTheDocument()
-    expect(screen.getByText('Restaurante 3')).toBeInTheDocument()
-    expect(screen.getByText('4.5')).toBeInTheDocument()
-    expect(screen.getByText('4.3')).toBeInTheDocument()
+    renderWithTheme(<CardList key={123}>{mockChildren}</CardList>)
+
+    expect(screen.getByTestId('test-child')).toBeInTheDocument()
   })
 
-  it('renderiza tags corretamente', () => {
-    renderWithTheme(<CardList cards={mockCardsData} buttonTxt="Ver Cardápio" />)
+  it('renderiza sem children', () => {
+    renderWithTheme(<CardList>{null}</CardList>)
 
-    expect(screen.getByText('Destaque da semana')).toBeInTheDocument()
-    expect(screen.getByText('Japonês')).toBeInTheDocument()
-    expect(screen.getByText('Italiano')).toBeInTheDocument()
+    // O componente deve renderizar mesmo sem children
+    const containers = screen.getAllByRole('generic')
+    expect(containers.length).toBeGreaterThan(0)
   })
 
-  it('renderiza rating quando fornecido', () => {
-    renderWithTheme(<CardList cards={mockCardsData} buttonTxt="Ver Cardápio" />)
+  it('renderiza com children complexos', () => {
+    const mockChildren = (
+      <div>
+        <h2>Título</h2>
+        <p>Descrição</p>
+        <button>Botão</button>
+      </div>
+    )
 
-    expect(screen.getByText('4.5')).toBeInTheDocument()
-    expect(screen.getByText('4.3')).toBeInTheDocument()
+    renderWithTheme(<CardList>{mockChildren}</CardList>)
+
+    expect(screen.getByText('Título')).toBeInTheDocument()
+    expect(screen.getByText('Descrição')).toBeInTheDocument()
+    expect(screen.getByText('Botão')).toBeInTheDocument()
   })
 
-  it('renderiza com props de tema corretas', () => {
-    const themeProps = {
-      cards: mockCardsData,
-      $defaultColor: 'secondary' as const,
-      $darkTheme: 'quaternary' as const,
-      $lightTheme: 'primary' as const,
-      $textColor: 'primary' as const,
-      $textDarkTheme: 'secondary' as const,
-      $textLightTheme: 'primary' as const
-    }
+  it('renderiza com array de children', () => {
+    const mockChildren = [
+      <div key="1" data-testid="array-child-1">
+        Array Child 1
+      </div>,
+      <div key="2" data-testid="array-child-2">
+        Array Child 2
+      </div>
+    ]
 
-    renderWithTheme(<CardList buttonTxt="Ver Cardápio" {...themeProps} />)
+    renderWithTheme(<CardList>{mockChildren}</CardList>)
 
-    expect(screen.getByText('Restaurante 1')).toBeInTheDocument()
-    expect(screen.getByText('Restaurante 2')).toBeInTheDocument()
-    expect(screen.getByText('Restaurante 3')).toBeInTheDocument()
-  })
-
-  it('renderiza com props de botão corretas', () => {
-    const buttonProps = {
-      cards: mockCardsData,
-      buttonTxt: 'Pedir Agora',
-      $buttonColor: 'primary' as const,
-      $buttonTextColor: 'secondary' as const,
-      $lgButtonPercent: 100,
-      $mdButtonPercent: 80,
-      $smButtonPercent: 90
-    }
-
-    renderWithTheme(<CardList {...buttonProps} />)
-
-    const buttons = screen.getAllByText('Pedir Agora')
-    expect(buttons).toHaveLength(3)
+    expect(screen.getByTestId('array-child-1')).toBeInTheDocument()
+    expect(screen.getByTestId('array-child-2')).toBeInTheDocument()
   })
 })
