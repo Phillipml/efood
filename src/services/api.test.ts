@@ -14,7 +14,7 @@ describe('API Service', () => {
     mockFetch.mockResolvedValueOnce({
       ok: true,
       json: jest.fn().mockResolvedValueOnce(mockData)
-    } as any)
+    } as unknown as Response)
 
     await GetData()
 
@@ -34,7 +34,7 @@ describe('API Service', () => {
     mockFetch.mockResolvedValueOnce({
       ok: true,
       json: jest.fn().mockResolvedValueOnce(mockData)
-    } as any)
+    } as unknown as Response)
 
     const result = await GetData()
 
@@ -46,7 +46,7 @@ describe('API Service', () => {
       ok: false,
       status: 404,
       statusText: 'Not Found'
-    } as any)
+    } as unknown as Response)
 
     await expect(GetData()).rejects.toThrow('Error: 404 Not Found')
   })
@@ -56,7 +56,7 @@ describe('API Service', () => {
       ok: false,
       status: 500,
       statusText: 'Internal Server Error'
-    } as any)
+    } as unknown as Response)
 
     await expect(GetData()).rejects.toThrow('Error: 500 Internal Server Error')
   })
@@ -66,7 +66,7 @@ describe('API Service', () => {
       ok: false,
       status: 400,
       statusText: 'Bad Request'
-    } as any)
+    } as unknown as Response)
 
     await expect(GetData()).rejects.toThrow('Error: 400 Bad Request')
   })
@@ -82,7 +82,7 @@ describe('API Service', () => {
     mockFetch.mockResolvedValueOnce({
       ok: true,
       json: mockJson
-    } as any)
+    } as unknown as Response)
 
     await GetData()
 
@@ -94,7 +94,7 @@ describe('API Service', () => {
     mockFetch.mockResolvedValueOnce({
       ok: true,
       json: jest.fn().mockResolvedValueOnce(mockData)
-    } as any)
+    } as unknown as Response)
 
     const result = await GetData()
 
