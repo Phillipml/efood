@@ -22,6 +22,7 @@ function Modal({ children, $justifyContent, $isOpen, onClose }: ModalType) {
   return $isOpen
     ? ReactDOM.createPortal(
         <ModalWrapper
+          data-testid="modal"
           onClick={() => onClose()}
           $justifyContent={$justifyContent}
           $isOpen={$isOpen}
