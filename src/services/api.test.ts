@@ -117,7 +117,7 @@ describe('API Service', () => {
     mockFetch.mockResolvedValueOnce({
       ok: true,
       json: jest.fn().mockResolvedValueOnce(mockData)
-    } as any)
+    } as unknown as Response)
 
     const result = await GetData()
 
