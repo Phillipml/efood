@@ -8,7 +8,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
 function AppContent() {
-  const { currentTheme, toggleTheme } = useThemeState()
+  const { currentTheme, toggleTheme, isDarkTheme } = useThemeState()
 
   return (
     <StyledThemeProvider theme={currentTheme}>
@@ -16,7 +16,7 @@ function AppContent() {
       <Header />
       <RoutesApp />
       <Footer />
-      <ThemeButton onClick={toggleTheme} />
+      <ThemeButton onClick={toggleTheme} isDarkTheme={isDarkTheme} />
     </StyledThemeProvider>
   )
 }
