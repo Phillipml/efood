@@ -1,10 +1,10 @@
 import { FaMoon, FaSun } from 'react-icons/fa6'
 import { ThemeBtn } from './styles'
-type ThemebuttonColorsVariants = {
+type ThemeButtonTypes = {
   onClick: () => void
   isDarkTheme: boolean
 }
-const ThemeButton = ({ onClick, isDarkTheme }: ThemebuttonColorsVariants) => {
+const ThemeButton = ({ onClick, isDarkTheme }: ThemeButtonTypes) => {
   return (
     <>
       <ThemeBtn onClick={onClick}>

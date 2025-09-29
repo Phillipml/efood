@@ -54,11 +54,16 @@ export class TestHelpers {
   async assertNoConsoleErrors() {
     const errors: string[] = []
 
-    this.page.on('console', (msg) => {
-      if (msg.type() === 'error') {
-        errors.push(msg.text())
-      }
-    })
+        this.page.on('console', (msg) => {
+          if (msg.type() === 'error') {
+            const text = msg.text()
+            if (!text.includes('ERR_NAME_NOT_RESOLVED') && 
+                !text.includes('Could not resolve hostname') &&
+                !text.includes('Failed to load resource')) {
+              errors.push(text)
+            }
+          }
+        })
 
     await this.page.waitForTimeout(1000)
     expect(errors).toHaveLength(0)

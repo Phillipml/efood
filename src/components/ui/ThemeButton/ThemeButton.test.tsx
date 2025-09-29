@@ -12,7 +12,7 @@ const renderWithTheme = (
 
 describe('ThemeButton Component', () => {
   it('renderiza ícone de sol no tema claro', () => {
-    renderWithTheme(<ThemeButton onClick={() => {}} />)
+    renderWithTheme(<ThemeButton onClick={() => {}} isDarkTheme={false} />)
 
     const button = screen.getByRole('button')
     expect(button).toBeInTheDocument()
@@ -22,7 +22,7 @@ describe('ThemeButton Component', () => {
   })
 
   it('renderiza ícone de lua no tema escuro', () => {
-    renderWithTheme(<ThemeButton onClick={() => {}} />, $darkTheme)
+    renderWithTheme(<ThemeButton onClick={() => {}} isDarkTheme={true} />, $darkTheme)
 
     const button = screen.getByRole('button')
     expect(button).toBeInTheDocument()
@@ -33,7 +33,7 @@ describe('ThemeButton Component', () => {
 
   it('executa onClick quando clicado', () => {
     const handleClick = jest.fn()
-    renderWithTheme(<ThemeButton onClick={handleClick} />)
+    renderWithTheme(<ThemeButton onClick={handleClick} isDarkTheme={false} />)
 
     const button = screen.getByRole('button')
     fireEvent.click(button)
@@ -42,14 +42,14 @@ describe('ThemeButton Component', () => {
   })
 
   it('aplica estilos corretos', () => {
-    renderWithTheme(<ThemeButton onClick={() => {}} />)
+    renderWithTheme(<ThemeButton onClick={() => {}} isDarkTheme={false} />)
 
     const button = screen.getByRole('button')
     expect(button).toBeInTheDocument()
   })
 
   it('funciona sem quebrar', () => {
-    renderWithTheme(<ThemeButton onClick={() => {}} />)
+    renderWithTheme(<ThemeButton onClick={() => {}} isDarkTheme={false} />)
 
     const button = screen.getByRole('button')
     expect(button).toBeInTheDocument()
@@ -58,7 +58,7 @@ describe('ThemeButton Component', () => {
   })
 
   it('muda ícone baseado no tema', () => {
-    const { rerender } = renderWithTheme(<ThemeButton onClick={() => {}} />)
+    const { rerender } = renderWithTheme(<ThemeButton onClick={() => {}} isDarkTheme={false} />)
 
     let button = screen.getByRole('button')
     let icon = button.querySelector('svg')
@@ -66,7 +66,7 @@ describe('ThemeButton Component', () => {
 
     rerender(
       <ThemeProvider theme={$darkTheme}>
-        <ThemeButton onClick={() => {}} />
+        <ThemeButton onClick={() => {}} isDarkTheme={true} />
       </ThemeProvider>
     )
 
@@ -77,7 +77,7 @@ describe('ThemeButton Component', () => {
 
   it('mantém funcionalidade após múltiplos cliques', () => {
     const handleClick = jest.fn()
-    renderWithTheme(<ThemeButton onClick={handleClick} />)
+    renderWithTheme(<ThemeButton onClick={handleClick} isDarkTheme={false} />)
 
     const button = screen.getByRole('button')
 

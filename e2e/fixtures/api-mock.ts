@@ -58,7 +58,7 @@ export const mockApiResponse = [
 ]
 
 export async function setupApiMock(page: Page) {
-  await page.route('**/api/efood/restaurantes', async (route) => {
+  await page.route('**/ebac-fake-api.vercel.app/api/efood/restaurantes', async (route) => {
     await route.fulfill({
       status: 200,
       contentType: 'application/json',

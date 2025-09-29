@@ -81,9 +81,7 @@ export class RestaurantPage {
       .getByText('Restaurantes')
       .or(page.locator('h1, h2, h3').first())
     this.logo = page.locator('img[alt*="logo"], img[alt*="Logo"]').first()
-    this.cartCounter = page
-      .locator('text=/\\d+ produto\\(s\\) no carrinho/')
-      .or(page.locator('text=/carrinho/'))
+    this.cartCounter = page.locator('h2').filter({ hasText: /produto.*carrinho/ })
     this.cardList = page.locator('[data-testid="card-list"]')
     this.cards = page.locator('[data-testid="card"]')
     this.addButtons = page.locator('button').filter({ hasText: 'Adicionar' })
