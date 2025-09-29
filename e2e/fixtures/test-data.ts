@@ -1,7 +1,7 @@
 export const TEST_DATA = {
   BASE_URL: 'http://localhost:3000',
   HOME_URL: '/',
-  RESTAURANT_URL: '/restaurant',
+  RESTAURANT_URL: '/restaurant/1',
 
   TEXTS: {
     HOME: {

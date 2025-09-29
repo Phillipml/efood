@@ -21,18 +21,8 @@ export class HomePage {
       .filter({ hasText: /theme|Theme|🌙|☀️/ })
       .or(page.locator('button[style*="position: fixed"]'))
       .or(page.locator('button').last())
-    this.cardList = page
-      .locator('[data-testid="card-list"], .card-list, div')
-      .filter({ hasText: 'Hioki Sushi' })
-      .first()
-      .locator('..')
-    this.cards = page
-      .locator('div')
-      .filter({
-        hasText:
-          /Hioki Sushi|Pizza Palace|Burger King|Taco Bell|Sushi Master|Pasta House/
-      })
-      .filter({ hasText: /Saiba Mais/ })
+    this.cardList = page.locator('[data-testid="card-list"]')
+    this.cards = page.locator('[data-testid="card"]')
     this.learnMoreButtons = page
       .locator('button')
       .filter({ hasText: 'Saiba Mais' })
@@ -94,12 +84,8 @@ export class RestaurantPage {
     this.cartCounter = page
       .locator('text=/\\d+ produto\\(s\\) no carrinho/')
       .or(page.locator('text=/carrinho/'))
-    this.cardList = page
-      .locator('div')
-      .filter({ hasText: 'Sushi Salmão' })
-      .first()
-      .locator('..')
-    this.cards = page.locator('div').filter({ hasText: 'Sushi Salmão' })
+    this.cardList = page.locator('[data-testid="card-list"]')
+    this.cards = page.locator('[data-testid="card"]')
     this.addButtons = page.locator('button').filter({ hasText: 'Adicionar' })
   }
 
