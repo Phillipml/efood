@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test'
 import { HomePage } from '../fixtures/page-objects'
 import { TestHelpers } from '../utils/helpers'
 import { TEST_DATA } from '../fixtures/test-data'
+import { setupApiMock } from '../fixtures/api-mock'
 
 test.describe('Página Home', () => {
   let homePage: HomePage
@@ -10,6 +11,7 @@ test.describe('Página Home', () => {
   test.beforeEach(async ({ page }) => {
     homePage = new HomePage(page)
     helpers = new TestHelpers(page)
+    await setupApiMock(page)
   })
 
   test('Header é exibido corretamente', async ({ page }) => {

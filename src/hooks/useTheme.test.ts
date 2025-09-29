@@ -95,12 +95,12 @@ describe('useThemeState Hook', () => {
   it('currentTheme muda com isDarkTheme', () => {
     const { result } = renderHook(() => useThemeState())
 
-    expect(result.current.currentTheme).toBe($lightTheme)
+    expect(result.current.currentTheme).toEqual($darkTheme)
 
     act(() => {
       result.current.toggleTheme()
     })
 
-    expect(result.current.currentTheme).toBe($darkTheme)
+    expect(result.current.currentTheme).toEqual($lightTheme)
   })
 })

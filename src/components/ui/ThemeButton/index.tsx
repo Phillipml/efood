@@ -1,15 +1,15 @@
 import { FaMoon, FaSun } from 'react-icons/fa6'
-import { useTheme } from 'styled-components'
+import { useThemeState } from '@/hooks/useTheme'
 import { ThemeBtn } from './styles'
 type ThemebuttonColorsVariants = {
   onClick: () => void
 }
 const ThemeButton = ({ onClick }: ThemebuttonColorsVariants) => {
-  const theme = useTheme()
+  const { isDarkTheme } = useThemeState()
   return (
     <>
       <ThemeBtn onClick={onClick}>
-        {theme.primary === '#FFF8F2' ? <FaSun /> : <FaMoon />}
+        {isDarkTheme ? <FaSun /> : <FaMoon />}
       </ThemeBtn>
     </>
   )

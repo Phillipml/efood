@@ -1,20 +1,34 @@
-import styled, { css } from 'styled-components'
-import type { ModalType } from '.'
-import { fadeIn } from '@/utils/styles-utils'
-export const ModalWrapper = styled.div<
-  Omit<ModalType, 'children' | 'openClose'>
->`
-  ${({ $justifyContent }) => css`
-    z-index: 9999;
-    position: fixed;
-    top: 0%;
-    left: 0;
+import { mobile } from '@/styles/breakpoints'
+import { MainContainer } from '@/styles/reset'
+import { PercentSize, pxToRem } from '@/utils/size-utils'
+import styled from 'styled-components'
+
+export const ModalContent = styled(MainContainer)`
+  ${PercentSize('width', { lgScreen: 94, smScreen: 70 })};
+  height: auto;
+  ${pxToRem('padding', { lgScreen: 8 })}
+  background-color: ${({ theme }) => theme.tertiary};
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
+  ${mobile} {
+    grid-template-columns: 1fr;
+  }
+  img {
     width: 100%;
     height: 100%;
+    ${pxToRem('padding', { lgScreen: 8 })}
+    object-fit:fill;
+    ${mobile} {
+      margin: 0 auto;
+    }
+  }
+  div {
     display: flex;
-    align-items: center;
-    justify-content: ${$justifyContent};
-    background-color: rgba(0, 0, 0, 0.2);
-    ${fadeIn}
-  `}
+    flex-direction: column;
+    justify-content: space-between;
+    ${pxToRem('padding', { lgScreen: 8 })}
+    button {
+      ${pxToRem('margin-top', { smScreen: 14 })}
+    }
+  }
 `

@@ -5,8 +5,8 @@ import { GetData } from '@/services/api'
 import type { Menu } from '@/types'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Modal from '@/components/ui/Modal/index'
-import { ModalContent } from './styles'
+import Overlay from '@/components/layout/Overlay/index'
+import Modal from '@/components/ui/Modal'
 import Text from '@/components/ui/Text'
 import Button from '@/components/ui/Button'
 import { priceFormatter } from '@/utils/price-utils'
@@ -32,10 +32,12 @@ const Restaurant = () => {
     }
     clientList()
   }, [id])
+
   const modalOpenHandle = (item: Menu) => {
     setModalItem(item)
     setIsOpen(true)
   }
+
   const modalCloseHandle = () => {
     setModalItem(null)
     setIsOpen(false)
@@ -46,12 +48,12 @@ const Restaurant = () => {
   ) : (
     <>
       <Hero />
-      <Modal
+      <Overlay
         $isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         $justifyContent="center"
       >
-        <ModalContent>
+        <Modal>
           <img src={modalItem?.foto} width={50} alt={modalItem?.nome} />
           <div>
             <Text as="title" $textColor="primary">
@@ -64,7 +66,7 @@ const Restaurant = () => {
               {modalItem?.porcao}
             </Text>
             <Button
-              onClick={() => modalCloseHandle}
+              onClick={modalCloseHandle}
               $buttonColor="primary"
               $buttonTextColor="tertiary"
               $lgButtonPercent={38}
@@ -73,8 +75,8 @@ const Restaurant = () => {
               Adicionar ao carrinho - {priceFormatter(modalItem?.preco)}
             </Button>
           </div>
-        </ModalContent>
-      </Modal>
+        </Modal>
+      </Overlay>
       <CardList>
         {restaurant?.map((restaurant, i) => (
           <Card

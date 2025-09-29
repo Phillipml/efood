@@ -28,6 +28,14 @@ export const useThemeState = () => {
 
   useEffect(() => {
     localStorage.setItem('efood-theme', String(isDarkTheme))
+    // Adiciona/remove classe 'dark' do body para compatibilidade com testes
+    if (typeof window !== 'undefined') {
+      if (isDarkTheme) {
+        document.body.classList.add('dark')
+      } else {
+        document.body.classList.remove('dark')
+      }
+    }
   }, [isDarkTheme])
 
   const toggleTheme = () => {

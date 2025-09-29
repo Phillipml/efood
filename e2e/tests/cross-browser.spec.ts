@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test'
 import { HomePage, RestaurantPage } from '../fixtures/page-objects'
 import { TestHelpers } from '../utils/helpers'
 import { TEST_DATA } from '../fixtures/test-data'
+import { setupApiMock } from '../fixtures/api-mock'
 
 test.describe('Cross-Browser', () => {
   let homePage: HomePage
@@ -12,6 +13,7 @@ test.describe('Cross-Browser', () => {
     homePage = new HomePage(page)
     restaurantPage = new RestaurantPage(page)
     helpers = new TestHelpers(page)
+    await setupApiMock(page)
   })
 
   test('Chrome funciona', async ({ page, browserName }) => {

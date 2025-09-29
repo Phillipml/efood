@@ -47,6 +47,7 @@ const Card = ({
 }: CardProps) => {
   return (
     <Container
+      data-testid="card"
       $defaultColor={$defaultColor}
       $darkTheme={$darkTheme}
       $lightTheme={$lightTheme}

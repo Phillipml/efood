@@ -7,6 +7,6 @@ export type CardData = {
 }
 
 const CardList = ({ children, key }: CardData) => {
-  return <Container key={key}>{children}</Container>
+  return <Container key={key} data-testid="card-list">{children}</Container>
 }
 export default CardList

@@ -1,81 +1,28 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import Modal from './index'
 
-jest.mock('react-dom', () => ({
-  ...jest.requireActual('react-dom'),
-  createPortal: (node: React.ReactNode) => node
-}))
-
-Object.defineProperty(document, 'getElementById', {
-  value: jest.fn(() => ({
-    appendChild: jest.fn(),
-    removeChild: jest.fn()
-  }))
-})
-
-describe('Modal Component', () => {
-  const mockOnClose = jest.fn()
-
-  beforeEach(() => {
-    mockOnClose.mockClear()
-  })
-
-  it('does not render when $isOpen is false', () => {
+describe('Modal', () => {
+  it('should render children correctly', () => {
     render(
-      <Modal $isOpen={false} onClose={mockOnClose} $justifyContent="center">
-        <div>Conteúdo do modal</div>
+      <Modal>
+        <div>Test content</div>
       </Modal>
     )
 
-    expect(screen.queryByText('Conteúdo do modal')).not.toBeInTheDocument()
+    expect(screen.getByText('Test content')).toBeInTheDocument()
   })
 
-  it('renderiza quando $isOpen é true', () => {
+  it('should render multiple children', () => {
     render(
-      <Modal $isOpen={true} onClose={mockOnClose} $justifyContent="center">
-        <div>Conteúdo do modal</div>
+      <Modal>
+        <div>First child</div>
+        <div>Second child</div>
       </Modal>
     )
 
-    expect(screen.getByText('Conteúdo do modal')).toBeInTheDocument()
+    expect(screen.getByText('First child')).toBeInTheDocument()
+    expect(screen.getByText('Second child')).toBeInTheDocument()
   })
 
-  it('chama onClose quando clica no fundo', () => {
-    render(
-      <Modal $isOpen={true} onClose={mockOnClose} $justifyContent="center">
-        <div>Conteúdo do modal</div>
-      </Modal>
-    )
 
-    const modalWrapper =
-      screen.getByText('Conteúdo do modal').parentElement?.parentElement
-    fireEvent.click(modalWrapper!)
-
-    expect(mockOnClose).toHaveBeenCalledTimes(1)
-  })
-
-  it('não chama onClose quando clica no conteúdo', () => {
-    render(
-      <Modal $isOpen={true} onClose={mockOnClose} $justifyContent="center">
-        <div>Conteúdo do modal</div>
-      </Modal>
-    )
-
-    const modalContent = screen.getByText('Conteúdo do modal')
-    fireEvent.click(modalContent)
-
-    expect(mockOnClose).not.toHaveBeenCalled()
-  })
-
-  it('renderiza com justify-content correto', () => {
-    render(
-      <Modal $isOpen={true} onClose={mockOnClose} $justifyContent="end">
-        <div>Conteúdo do modal</div>
-      </Modal>
-    )
-
-    const modalWrapper =
-      screen.getByText('Conteúdo do modal').parentElement?.parentElement
-    expect(modalWrapper).toHaveStyle('justify-content: end')
-  })
 })
