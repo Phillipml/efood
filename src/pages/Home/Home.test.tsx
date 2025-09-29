@@ -1,5 +1,5 @@
 import { screen, fireEvent } from '@testing-library/react'
-import Home from './Home'
+import Home from '.'
 import {
   renderWithThemeAndRouter,
   mockNavigate,

@@ -1,7 +1,7 @@
 import type { FontSizeProps, Variant } from '@/types'
 import { ButtonStyled } from './styles'
 export type ButtonTypes = {
-  children?: string
+  children?: React.ReactNode
   $buttonColor?: Variant
   $buttonDarkThemeColor?: Variant
   $buttonLightThemeColor?: Variant
