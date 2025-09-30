@@ -16,7 +16,7 @@ import { ItemsList } from './styles'
 const Restaurant = () => {
   const [restaurant, setRestaurant] = useState<Menu[] | null>(null)
   const [modalItem, setModalItem] = useState<Menu | null>(null)
-  const [isShowing, setOverlay] = useOverlay()
+  const [, setOverlay] = useOverlay()
   const [isLoading, setIsLoading] = useState(false)
   const { id } = useParams()
 
@@ -66,7 +66,7 @@ const Restaurant = () => {
               onClick={modalCloseHandle}
               $buttonColor="primary"
               $buttonTextColor="tertiary"
-              $lgButtonPercent={38}
+              $lgButtonPercent={34}
               $smButtonPercent={80}
             >
               Adicionar ao carrinho - {priceFormatter(modalItem?.preco)}
