@@ -4,7 +4,7 @@ import { renderWithProviders } from '@/utils/__mocks__/render-utils'
 import { useOverlay } from '@/hooks/useOverlay'
 
 const TestComponent = () => {
-  const [isShowing, setOverlay] = useOverlay()
+  const [, setOverlay] = useOverlay()
   
   return (
     <>
