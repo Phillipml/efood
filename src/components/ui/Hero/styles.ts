@@ -37,6 +37,9 @@ export const HeroContainer = styled(MainContainer)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  ${pxToRem('padding-top', { lgScreen: 25 })}
+  ${pxToRem('padding-bottom', { lgScreen: 32 })}
+
   > p {
     font-weight: lighter;
   }

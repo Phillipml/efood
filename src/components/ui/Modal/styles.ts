@@ -1,23 +1,24 @@
 import { mobile } from '@/styles/breakpoints'
 import { MainContainer } from '@/styles/reset'
-import { PercentSize, pxToRem } from '@/utils/size-utils'
+import { pxToRem } from '@/utils/size-utils'
 import styled from 'styled-components'
 
 export const ModalContent = styled(MainContainer)`
-  ${PercentSize('width', { lgScreen: 94, smScreen: 70 })};
+position: relative;
   height: auto;
-  ${pxToRem('padding', { lgScreen: 8 })}
+  ${pxToRem('padding', { lgScreen: 33 })}
   background-color: ${({ theme }) => theme.tertiary};
   display: grid;
   grid-template-columns: 0.5fr 1fr;
   ${mobile} {
     grid-template-columns: 1fr;
   }
+
   img {
-    width: 100%;
-    height: 100%;
-    ${pxToRem('padding', { lgScreen: 8 })}
-    object-fit:fill;
+    ${pxToRem('width', { lgScreen: 280 })}
+    ${pxToRem('height', { lgScreen: 280 })}
+    
+    object-fit:cover;
     ${mobile} {
       margin: 0 auto;
     }
@@ -25,10 +26,19 @@ export const ModalContent = styled(MainContainer)`
   div {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    ${pxToRem('padding', { lgScreen: 8 })}
+    ${pxToRem('gap', { lgScreen: 16 })}
+    height: auto;
     button {
       ${pxToRem('margin-top', { smScreen: 14 })}
     }
   }
+`
+export const CloseButton = styled.button`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  ${pxToRem('font-size', { lgScreen: 16 })}
 `

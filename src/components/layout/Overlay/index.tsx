@@ -1,32 +1,31 @@
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { OverlayWrapper } from './styles'
+import { useOverlay } from '@/hooks/useOverlay'
 
 export type OverlayType = {
   children: React.ReactNode
   $justifyContent: 'center' | 'end'
-  $isOpen: boolean
-  onClose: () => void
 }
 
-function Overlay({ children, $justifyContent, $isOpen, onClose }: OverlayType) {
+function Overlay({ children, $justifyContent }: OverlayType) {
   const rootDocument = document.getElementById('root')
+  const [isShowing, setOverlay] = useOverlay()
+
   useEffect(() => {
-    if ($isOpen) {
+    if (isShowing) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
     }
-  }, [$isOpen])
+  }, [isShowing])
 
-  return $isOpen
+  return isShowing
     ? ReactDOM.createPortal(
         <OverlayWrapper
           data-testid="modal"
-          onClick={() => onClose()}
+          onClick={() => setOverlay()}
           $justifyContent={$justifyContent}
-          $isOpen={$isOpen}
-          onClose={onClose}
         >
           <div onClick={(e) => e.stopPropagation()}>{children}</div>
         </OverlayWrapper>,

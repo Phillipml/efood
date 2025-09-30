@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components'
 import { $darkTheme } from '@/styles/theme'
+import { tablet } from './breakpoints'
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -40,5 +41,7 @@ export const MainContainer = styled.div`
   max-width: 1024px;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  ${tablet} {
+    padding: 2%;
+  }
 `

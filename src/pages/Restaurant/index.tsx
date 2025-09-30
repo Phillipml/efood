@@ -1,4 +1,3 @@
-import CardList from '@/components/layout/CardList'
 import Card from '@/components/ui/Card'
 import Loading from '@/components/ui/Loading'
 import { GetData } from '@/services/api'
@@ -11,11 +10,13 @@ import Text from '@/components/ui/Text'
 import Button from '@/components/ui/Button'
 import { priceFormatter } from '@/utils/price-utils'
 import Hero from '@/components/ui/Hero'
+import { useOverlay } from '@/hooks/useOverlay'
+import { ItemsList } from './styles'
 
 const Restaurant = () => {
   const [restaurant, setRestaurant] = useState<Menu[] | null>(null)
   const [modalItem, setModalItem] = useState<Menu | null>(null)
-  const [isOpen, setIsOpen] = useState(false)
+  const [, setOverlay] = useOverlay()
   const [isLoading, setIsLoading] = useState(false)
   const { id } = useParams()
 
@@ -35,12 +36,12 @@ const Restaurant = () => {
 
   const modalOpenHandle = (item: Menu) => {
     setModalItem(item)
-    setIsOpen(true)
+    setOverlay()
   }
 
   const modalCloseHandle = () => {
     setModalItem(null)
-    setIsOpen(false)
+    setOverlay()
   }
 
   return isLoading ? (
@@ -48,11 +49,7 @@ const Restaurant = () => {
   ) : (
     <>
       <Hero />
-      <Overlay
-        $isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        $justifyContent="center"
-      >
+      <Overlay $justifyContent="center">
         <Modal>
           <img src={modalItem?.foto} width={50} alt={modalItem?.nome} />
           <div>
@@ -69,7 +66,7 @@ const Restaurant = () => {
               onClick={modalCloseHandle}
               $buttonColor="primary"
               $buttonTextColor="tertiary"
-              $lgButtonPercent={38}
+              $lgButtonPercent={34}
               $smButtonPercent={80}
             >
               Adicionar ao carrinho - {priceFormatter(modalItem?.preco)}
@@ -77,7 +74,7 @@ const Restaurant = () => {
           </div>
         </Modal>
       </Overlay>
-      <CardList>
+      <ItemsList>
         {restaurant?.map((restaurant, i) => (
           <Card
             key={i}
@@ -88,7 +85,7 @@ const Restaurant = () => {
             buttonTxt="Adicionar ao Carrinho"
           />
         ))}
-      </CardList>
+      </ItemsList>
     </>
   )
 }

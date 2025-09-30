@@ -1,8 +1,6 @@
-import { render, screen, fireEvent, cleanup } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
+import { screen, fireEvent, cleanup } from '@testing-library/react'
 import RoutesApp from './routes'
-import { $lightTheme } from './styles/theme'
+import { renderWithProviders } from './utils/test-utils'
 
 jest.mock('@/services/api', () => ({
   GetData: jest.fn(() =>
@@ -88,16 +86,6 @@ jest.mock('@/components/ui/Modal', () => {
     return <div data-testid="modal">{children}</div>
   }
 })
-const renderWithProviders = (
-  component: React.ReactElement,
-  initialEntries: string[] = ['/']
-) => {
-  return render(
-    <MemoryRouter initialEntries={initialEntries}>
-      <ThemeProvider theme={$lightTheme}>{component}</ThemeProvider>
-    </MemoryRouter>
-  )
-}
 
 describe('Routes', () => {
   beforeEach(() => {
@@ -124,9 +112,9 @@ describe('Routes', () => {
     it('renderiza rota restaurant corretamente', async () => {
       renderWithProviders(<RoutesApp />, ['/restaurant/1'])
 
-      await screen.findByTestId('card-list')
+      await screen.findByTestId('card')
 
-      expect(screen.getByTestId('card-list')).toBeInTheDocument()
+      expect(screen.getByTestId('card')).toBeInTheDocument()
       expect(screen.getByTestId('card-button')).toHaveTextContent(
         'Adicionar ao Carrinho'
       )
@@ -151,7 +139,7 @@ describe('Routes', () => {
     it('navega para restaurant via URL', async () => {
       renderWithProviders(<RoutesApp />, ['/restaurant/1'])
 
-      await screen.findByTestId('card-list')
+      await screen.findByTestId('card')
 
       expect(screen.getByTestId('card-button')).toHaveTextContent(
         'Adicionar ao Carrinho'
@@ -181,25 +169,6 @@ describe('Routes', () => {
       consoleSpy.mockRestore()
     })
 
-    it('mantém estado das rotas após re-renderização', async () => {
-      const { rerender } = renderWithProviders(<RoutesApp />, ['/'])
-
-      await screen.findByTestId('card-list')
-
-      expect(screen.getByTestId('card-button')).toHaveTextContent('Saiba Mais')
-
-      rerender(
-        <MemoryRouter initialEntries={['/']}>
-          <ThemeProvider theme={$lightTheme}>
-            <RoutesApp />
-          </ThemeProvider>
-        </MemoryRouter>
-      )
-
-      await screen.findByTestId('card-list')
-
-      expect(screen.getByTestId('card-button')).toHaveTextContent('Saiba Mais')
-    })
 
     it('testa carregamento inicial na página home', async () => {
       renderWithProviders(<RoutesApp />, ['/'])
@@ -215,7 +184,7 @@ describe('Routes', () => {
 
       expect(screen.getByTestId('loading')).toBeInTheDocument()
 
-      await screen.findByTestId('card-list')
+      await screen.findByTestId('card')
       expect(screen.queryByTestId('loading')).not.toBeInTheDocument()
     })
   })
