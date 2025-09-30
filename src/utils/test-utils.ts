@@ -1,7 +1,8 @@
 export {
   renderWithTheme,
   renderWithThemeAndRouter,
-  renderSimple
+  renderSimple,
+  renderWithProviders
 } from './__mocks__/render-utils'
 
 export {

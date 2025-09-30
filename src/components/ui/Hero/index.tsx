@@ -32,8 +32,8 @@ function Hero() {
         onLoad={(e) => (e.currentTarget.style.display = 'block')}
       />
       <HeroContainer>
-        <Text $lgFontSize="xl">{typeFormatter(restaurant?.tipo)}</Text>
-        <Text as="title" $lgFontSize="xl">
+        <Text $lgFontSize="xl" $textLightTheme='secondary'>{typeFormatter(restaurant?.tipo)}</Text>
+        <Text as="title" $lgFontSize="xl" $textLightTheme='secondary'>
           {restaurant?.titulo}
         </Text>
       </HeroContainer>

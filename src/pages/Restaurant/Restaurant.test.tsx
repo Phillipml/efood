@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import Restaurant from './index'
-import { renderWithThemeAndRouter } from '@/utils/test-utils'
+  import { renderWithProviders } from '@/utils/__mocks__/render-utils'
 
 jest.mock('@/services/api', () => ({
   GetData: jest.fn(() => Promise.resolve([
@@ -26,12 +26,12 @@ jest.mock('react-router-dom', () => ({
 
 describe('Restaurant Page', () => {
   it('should render loading state initially', () => {
-    renderWithThemeAndRouter(<Restaurant />)
+    renderWithProviders(<Restaurant />)
     expect(screen.getByTestId('loading-container')).toBeInTheDocument()
   })
 
   it('should render cards after loading', async () => {
-    renderWithThemeAndRouter(<Restaurant />)
+    renderWithProviders(<Restaurant />)
     
     await new Promise(resolve => setTimeout(resolve, 100))
     
@@ -40,7 +40,7 @@ describe('Restaurant Page', () => {
   })
 
   it('should render hero component', async () => {
-    renderWithThemeAndRouter(<Restaurant />)
+    renderWithProviders(<Restaurant />)
     
     await new Promise(resolve => setTimeout(resolve, 100))
     
@@ -48,7 +48,7 @@ describe('Restaurant Page', () => {
   })
 
   it('should display card information correctly', async () => {
-    renderWithThemeAndRouter(<Restaurant />)
+    renderWithProviders(<Restaurant />)
     
     await new Promise(resolve => setTimeout(resolve, 100))
     

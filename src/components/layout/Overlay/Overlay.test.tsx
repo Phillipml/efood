@@ -1,54 +1,79 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { screen, fireEvent } from '@testing-library/react'
 import Overlay from './index'
+import { renderWithProviders } from '@/utils/__mocks__/render-utils'
+import { useOverlay } from '@/hooks/useOverlay'
 
-const mockOnClose = jest.fn()
-
-const TestComponent = ({ isOpen }: { isOpen: boolean }) => (
-  <Overlay $isOpen={isOpen} onClose={mockOnClose} $justifyContent="center">
-    <div data-testid="overlay-content">Test Content</div>
-  </Overlay>
-)
+const TestComponent = () => {
+  const [isShowing, setOverlay] = useOverlay()
+  
+  return (
+    <>
+      <button onClick={() => setOverlay()} data-testid="toggle-button">
+        Toggle Overlay
+      </button>
+      <Overlay $justifyContent="center">
+        <div data-testid="overlay-content">Test Content</div>
+      </Overlay>
+    </>
+  )
+}
 
 describe('Overlay', () => {
   beforeEach(() => {
-    mockOnClose.mockClear()
     document.body.innerHTML = '<div id="root"></div>'
   })
 
-  it('should render when isOpen is true', () => {
-    render(<TestComponent isOpen={true} />)
-    expect(screen.getByTestId('overlay-content')).toBeInTheDocument()
-  })
-
-  it('should not render when isOpen is false', () => {
-    render(<TestComponent isOpen={false} />)
+  it('should not render initially', () => {
+    renderWithProviders(<TestComponent />)
     expect(screen.queryByTestId('overlay-content')).not.toBeInTheDocument()
   })
 
-  it('should call onClose when overlay is clicked', () => {
-    render(<TestComponent isOpen={true} />)
-    const overlay = screen.getByTestId('modal')
-    fireEvent.click(overlay)
-    expect(mockOnClose).toHaveBeenCalledTimes(1)
+  it('should render when opened', () => {
+    renderWithProviders(<TestComponent />)
+    const toggleButton = screen.getByTestId('toggle-button')
+    fireEvent.click(toggleButton)
+    expect(screen.getByTestId('overlay-content')).toBeInTheDocument()
   })
 
-  it('should not call onClose when content is clicked', () => {
-    render(<TestComponent isOpen={true} />)
+  it('should close when overlay is clicked', () => {
+    renderWithProviders(<TestComponent />)
+    const toggleButton = screen.getByTestId('toggle-button')
+    fireEvent.click(toggleButton)
+    expect(screen.getByTestId('overlay-content')).toBeInTheDocument()
+    
+    const overlay = screen.getByTestId('modal')
+    fireEvent.click(overlay)
+    expect(screen.queryByTestId('overlay-content')).not.toBeInTheDocument()
+  })
+
+  it('should not close when content is clicked', () => {
+    renderWithProviders(<TestComponent />)
+    const toggleButton = screen.getByTestId('toggle-button')
+    fireEvent.click(toggleButton)
+    
     const content = screen.getByTestId('overlay-content')
     fireEvent.click(content)
-    expect(mockOnClose).not.toHaveBeenCalled()
+    expect(screen.getByTestId('overlay-content')).toBeInTheDocument()
   })
 
   it('should set body overflow hidden when opened', () => {
-    render(<TestComponent isOpen={true} />)
+    renderWithProviders(<TestComponent />)
+    const toggleButton = screen.getByTestId('toggle-button')
+    fireEvent.click(toggleButton)
     expect(document.body.style.overflow).toBe('hidden')
   })
 
   it('should reset body overflow when closed', () => {
-    const { rerender } = render(<TestComponent isOpen={true} />)
+    renderWithProviders(<TestComponent />)
+    const toggleButton = screen.getByTestId('toggle-button')
+    
+    // Open overlay
+    fireEvent.click(toggleButton)
     expect(document.body.style.overflow).toBe('hidden')
     
-    rerender(<TestComponent isOpen={false} />)
+    // Close overlay
+    const overlay = screen.getByTestId('modal')
+    fireEvent.click(overlay)
     expect(document.body.style.overflow).toBe('')
   })
 })

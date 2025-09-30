@@ -3,6 +3,7 @@ import { render, type RenderOptions } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import { MemoryRouter } from 'react-router-dom'
 import { $lightTheme, $darkTheme } from '@/styles/theme'
+import { OverlayProvider } from '@/providers/OverlayProvider'
 
 type CustomRenderProps = Omit<RenderOptions, 'queries'> & {
   theme?: typeof $lightTheme | typeof $darkTheme
@@ -43,4 +44,17 @@ export const renderSimple = (
   renderOptions?: RenderOptions
 ) => {
   return render(ui, renderOptions)
+}
+
+export const renderWithProviders = (
+  ui: React.ReactElement,
+  initialEntries: string[] = ['/']
+) => {
+  return render(
+    <MemoryRouter initialEntries={initialEntries}>
+      <ThemeProvider theme={$lightTheme}>
+        <OverlayProvider>{ui}</OverlayProvider>
+      </ThemeProvider>
+    </MemoryRouter>
+  )
 }
