@@ -53,7 +53,7 @@ const Restaurant = () => {
         <Modal>
           <img src={modalItem?.foto} width={50} alt={modalItem?.nome} />
           <div>
-            <Text as="title" $textColor="primary">
+            <Text as="title" $textColor="primary" $smFontSize="lg">
               {modalItem?.nome}
             </Text>
             <Text $textColor="primary">

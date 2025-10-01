@@ -1,6 +1,7 @@
 import { mobile } from '@/styles/breakpoints'
 import { MainContainer } from '@/styles/reset'
 import { pxToRem } from '@/utils/size-utils'
+
 import styled from 'styled-components'
 
 export const ModalContent = styled(MainContainer)`
@@ -20,7 +21,7 @@ export const ModalContent = styled(MainContainer)`
     
     object-fit:cover;
     ${mobile} {
-      margin: 0 auto;
+      width: 100%;
     }
   }
   div {
@@ -28,6 +29,7 @@ export const ModalContent = styled(MainContainer)`
     flex-direction: column;
     ${pxToRem('gap', { lgScreen: 16 })}
     ${pxToRem('line-height', { lgScreen: 22 })}
+    ${pxToRem('margin-top', { smScreen: 8 })}
     height: auto;
     button {
       ${pxToRem('margin-top', { smScreen: 14 })}

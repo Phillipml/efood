@@ -25,18 +25,31 @@ export const RestaurantContainer = styled(Container)`
       justify-content: flex-end;
     }
   }
-  
+
   img {
     margin: 0 auto;
   }
 
-
   ${mobile} {
     flex-direction: column;
-    
+    align-items: center;
+    justify-content: center;
+
     > * {
       width: 100%;
       margin-bottom: 1rem;
+
+      &:first-child {
+        justify-content: center;
+        order: 2;
+      }
+      &:nth-child(2) {
+        order: 1;
+      }
+      &:last-child {
+        justify-content: center;
+        order: 3;
+      }
     }
   }
 `
