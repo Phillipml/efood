@@ -13,6 +13,8 @@ export const Container = styled(MainContainer)`
   align-items: center;
   justify-content: space-between;
   height: 100%;
+  ${pxToRem('padding', { lgScreen: 52 })};
+  
 `
 
 export const HeaderWrapper = styled.header<LogoProps>`
