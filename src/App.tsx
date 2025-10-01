@@ -13,10 +13,10 @@ function AppContent() {
   return (
     <StyledThemeProvider theme={currentTheme}>
       <GlobalStyle />
+      <ThemeButton onClick={toggleTheme} isDarkTheme={isDarkTheme} />
       <Header />
       <RoutesApp />
       <Footer />
-      <ThemeButton onClick={toggleTheme} isDarkTheme={isDarkTheme} />
     </StyledThemeProvider>
   )
 }
