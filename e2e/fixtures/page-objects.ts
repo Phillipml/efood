@@ -82,7 +82,9 @@ export class RestaurantPage {
       .or(page.locator('h1, h2, h3').first())
     this.logo = page.locator('img[alt*="logo"], img[alt*="Logo"]').first()
     this.cartCounter = page.locator('h2').filter({ hasText: /produto.*carrinho/ })
-    this.cardList = page.locator('[data-testid="card-list"]')
+    // A página Restaurant não usa CardList, mas renderiza cards diretamente
+    // Vamos usar a presença de cards como indicador de que a "lista" está presente
+    this.cardList = page.locator('[data-testid="card"]').first()
     this.cards = page.locator('[data-testid="card"]')
     this.addButtons = page.locator('button').filter({ hasText: 'Adicionar' })
   }
