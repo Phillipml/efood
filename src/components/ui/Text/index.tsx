@@ -12,7 +12,7 @@ export const Text = ({
   $textColor = 'tertiary',
   $textDarkTheme,
   $textLightTheme,
-  $alignCenter = false,
+  $alignCenter,
   $lgFontSize,
   $mdFontSize,
   $smFontSize
@@ -28,7 +28,7 @@ export const Text = ({
           $textColor={$textColor}
           $textDarkTheme={$textDarkTheme}
           $textLightTheme={$textLightTheme}
-          $alignCenter={$alignCenter ?? true}
+          $alignCenter={$alignCenter}
         >
           {children}
         </TextContent>

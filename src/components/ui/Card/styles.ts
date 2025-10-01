@@ -25,7 +25,7 @@ export const Container = styled.div<ContainerProps>`
       unique: $defaultColor,
       light: $lightTheme,
       dark: $darkTheme
-    })}
+    })};
     border: 1px solid ${theme.tertiary};
     > img {
       width: 100%;

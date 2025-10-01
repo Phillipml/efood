@@ -10,8 +10,33 @@ export const HeaderRestaurantWrap = styled(HeaderWrapper)`
 export const RestaurantContainer = styled(Container)`
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  > * {
+    flex: 1;
+    width: 33.333%;
+    display: flex;
+    align-items: center;
+    &:first-child {
+      justify-content: flex-start;
+    }
+    &:nth-child(2) {
+      justify-content: center;
+    }
+    &:last-child {
+      justify-content: flex-end;
+    }
+  }
+  
+  img {
+    margin: 0 auto;
+  }
+
+
   ${mobile} {
     flex-direction: column;
+    
+    > * {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
   }
 `

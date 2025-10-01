@@ -77,7 +77,6 @@ describe('Hero Component', () => {
     await waitFor(() => {
       expect(GetData).toHaveBeenCalledTimes(1)
       expect(screen.getByText('Italiana')).toBeInTheDocument()
-      // O título é renderizado como elemento title no head
       expect(document.title).toBe('Restaurante Teste')
     })
   })

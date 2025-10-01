@@ -4,7 +4,7 @@ import { pxToRem } from '@/utils/size-utils'
 import styled from 'styled-components'
 
 export const ModalContent = styled(MainContainer)`
-position: relative;
+  position: relative;
   height: auto;
   ${pxToRem('padding', { lgScreen: 33 })}
   background-color: ${({ theme }) => theme.tertiary};
@@ -27,6 +27,7 @@ position: relative;
     display: flex;
     flex-direction: column;
     ${pxToRem('gap', { lgScreen: 16 })}
+    ${pxToRem('line-height', { lgScreen: 22 })}
     height: auto;
     button {
       ${pxToRem('margin-top', { smScreen: 14 })}
@@ -40,5 +41,9 @@ export const CloseButton = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  ${pxToRem('font-size', { lgScreen: 16 })}
+
+  > svg {
+    ${pxToRem('font-size', { lgScreen: 24 })}
+    color: ${({ theme }) => theme.primary};
+  }
 `

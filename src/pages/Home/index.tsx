@@ -38,9 +38,11 @@ const Home = () => {
             rating={info.avaliacao}
             foodType={info.tipo}
             buttonTxt="Saiba Mais"
-            $lgButtonPercent={24}
-            $mdButtonPercent={32}
+            $lgButtonPercent={18}
+            $mdButtonPercent={28}
             onClick={() => goToRestaurant(info.id)}
+            $darkTheme = 'secondary'
+            $lightTheme = 'primary'
           />
         ))}
       </CardList>
