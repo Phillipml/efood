@@ -17,7 +17,7 @@ export const setColor = ( theme:DefaultTheme,
     secondary: `${theme.secondary};`,
     tertiary: `${theme.tertiary};`,
     quaternary: `${theme.quaternary};`,
-    quinary: `${theme.quinary}`
+    quinary: `${theme.quinary};`
   }
 
   const getColor = (variant: string) => {

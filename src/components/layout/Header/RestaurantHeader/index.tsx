@@ -10,7 +10,6 @@ export const RestaurantHeader = () => {
           $textColor="tertiary"
           $textDarkTheme="primary"
           $lgFontSize="lg"
-          $alignCenter={true}
         >
           Restaurantes
         </Text>
@@ -20,7 +19,7 @@ export const RestaurantHeader = () => {
           $textColor="tertiary"
           $textDarkTheme="primary"
           $lgFontSize="lg"
-          $alignCenter={true}
+         
         >
           0 produto(s) no carrinho
         </Text>

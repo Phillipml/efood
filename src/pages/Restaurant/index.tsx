@@ -64,7 +64,7 @@ const Restaurant = () => {
             </Text>
             <Button
               onClick={modalCloseHandle}
-              $buttonColor="primary"
+              $buttonColor="secondary"
               $buttonTextColor="tertiary"
               $lgButtonPercent={34}
               $smButtonPercent={80}
@@ -83,6 +83,10 @@ const Restaurant = () => {
             description={restaurant.descricao}
             onClick={() => modalOpenHandle(restaurant)}
             buttonTxt="Adicionar ao Carrinho"
+            $defaultColor="tertiary"
+            $textColor="primary"
+            $buttonColor="secondary"
+            $buttonTextColor="tertiary"
           />
         ))}
       </ItemsList>

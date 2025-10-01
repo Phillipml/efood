@@ -34,7 +34,7 @@ describe('color-utils', () => {
         expect(setColor(mockLightTheme, { unique: 'quaternary' })).toBe(
           '#FFB930;'
         )
-        expect(setColor(mockLightTheme, { unique: 'quinary' })).toBe('#FFFFFF')
+        expect(setColor(mockLightTheme, { unique: 'quinary' })).toBe('#FFFFFF;')
       })
     })
     describe('Comportamento com light theme', () => {
