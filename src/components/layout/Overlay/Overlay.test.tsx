@@ -4,14 +4,14 @@ import { renderWithProviders } from '@/utils/__mocks__/render-utils'
 import { useOverlay } from '@/hooks/useOverlay'
 
 const TestComponent = () => {
-  const [, setOverlay] = useOverlay()
+  const { showModal } = useOverlay()
   
   return (
     <>
-      <button onClick={() => setOverlay()} data-testid="toggle-button">
+      <button onClick={() => showModal()} data-testid="toggle-button">
         Toggle Overlay
       </button>
-      <Overlay $justifyContent="center">
+      <Overlay $justifyContent="center" type="modal">
         <div data-testid="overlay-content">Test Content</div>
       </Overlay>
     </>
@@ -67,11 +67,9 @@ describe('Overlay', () => {
     renderWithProviders(<TestComponent />)
     const toggleButton = screen.getByTestId('toggle-button')
     
-    // Open overlay
     fireEvent.click(toggleButton)
     expect(document.body.style.overflow).toBe('hidden')
     
-    // Close overlay
     const overlay = screen.getByTestId('modal')
     fireEvent.click(overlay)
     expect(document.body.style.overflow).toBe('')

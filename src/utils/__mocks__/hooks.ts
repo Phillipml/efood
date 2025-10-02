@@ -21,8 +21,20 @@ export const mockUseLocation = {
   key: 'default'
 }
 
+export const mockUseOverlay = {
+  currentOverlay: null,
+  showModal: jest.fn(),
+  showSideMenu: jest.fn(),
+  hideOverlay: jest.fn(),
+  isModalOpen: false,
+  isSideMenuOpen: false
+}
+
 export const resetAllMocks = () => {
   mockUseThemeState.toggleTheme.mockClear()
   mockUseTheme.toggleTheme.mockClear()
   mockNavigate.mockClear()
+  mockUseOverlay.showModal.mockClear()
+  mockUseOverlay.showSideMenu.mockClear()
+  mockUseOverlay.hideOverlay.mockClear()
 }

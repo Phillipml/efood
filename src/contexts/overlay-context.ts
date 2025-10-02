@@ -1,8 +1,12 @@
 import { createContext } from 'react'
 
+export type OverlayType = 'modal' | 'sideMenu' | null
+
 export type OverlayContextType = {
-  isShowing: boolean
-  setOverlay: () => void
+  currentOverlay: OverlayType
+  showModal: () => void
+  showSideMenu: () => void
+  hideOverlay: () => void
 }
 
 export const OverlayContext = createContext<OverlayContextType | undefined>(

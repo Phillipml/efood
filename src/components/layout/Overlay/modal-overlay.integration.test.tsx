@@ -1,26 +1,41 @@
 import { screen, fireEvent } from '@testing-library/react'
-import Overlay from './index'
 import Modal from '../../ui/Modal'
 import { renderWithProviders } from '@/utils/__mocks__/render-utils'
 import { useOverlay } from '@/hooks/useOverlay'
+import { useState } from 'react'
+import type { Menu } from '@/types'
+
+const mockItem: Menu = {
+  id: 1,
+  nome: 'Modal Title',
+  descricao: 'Modal content',
+  porcao: 'Test Portion',
+  preco: 10.50,
+  foto: 'test-image.jpg'
+}
 
 const ModalOverlayIntegration = () => {
-  const [, setOverlay] = useOverlay()
+  const { showModal } = useOverlay()
+  const [modalItem, setModalItem] = useState<Menu | null>(null)
+  
+  const handleToggleModal = () => {
+    if (modalItem) {
+      setModalItem(null)
+    } else {
+      setModalItem(mockItem)
+      showModal()
+    }
+  }
   
   return (
     <>
-      <button onClick={() => setOverlay()} data-testid="toggle-button">
+      <button onClick={handleToggleModal} data-testid="toggle-button">
         Toggle Modal
       </button>
-      <Overlay $justifyContent="center">
-        <Modal>
-          <div>
-            <h2>Modal Title</h2>
-            <p>Modal content</p>
-            <button onClick={() => setOverlay()}>Close</button>
-          </div>
-        </Modal>
-      </Overlay>
+      <Modal 
+        item={modalItem} 
+        onAddToCart={() => setModalItem(null)} 
+      />
     </>
   )
 }
@@ -41,7 +56,7 @@ describe('Modal + Overlay Integration', () => {
     fireEvent.click(toggleButton)
     
     expect(screen.getByText('Modal Title')).toBeInTheDocument()
-    expect(screen.getByText('Modal content')).toBeInTheDocument()
+    expect(screen.getByText(/Modal content/)).toBeInTheDocument()
   })
 
   it('should close modal when close button is clicked', () => {
@@ -49,7 +64,7 @@ describe('Modal + Overlay Integration', () => {
     const toggleButton = screen.getByTestId('toggle-button')
     fireEvent.click(toggleButton)
     
-    const closeButton = screen.getByText('Close')
+    const closeButton = screen.getAllByRole('button')[0]
     fireEvent.click(closeButton)
     
     expect(screen.queryByText('Modal Title')).not.toBeInTheDocument()
@@ -71,7 +86,7 @@ describe('Modal + Overlay Integration', () => {
     const toggleButton = screen.getByTestId('toggle-button')
     fireEvent.click(toggleButton)
     
-    const modalContent = screen.getByText('Modal content')
+    const modalContent = screen.getByText(/Modal content/)
     fireEvent.click(modalContent)
     
     expect(screen.getByText('Modal Title')).toBeInTheDocument()

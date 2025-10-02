@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import Modal from './index'
+import type { Menu } from '@/types'
 
 const meta: Meta<typeof Modal> = {
   title: 'UI/Modal',
@@ -12,34 +13,46 @@ const meta: Meta<typeof Modal> = {
 export default meta
 type Story = StoryObj<typeof Modal>
 
+const mockItem: Menu = {
+  id: 1,
+  nome: 'Pizza Margherita',
+  descricao: 'Pizza tradicional com molho de tomate, mussarela e manjericão fresco',
+  porcao: '8 fatias',
+  preco: 45.90,
+  foto: 'https://via.placeholder.com/300x200'
+}
+
 export const Default: Story = {
   args: {
-    children: <div>Conteúdo do modal</div>
+    item: mockItem,
+    onAddToCart: () => console.log('Adicionado ao carrinho')
   }
 }
 
-export const WithImage: Story = {
+export const WithDifferentItem: Story = {
   args: {
-    children: (
-      <>
-        <img src="https://via.placeholder.com/300x200" alt="Imagem" />
-        <div>
-          <h2>Título do Modal</h2>
-          <p>Descrição do conteúdo</p>
-        </div>
-      </>
-    )
+    item: {
+      id: 2,
+      nome: 'Hambúrguer Artesanal',
+      descricao: 'Hambúrguer com carne artesanal, queijo cheddar, alface, tomate e molho especial',
+      porcao: '1 unidade',
+      preco: 32.50,
+      foto: 'https://via.placeholder.com/300x200'
+    },
+    onAddToCart: () => console.log('Adicionado ao carrinho')
   }
 }
 
-export const WithButton: Story = {
+export const WithExpensiveItem: Story = {
   args: {
-    children: (
-      <div>
-        <h2>Confirmação</h2>
-        <p>Tem certeza que deseja continuar?</p>
-        <button>Confirmar</button>
-      </div>
-    )
+    item: {
+      id: 3,
+      nome: 'Picanha Premium',
+      descricao: 'Picanha premium grelhada, acompanhada de arroz, feijão e farofa',
+      porcao: '1 prato',
+      preco: 89.90,
+      foto: 'https://via.placeholder.com/300x200'
+    },
+    onAddToCart: () => console.log('Adicionado ao carrinho')
   }
 }

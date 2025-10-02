@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import App from './App'
 import { mockUseThemeState, resetAllMocks } from './utils/test-utils'
+import { OverlayProvider } from './providers/OverlayProvider'
 
 jest.mock('./hooks/useTheme', () => ({
   useThemeState: () => mockUseThemeState
@@ -31,13 +32,21 @@ jest.mock('./styles/reset', () => ({
   default: () => <div data-testid="global-style">Global Style</div>
 }))
 
+const renderWithProviders = (ui: React.ReactElement) => {
+  return render(
+    <OverlayProvider>
+      {ui}
+    </OverlayProvider>
+  )
+}
+
 describe('App Component', () => {
   beforeEach(() => {
     resetAllMocks()
   })
 
   it('renderiza sem quebrar', () => {
-    render(<App />)
+    renderWithProviders(<App />)
 
     expect(screen.getByTestId('header')).toBeInTheDocument()
     expect(screen.getByTestId('footer')).toBeInTheDocument()
@@ -46,21 +55,21 @@ describe('App Component', () => {
   })
 
   it('renderiza ThemeProvider', () => {
-    render(<App />)
+    renderWithProviders(<App />)
 
     const header = screen.getByTestId('header')
     expect(header).toBeInTheDocument()
   })
 
   it('renderiza BrowserRouter', () => {
-    render(<App />)
+    renderWithProviders(<App />)
 
     const header = screen.getByTestId('header')
     expect(header).toBeInTheDocument()
   })
 
   it('renderiza Header', () => {
-    render(<App />)
+    renderWithProviders(<App />)
 
     const header = screen.getByTestId('header')
     expect(header).toBeInTheDocument()
@@ -68,7 +77,7 @@ describe('App Component', () => {
   })
 
   it('renderiza RoutesApp', () => {
-    render(<App />)
+    renderWithProviders(<App />)
 
     const routes = screen.getByTestId('routes')
     expect(routes).toBeInTheDocument()
@@ -76,7 +85,7 @@ describe('App Component', () => {
   })
 
   it('renderiza Footer', () => {
-    render(<App />)
+    renderWithProviders(<App />)
 
     const footer = screen.getByTestId('footer')
     expect(footer).toBeInTheDocument()
@@ -84,7 +93,7 @@ describe('App Component', () => {
   })
 
   it('renderiza ThemeButton', () => {
-    render(<App />)
+    renderWithProviders(<App />)
 
     const themeButton = screen.getByTestId('theme-button')
     expect(themeButton).toBeInTheDocument()
@@ -92,7 +101,7 @@ describe('App Component', () => {
   })
 
   it('toggle de tema funciona', () => {
-    render(<App />)
+    renderWithProviders(<App />)
 
     const themeButton = screen.getByTestId('theme-button')
     fireEvent.click(themeButton)
@@ -101,7 +110,7 @@ describe('App Component', () => {
   })
 
   it('aplica tema correto', () => {
-    render(<App />)
+    renderWithProviders(<App />)
 
     const header = screen.getByTestId('header')
     const footer = screen.getByTestId('footer')
@@ -115,7 +124,7 @@ describe('App Component', () => {
   })
 
   it('estrutura completa do App', () => {
-    render(<App />)
+    renderWithProviders(<App />)
 
     expect(screen.getByTestId('global-style')).toBeInTheDocument()
     expect(screen.getByTestId('header')).toBeInTheDocument()
@@ -125,7 +134,7 @@ describe('App Component', () => {
   })
 
   it('múltiplos cliques no ThemeButton', () => {
-    render(<App />)
+    renderWithProviders(<App />)
 
     const themeButton = screen.getByTestId('theme-button')
 

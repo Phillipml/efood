@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import Overlay from './index'
 import Modal from '../../ui/Modal'
+import type { Menu } from '@/types'
 
 const meta: Meta<typeof Overlay> = {
   title: 'Layout/Overlay',
@@ -14,21 +15,29 @@ const meta: Meta<typeof Overlay> = {
 export default meta
 type Story = StoryObj<typeof Overlay>
 
+const mockItem: Menu = {
+  id: 1,
+  nome: 'Item de Exemplo',
+  descricao: 'Descrição do item',
+  porcao: '1 porção',
+  preco: 15.90,
+  foto: 'https://via.placeholder.com/300x200'
+}
+
 const OverlayWithState = (args: any) => {
   const [isOpen, setIsOpen] = useState(false)
   
   return (
     <>
       <button onClick={() => setIsOpen(true)}>Abrir Overlay</button>
-      <Overlay {...args} $isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <Modal>
-          <div>
-            <h2>Modal no Overlay</h2>
-            <p>Conteúdo do modal</p>
-            <button onClick={() => setIsOpen(false)}>Fechar</button>
-          </div>
-        </Modal>
-      </Overlay>
+      {isOpen && (
+        <Overlay {...args}>
+          <Modal 
+            item={mockItem} 
+            onAddToCart={() => setIsOpen(false)} 
+          />
+        </Overlay>
+      )}
     </>
   )
 }
