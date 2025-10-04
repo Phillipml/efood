@@ -6,11 +6,13 @@ import { useOverlay } from '@/hooks/useOverlay'
 export type OverlayType = {
   children: React.ReactNode
   $justifyContent: 'center' | 'end'
+  type: 'modal' | 'sideMenu'
 }
 
-function Overlay({ children, $justifyContent }: OverlayType) {
+function Overlay({ children, $justifyContent, type }: OverlayType) {
   const rootDocument = document.getElementById('root')
-  const [isShowing, setOverlay] = useOverlay()
+  const { currentOverlay, hideOverlay } = useOverlay()
+  const isShowing = currentOverlay === type
 
   useEffect(() => {
     if (isShowing) {
@@ -23,9 +25,10 @@ function Overlay({ children, $justifyContent }: OverlayType) {
   return isShowing
     ? ReactDOM.createPortal(
         <OverlayWrapper
-          data-testid="modal"
-          onClick={() => setOverlay()}
+          onClick={() => hideOverlay()}
           $justifyContent={$justifyContent}
+          type={type}
+          data-testid={type}
         >
           <div onClick={(e) => e.stopPropagation()}>{children}</div>
         </OverlayWrapper>,

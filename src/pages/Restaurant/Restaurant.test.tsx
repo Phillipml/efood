@@ -1,52 +1,37 @@
-import { screen } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 import Restaurant from './index'
 import { renderWithProviders } from '@/utils/__mocks__/render-utils'
 
+const mockData = {
+  id: 1,
+  titulo: 'Restaurante Teste',
+  tipo: 'japonês',
+  capa: 'test.jpg',
+  destacado: true,
+  avaliacao: 4.5,
+  descricao: 'Restaurante de teste',
+  cardapio: [
+    {
+      id: 1,
+      nome: 'Sushi',
+      descricao: 'Sushi delicioso',
+      foto: 'sushi.jpg',
+      preco: 25.9,
+      porcao: '8 peças'
+    },
+    {
+      id: 2,
+      nome: 'Temaki',
+      descricao: 'Temaki fresco',
+      foto: 'temaki.jpg',
+      preco: 18.5,
+      porcao: '1 unidade'
+    }
+  ]
+}
+
 jest.mock('@/services/api', () => ({
-  GetData: jest.fn(() =>
-    Promise.resolve([
-      {
-        id: 1,
-        titulo: 'Test Restaurant',
-        tipo: 'japonês',
-        capa: 'test.jpg',
-        cardapio: [
-          {
-            id: 1,
-            nome: 'Sushi',
-            descricao: 'Delicious sushi',
-            foto: 'sushi.jpg',
-            preco: 25.9,
-            porcao: '8 peças'
-          },
-          {
-            id: 2,
-            nome: 'Temaki',
-            descricao: 'Fresh temaki',
-            foto: 'temaki.jpg',
-            preco: 18.5,
-            porcao: '1 unidade'
-          },
-          {
-            id: 3,
-            nome: 'Sashimi',
-            descricao: 'Fresh sashimi',
-            foto: 'sashimi.jpg',
-            preco: 32.0,
-            porcao: '12 peças'
-          },
-          {
-            id: 4,
-            nome: 'Combo',
-            descricao: 'Complete combo',
-            foto: 'combo.jpg',
-            preco: 45.9,
-            porcao: '1 pessoa'
-          }
-        ]
-      }
-    ])
-  )
+  GetData: jest.fn(() => Promise.resolve([mockData]))
 }))
 
 jest.mock('react-router-dom', () => ({
@@ -54,35 +39,41 @@ jest.mock('react-router-dom', () => ({
   useParams: () => ({ id: '1' })
 }))
 
+global.alert = jest.fn()
+
 describe('Restaurant Page', () => {
-  it('should render loading state initially', () => {
+  it('mostra loading inicialmente', () => {
     renderWithProviders(<Restaurant />)
     expect(screen.getByTestId('loading-container')).toBeInTheDocument()
   })
 
-  it('should render cards after loading', async () => {
+  it('mostra cards após carregar', async () => {
     renderWithProviders(<Restaurant />)
 
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    await waitFor(() => {
+      expect(screen.queryByTestId('loading-container')).not.toBeInTheDocument()
+    })
 
-    const buttons = screen.getAllByText('Adicionar ao Carrinho')
-    expect(buttons.length).toBeGreaterThan(0)
+    expect(screen.getByText('Sushi')).toBeInTheDocument()
+    expect(screen.getByText('Temaki')).toBeInTheDocument()
   })
 
-  it('should render hero component', async () => {
+  it('mostra título do restaurante', async () => {
     renderWithProviders(<Restaurant />)
 
-    await new Promise((resolve) => setTimeout(resolve, 100))
-
-    expect(screen.getByText('Test Restaurant')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText('Restaurante Teste')).toBeInTheDocument()
+    })
   })
 
-  it('should display card information correctly', async () => {
+  it('mostra botões de adicionar ao carrinho', async () => {
     renderWithProviders(<Restaurant />)
 
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    await waitFor(() => {
+      expect(screen.queryByTestId('loading-container')).not.toBeInTheDocument()
+    })
 
     const buttons = screen.getAllByText('Adicionar ao Carrinho')
-    expect(buttons).toHaveLength(4)
+    expect(buttons).toHaveLength(2)
   })
 })

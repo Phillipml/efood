@@ -6,6 +6,7 @@ import GlobalStyle from './styles/reset'
 import RoutesApp from './routes'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import SideMenu from './components/layout/SideMenu'
 
 function AppContent() {
   const { currentTheme, toggleTheme, isDarkTheme } = useThemeState()
@@ -13,6 +14,7 @@ function AppContent() {
   return (
     <StyledThemeProvider theme={currentTheme}>
       <GlobalStyle />
+      <SideMenu />
       <ThemeButton onClick={toggleTheme} isDarkTheme={isDarkTheme} />
       <Header />
       <RoutesApp />

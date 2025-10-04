@@ -3,10 +3,9 @@ import type { ReactNode } from 'react'
 
 export type CardData = {
   children: ReactNode
-  key?: number
 }
 
-const CardList = ({ children, key }: CardData) => {
-  return <Container key={key} data-testid="card-list">{children}</Container>
+const CardList = ({ children }: CardData) => {
+  return <Container data-testid="card-list">{children}</Container>
 }
 export default CardList

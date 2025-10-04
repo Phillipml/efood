@@ -2,11 +2,19 @@ import { useState, type ReactNode } from 'react'
 import { OverlayContext } from '../contexts/overlay-context'
 
 export const OverlayProvider = ({ children }: { children: ReactNode }) => {
-  const [isShowing, setIsShowing] = useState(false)
-  const setOverlay = () => setIsShowing(!isShowing)
+  const [currentOverlay, setCurrentOverlay] = useState<'modal' | 'sideMenu' | null>(null)
+  
+  const showModal = () => setCurrentOverlay('modal')
+  const showSideMenu = () => setCurrentOverlay('sideMenu')
+  const hideOverlay = () => setCurrentOverlay(null)
   
   return (
-    <OverlayContext.Provider value={{ isShowing, setOverlay }}>
+    <OverlayContext.Provider value={{ 
+      currentOverlay, 
+      showModal, 
+      showSideMenu, 
+      hideOverlay 
+    }}>
       {children}
     </OverlayContext.Provider>
   )

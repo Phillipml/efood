@@ -2,8 +2,10 @@ import React from 'react'
 import { render, type RenderOptions } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import { MemoryRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
 import { $lightTheme, $darkTheme } from '@/styles/theme'
 import { OverlayProvider } from '@/providers/OverlayProvider'
+import { store } from '@/store'
 
 type CustomRenderProps = Omit<RenderOptions, 'queries'> & {
   theme?: typeof $lightTheme | typeof $darkTheme
@@ -51,10 +53,12 @@ export const renderWithProviders = (
   initialEntries: string[] = ['/']
 ) => {
   return render(
-    <MemoryRouter initialEntries={initialEntries}>
-      <ThemeProvider theme={$lightTheme}>
-        <OverlayProvider>{ui}</OverlayProvider>
-      </ThemeProvider>
-    </MemoryRouter>
+    <Provider store={store}>
+      <MemoryRouter initialEntries={initialEntries}>
+        <ThemeProvider theme={$lightTheme}>
+          <OverlayProvider>{ui}</OverlayProvider>
+        </ThemeProvider>
+      </MemoryRouter>
+    </Provider>
   )
 }

@@ -43,7 +43,6 @@ describe('CardList Component', () => {
   it('renderiza sem children', () => {
     renderWithTheme(<CardList>{null}</CardList>)
 
-    // O componente deve renderizar mesmo sem children
     const containers = screen.getAllByRole('generic')
     expect(containers.length).toBeGreaterThan(0)
   })

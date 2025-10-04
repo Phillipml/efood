@@ -6,5 +6,12 @@ export const useOverlay = () => {
   if (!context) {
     throw new Error('useOverlay deve ser usado dentro de um OverlayProvider')
   }
-  return [context.isShowing, context.setOverlay] as const
+  return {
+    currentOverlay: context.currentOverlay,
+    showModal: context.showModal,
+    showSideMenu: context.showSideMenu,
+    hideOverlay: context.hideOverlay,
+    isModalOpen: context.currentOverlay === 'modal',
+    isSideMenuOpen: context.currentOverlay === 'sideMenu'
+  }
 }

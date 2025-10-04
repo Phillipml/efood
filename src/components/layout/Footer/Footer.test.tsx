@@ -22,11 +22,8 @@ describe('Footer Component', () => {
   it('renderiza conteúdo esperado', () => {
     renderWithTheme(<Footer />)
 
-    // Verifica se o logo está presente
     const logo = screen.getByAltText('Efood logo')
     expect(logo).toBeInTheDocument()
-
-    // Verifica se o texto principal está presente
     expect(
       screen.getByText(
         /A efood é uma plataforma para divulgação de estabelecimentos/
@@ -42,9 +39,8 @@ describe('Footer Component', () => {
   it('renderiza ícones de redes sociais', () => {
     renderWithTheme(<Footer />)
 
-    // Verifica se os links das redes sociais estão presentes
     const socialLinks = screen.getAllByRole('link')
-    expect(socialLinks).toHaveLength(4) // Logo + Instagram, Facebook, Twitter
+    expect(socialLinks).toHaveLength(4)
   })
 
   it('renderiza Container com estrutura correta', () => {

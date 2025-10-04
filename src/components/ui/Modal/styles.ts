@@ -1,7 +1,6 @@
 import { mobile } from '@/styles/breakpoints'
 import { MainContainer } from '@/styles/reset'
 import { pxToRem } from '@/utils/size-utils'
-
 import styled from 'styled-components'
 
 export const ModalContent = styled(MainContainer)`
