@@ -8,63 +8,53 @@ import {
   SideMenuStyled
 } from './styles'
 import Text from '@/components/ui/Text'
-import foto from '@/assets/images/laDolce.png'
 import { CiTrash } from 'react-icons/ci'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { cartItems, cartTotalPrice } from '@/store/cart/cartSelector'
+import { priceFormatter } from '@/utils/price-utils'
+import { removeItem } from '@/store/cart/cartSlice'
 
 function SideMenu() {
+  const cart = useAppSelector(cartItems)
+  const totalPrice = useAppSelector(cartTotalPrice)
+  const dispatch = useAppDispatch()
+  const amount = priceFormatter(totalPrice)
+
   return (
     <Overlay $justifyContent="end" type="sideMenu">
       <SideMenuStyled>
         <CartWrapper>
-          <CartItem>
-            <RemoveButton>
-              <CiTrash />
-            </RemoveButton>
-            <img src={foto} width={50} alt="oi" />
-            <div>
-              <Text
-                as="title"
-                $lgFontSize="lg"
-                $textLightTheme="tertiary"
-                $textDarkTheme="secondary"
-                $smFontSize="lg"
-              >
-                Titulo
-              </Text>
+          {cart.length > 0 &&
+            cart.map((item, k) => (
+              <CartItem key={k}>
+                <RemoveButton onClick={() => dispatch(removeItem(item.id))}>
+                  <CiTrash />
+                </RemoveButton>
+                <img src={item.foto} width={50} alt="oi" />
+                <div>
+                  <Text
+                    as="title"
+                    $lgFontSize="lg"
+                    $textLightTheme="tertiary"
+                    $textDarkTheme="secondary"
+                    $smFontSize="lg"
+                  >
+                    {item.nome}
+                  </Text>
 
-              <Text $textLightTheme="tertiary" $textDarkTheme="secondary">
-                R$00,00
-              </Text>
-            </div>
-          </CartItem>
-          <CartItem>
-            <RemoveButton>
-              <CiTrash />
-            </RemoveButton>
-            <img src={foto} width={50} alt="oi" />
-            <div>
-              <Text
-                as="title"
-                $lgFontSize="lg"
-                $textLightTheme="tertiary"
-                $textDarkTheme="secondary"
-                $smFontSize="lg"
-              >
-                Titulo
-              </Text>
-
-              <Text $textLightTheme="tertiary" $textDarkTheme="secondary">
-                R$00,00
-              </Text>
-            </div>
-          </CartItem>
+                  <Text $textLightTheme="tertiary" $textDarkTheme="secondary">
+                    {priceFormatter(item.preco)}
+                  </Text>
+                </div>
+              </CartItem>
+            ))}
         </CartWrapper>
         <AmountValue>
           <Text as="title" $lgFontSize="lg">
             Valor Total
           </Text>
           <Text as="title" $lgFontSize="lg">
-            R$00,00
+            {amount}
           </Text>
         </AmountValue>
         <Button>Continuar com a entrega</Button>

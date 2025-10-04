@@ -47,6 +47,7 @@ export const RemoveButton = styled(CloseButton)`
   bottom: 8px;
   ${({ theme }) => css`
     > svg {
+      ${pxToRem('font-size', { lgScreen: 16 })}
       color: ${setColor(theme, {
         light: 'tertiary',
         dark: 'secondary'
