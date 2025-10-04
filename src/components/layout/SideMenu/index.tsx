@@ -57,7 +57,7 @@ function SideMenu() {
             {amount}
           </Text>
         </AmountValue>
-        <Button>Continuar com a entrega</Button>
+        <Button $buttonLightThemeColor='secondary' $buttonTextLightTheme='tertiary'>Continuar com a entrega</Button>
       </SideMenuStyled>
     </Overlay>
   )
