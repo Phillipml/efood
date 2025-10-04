@@ -50,10 +50,10 @@ function SideMenu() {
             ))}
         </CartWrapper>
         <AmountValue>
-          <Text as="title" $lgFontSize="lg">
+          <Text as="title" $lgFontSize="lg" $textLightTheme='secondary' $textDarkTheme='tertiary'>
             Valor Total
           </Text>
-          <Text as="title" $lgFontSize="lg">
+          <Text as="title" $lgFontSize="lg" $textLightTheme='secondary' $textDarkTheme='tertiary'>
             {amount}
           </Text>
         </AmountValue>

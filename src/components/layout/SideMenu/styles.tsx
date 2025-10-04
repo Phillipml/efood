@@ -19,6 +19,7 @@ export const CartWrapper = styled.div`
   ${pxToRem('gap', { lgScreen: 8 })}
   ${pxToRem('padding-top', { lgScreen: 16 })}
   ${pxToRem('padding-bottom', { lgScreen: 32 })}
+  
 `
 export const CartItem = styled(ModalContent)`
   ${pxToRem('padding', { lgScreen: 8 })}
@@ -27,6 +28,12 @@ export const CartItem = styled(ModalContent)`
   background-color: ${({ theme }) => theme.quinary};
   grid-template-columns: unset;
   display: flex;
+  ${({ theme }) => css`
+    background-color: ${setColor(theme, {
+      light: 'secondary',
+      dark: 'tertiary'
+    })};
+  `};
 
   img {
     ${pxToRem('width', { lgScreen: 80 })}
@@ -47,7 +54,7 @@ export const RemoveButton = styled(CloseButton)`
   bottom: 8px;
   ${({ theme }) => css`
     > svg {
-      ${pxToRem('font-size', { lgScreen: 16 })}
+      ${pxToRem('font-size', { lgScreen: 16, smScreen: 24 })}
       color: ${setColor(theme, {
         light: 'tertiary',
         dark: 'secondary'
