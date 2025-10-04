@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import type { RestaurantList } from '@/types'
 import Card from '@/components/ui/Card'
 import Loading from '@/components/ui/Loading'
+import { act } from 'react'
 
 const Home = () => {
   const [info, setInfo] = useState<RestaurantList[] | null>(null)
@@ -16,8 +17,10 @@ const Home = () => {
   const clientList = async () => {
     setIsLoading(true)
     const data = await GetData()
-    setInfo(data)
-    setIsLoading(false)
+    act(() => {
+      setInfo(data)
+      setIsLoading(false)
+    })
   }
   useEffect(() => {
     clientList()
