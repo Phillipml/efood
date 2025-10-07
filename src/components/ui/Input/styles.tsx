@@ -1,10 +1,15 @@
-import { pxToRem } from '@/utils/size-utils'
+import { FontSize, pxToRem } from '@/utils/size-utils'
 import styled from 'styled-components'
 
 export const InputWraper = styled.div`
-  width: 100%;
+  display: grid;
+  ${pxToRem('margin-bottom', { lgScreen: 8 })}
 `
-export const Label = styled.label``
-export const Input = styled.input`
+export const InputStyled = styled.input`
+  border: none;
   ${pxToRem('margin-top', { lgScreen: 8 })}
+  ${pxToRem('padding', { lgScreen: 8 })}
+  color:#4B4B4B
+  ${FontSize({ lgScreen: 'md' })};
+  font-weight: bold;
 `

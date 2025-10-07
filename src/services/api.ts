@@ -1,4 +1,4 @@
-const API_URL = 'https://ebac-fake-api.vercel.app/api/efood/restaurantes'
+const API_URL = 'https://phillerest-fake-api.vercel.app/api/restaurantes'
 
 export async function GetData() {
   const url = `${API_URL}`

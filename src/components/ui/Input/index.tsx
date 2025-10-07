@@ -1,11 +1,21 @@
-import * as S from './styles.ts'
+import Text from '../Text'
+import { InputWraper, InputStyled } from './styles'
 
-function Input() {
+function Input({ label }: { label: string }) {
   return (
-    <S.InputWraper>
-      <S.Label></S.Label>
-      <S.Input></S.Input>
-    </S.InputWraper>
+    <InputWraper>
+      <label>
+        <Text
+          as="title"
+          $lgFontSize="md"
+          $textDarkTheme="tertiary"
+          $textLightTheme="secondary"
+        >
+          {label}
+        </Text>
+      </label>
+      <InputStyled />
+    </InputWraper>
   )
 }
 
