@@ -9,10 +9,15 @@ export const FormStyled = styled.form`
     ${pxToRem('margin-bottom', { lgScreen: 24 })}
     ${pxToRem('font-size', { lgScreen: 16 })}
   }
-
-  .cep {
+  .card-number {
+    display: grid;
+    grid-template-columns: 70% 20%;
+    ${pxToRem('gap', { lgScreen: 28 })}
+    justify-content: space-between;
+  }
+  .card-data {
     display: flex;
-    ${pxToRem('gap', { lgScreen: 8 })}
+    ${pxToRem('gap', { lgScreen: 34 })}
   }
   button:first-of-type {
     ${pxToRem('margin-top', { lgScreen: 16 })}
