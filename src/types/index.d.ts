@@ -1,3 +1,5 @@
 export * from './responsive'
 export * from './theme'
 export * from './restaurants'
+export * from './delivery'
+export * from './payment'
