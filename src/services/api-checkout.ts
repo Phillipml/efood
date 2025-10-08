@@ -1,29 +1,25 @@
-import type { Delivery } from '../types/delivery'
-import type { Payment } from '../types/payment'
-
-export interface CheckoutProduct {
-  id: number
+export interface Product {
+  product: number
   price: number
 }
+export interface Delivery {
+  receiver: string
 
-export interface CheckoutRequest {
-  products: CheckoutProduct[]
-  delivery: Delivery
-  payment: Payment
-}
-
-export async function postCheckout(checkoutData: CheckoutRequest) {
-  const response = await fetch('https://api-ebac.vercel.app/api/efood/checkout', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(checkoutData),
-  })
-
-  if (!response.ok) {
-    throw new Error(`Erro: ${response.status}`)
+  address: {
+    receiver: string
+    descripton: string
+    city: string
+    zipCode: string
+    number: number
+    complement: string
   }
-
-  return response.json()
+}
+export interface Card {
+  name: string
+  number: string
+  code: number
+  expires: {
+    month: number
+    year: number
+  }
 }
