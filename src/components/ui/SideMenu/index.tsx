@@ -1,16 +1,32 @@
 // import Form from '@/components/layout/Form/DeliveryForm'
-import Checkout from '@/components/layout/Checkout/Confirmation'
+// import Checkout from '@/components/layout/Checkout/Confirmation'
+import { useCheckoutStep } from '@/hooks/useCheckoutStep'
 import Overlay from '../../layout/Overlay'
-// import Cart from './Cart'
+import Cart from './Cart'
 import { SideMenuStyled } from './styles'
-// import PaymentForm from '@/components/layout/Form/PaymentForm'
+import Delivery from '@/components/layout/Checkout/Delivery'
+import PaymentForm from '@/components/layout/Checkout/Payment'
+import Checkout from '@/components/layout/Checkout/Confirmation'
 
 function SideMenu() {
+  const { currentStep } = useCheckoutStep()
+  const contentHandle = () => {
+    if (currentStep == 'cart') {
+      return <Cart />
+    }
+    if (currentStep == 'delivery') {
+      return <Delivery />
+    }
+    if (currentStep == 'payment') {
+      return <PaymentForm />
+    }
+    if (currentStep == 'checkout') {
+      return <Checkout />
+    }
+  }
   return (
     <Overlay $justifyContent="end" type="sideMenu">
-      <SideMenuStyled>
-        <Checkout />
-      </SideMenuStyled>
+      <SideMenuStyled>{contentHandle()}</SideMenuStyled>
     </Overlay>
   )
 }

@@ -5,10 +5,12 @@ import Button from '@/components/ui/Button'
 import { useAppSelector } from '@/store/hooks'
 import { cartTotalPrice } from '@/store/cart/cartSelector'
 import { priceFormatter } from '@/utils/price-utils'
+import { useCheckoutStep } from '@/hooks/useCheckoutStep'
 
 function PaymentForm() {
   const value = useAppSelector(cartTotalPrice)
   const amount = priceFormatter(value)
+  const { setDelivery, setCheckout } = useCheckoutStep()
   return (
     <>
       <FormStyled>
@@ -28,12 +30,14 @@ function PaymentForm() {
         <Button
           $buttonLightThemeColor="secondary"
           $buttonTextLightTheme="tertiary"
+          onClick={() => setCheckout()}
         >
           Finalizar pagamento
         </Button>
         <Button
           $buttonLightThemeColor="secondary"
           $buttonTextLightTheme="tertiary"
+          onClick={() => setDelivery()}
         >
           Voltar para edição de endereço
         </Button>

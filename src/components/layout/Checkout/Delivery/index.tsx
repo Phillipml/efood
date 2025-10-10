@@ -2,8 +2,10 @@ import Input from '@/components/ui/Input'
 import { FormStyled } from './styles'
 import Text from '@/components/ui/Text'
 import Button from '@/components/ui/Button'
+import { useCheckoutStep } from '@/hooks/useCheckoutStep'
 
-function Form() {
+function Delivery() {
+  const { setCart, setPayment } = useCheckoutStep()
   return (
     <>
       <FormStyled>
@@ -21,12 +23,14 @@ function Form() {
         <Button
           $buttonLightThemeColor="secondary"
           $buttonTextLightTheme="tertiary"
+          onClick={() => setPayment()}
         >
           Continuar com o pagamento
         </Button>
         <Button
           $buttonLightThemeColor="secondary"
           $buttonTextLightTheme="tertiary"
+          onClick={() => setCart()}
         >
           Voltar para carrinho
         </Button>
@@ -35,4 +39,4 @@ function Form() {
   )
 }
 
-export default Form
+export default Delivery

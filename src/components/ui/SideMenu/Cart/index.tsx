@@ -6,16 +6,16 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { cartItems, cartTotalPrice } from '@/store/cart/cartSelector'
 import { priceFormatter } from '@/utils/price-utils'
 import { removeItem } from '@/store/cart/cartSlice'
+import { useCheckoutStep } from '@/hooks/useCheckoutStep'
 
 function Cart() {
   const cart = useAppSelector(cartItems)
   const totalPrice = useAppSelector(cartTotalPrice)
   const dispatch = useAppDispatch()
   const amount = priceFormatter(totalPrice)
-
+  const { setDelivery } = useCheckoutStep()
   return (
     <>
-      {' '}
       <S.CartWrapper>
         {cart.length > 0 &&
           cart.map((item, k) => (
@@ -63,6 +63,7 @@ function Cart() {
       <Button
         $buttonLightThemeColor="secondary"
         $buttonTextLightTheme="tertiary"
+        onClick={() => setDelivery()}
       >
         Continuar com a entrega
       </Button>
