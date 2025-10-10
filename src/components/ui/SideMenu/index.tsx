@@ -1,5 +1,3 @@
-// import Form from '@/components/layout/Form/DeliveryForm'
-// import Checkout from '@/components/layout/Checkout/Confirmation'
 import { useCheckoutStep } from '@/hooks/useCheckoutStep'
 import Overlay from '../../layout/Overlay'
 import Cart from './Cart'
