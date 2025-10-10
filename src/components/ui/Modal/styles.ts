@@ -1,4 +1,4 @@
-import { mobile } from '@/styles/breakpoints'
+import { mobile, tablet } from '@/styles/breakpoints'
 import { MainContainer } from '@/styles/reset'
 import { pxToRem } from '@/utils/size-utils'
 import styled from 'styled-components'
@@ -10,6 +10,9 @@ export const ModalContent = styled(MainContainer)`
   background-color: ${({ theme }) => theme.tertiary};
   display: grid;
   grid-template-columns: 0.5fr 1fr;
+  ${tablet} {
+    gap: 1rem;
+  }
   ${mobile} {
     grid-template-columns: 1fr;
   }
