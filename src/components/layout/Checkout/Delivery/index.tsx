@@ -1,14 +1,16 @@
-import { useState } from 'react'
+import { Formik, Form } from 'formik'
 import Input from '@/components/ui/Input'
 import { FormStyled } from './styles'
 import Text from '@/components/ui/Text'
 import Button from '@/components/ui/Button'
 import { useCheckoutStep } from '@/hooks/useCheckoutStep'
 import type { Delivery } from '@/services/api-checkout'
+import { deliverySchema } from '@/utils/validation-schemas'
 
 function Delivery() {
   const { setCart, setPayment } = useCheckoutStep()
-  const [formData, setFormData] = useState<Delivery>({
+  
+  const initialValues: Delivery = {
     receiver: '',
     address: {
       descripton: '',
@@ -17,93 +19,122 @@ function Delivery() {
       number: 0,
       complement: ''
     }
-  })
+  }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    
-    if (name === 'receiver') {
-      setFormData(prev => ({
-        ...prev,
-        receiver: value
-      }))
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        address: {
-          ...prev.address,
-          [name]: name === 'number' ? parseInt(value) || 0 : value
-        }
-      }))
-    }
+  const handleSubmit = (values: Delivery) => {
+    console.log('Dados do formulário:', values)
+    setPayment()
   }
 
   return (
     <>
-      <FormStyled>
-        <Text as="title" $lgFontSize="md">
-          Entrega
-        </Text>
-        <Input 
-          label="Quem irá receber" 
-          name="receiver"
-          value={formData.receiver}
-          onChange={handleInputChange}
-          placeholder="Digite o nome completo"
-        />
-        <Input 
-          label="Endereço" 
-          name="descripton"
-          value={formData.address.descripton}
-          onChange={handleInputChange}
-          placeholder="Rua, avenida, etc."
-        />
-        <Input 
-          label="Cidade" 
-          name="city"
-          value={formData.address.city}
-          onChange={handleInputChange}
-          placeholder="Nome da cidade"
-        />
-        <div className="cep">
-          <Input 
-            label="CEP" 
-            name="zipCode"
-            value={formData.address.zipCode}
-            onChange={handleInputChange}
-            mask="_____-___"
-            placeholder="00000-000"
-          />
-          <Input 
-            label="Número" 
-            name="number"
-            value={formData.address.number.toString()}
-            onChange={handleInputChange}
-            placeholder="123"
-          />
-        </div>
-        <Input 
-          label="Complemento (Opcional)" 
-          name="complement"
-          value={formData.address.complement || ''}
-          onChange={handleInputChange}
-          placeholder="Apartamento, casa, etc."
-        />
-        <Button
-          $buttonLightThemeColor="secondary"
-          $buttonTextLightTheme="tertiary"
-          onClick={() => setPayment()}
-        >
-          Continuar com o pagamento
-        </Button>
-        <Button
-          $buttonLightThemeColor="secondary"
-          $buttonTextLightTheme="tertiary"
-          onClick={() => setCart()}
-        >
-          Voltar para carrinho
-        </Button>
-      </FormStyled>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={deliverySchema}
+        onSubmit={handleSubmit}
+      >
+        {({ values, errors, touched, handleChange }) => (
+          <Form>
+            <FormStyled>
+              <Text as="title" $lgFontSize="md">
+                Entrega
+              </Text>
+              
+              <Input 
+                label="Quem irá receber" 
+                name="receiver"
+                value={values.receiver}
+                onChange={handleChange}
+                placeholder="Digite o nome completo"
+              />
+              {errors.receiver && touched.receiver && (
+                <div style={{ color: 'red', fontSize: '12px' }}>
+                  {errors.receiver}
+                </div>
+              )}
+              
+              <Input 
+                label="Endereço" 
+                name="address.descripton"
+                value={values.address.descripton}
+                onChange={handleChange}
+                placeholder="Rua, avenida, etc."
+              />
+              {errors.address?.descripton && touched.address?.descripton && (
+                <div style={{ color: 'red', fontSize: '12px' }}>
+                  {errors.address.descripton}
+                </div>
+              )}
+              
+              <Input 
+                label="Cidade" 
+                name="address.city"
+                value={values.address.city}
+                onChange={handleChange}
+                placeholder="Nome da cidade"
+              />
+              {errors.address?.city && touched.address?.city && (
+                <div style={{ color: 'red', fontSize: '12px' }}>
+                  {errors.address.city}
+                </div>
+              )}
+              
+              <div className="cep">
+                <Input 
+                  label="CEP" 
+                  name="address.zipCode"
+                  value={values.address.zipCode}
+                  onChange={handleChange}
+                  mask="_____-___"
+                  placeholder="00000-000"
+                />
+                {errors.address?.zipCode && touched.address?.zipCode && (
+                  <div style={{ color: 'red', fontSize: '12px' }}>
+                    {errors.address.zipCode}
+                  </div>
+                )}
+                
+                <Input 
+                  label="Número" 
+                  name="address.number"
+                  value={values.address.number.toString()}
+                  onChange={handleChange}
+                  placeholder="123"
+                />
+                {errors.address?.number && touched.address?.number && (
+                  <div style={{ color: 'red', fontSize: '12px' }}>
+                    {errors.address.number}
+                  </div>
+                )}
+              </div>
+              
+              <Input 
+                label="Complemento (Opcional)" 
+                name="address.complement"
+                value={values.address.complement || ''}
+                onChange={handleChange}
+                placeholder="Apartamento, casa, etc."
+              />
+              
+              <Button
+                $buttonLightThemeColor="secondary"
+                $buttonTextLightTheme="tertiary"
+                onClick={() => handleSubmit(values)}
+              >
+                Continuar com o pagamento
+              </Button>
+              
+              <Button
+                $buttonLightThemeColor="secondary"
+                $buttonTextLightTheme="tertiary"
+                onClick={() => setCart()}
+              >
+                Voltar para carrinho
+              </Button>
+            </FormStyled>
+          </Form>
+        )}
+      </Formik>
     </>
   )
 }
