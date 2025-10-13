@@ -29,10 +29,10 @@ function PaymentForm() {
     card: {
       name: '',
       number: '',
-      code: 0,
+      code: '',
       expires: {
-        month: 0,
-        year: 0
+        month: '',
+        year: ''
       }
     }
   }
@@ -99,7 +99,6 @@ function PaymentForm() {
                 name="card.name"
                 value={values.card.name}
                 onChange={handleChange}
-                placeholder="Nome como está no cartão"
                 $hasError={!!(errors.card?.name && touched.card?.name)}
               />
             
@@ -111,17 +110,15 @@ function PaymentForm() {
                   value={values.card.number}
                   onChange={handleChange}
                   mask="____ ____ ____ ____"
-                  placeholder="0000 0000 0000 0000"
                   $hasError={!!(errors.card?.number && touched.card?.number)}
                 />
               
                 <Input 
                   label="CVV" 
                   name="card.code"
-                  value={values.card.code.toString()}
+                  value={values.card.code}
                   onChange={handleChange}
                   mask="___"
-                  placeholder="000"
                   $hasError={!!(errors.card?.code && touched.card?.code)}
                 />
 
@@ -131,10 +128,9 @@ function PaymentForm() {
                 <Input 
                   label="Mês de vencimento" 
                   name="card.expires.month"
-                  value={values.card.expires.month.toString()}
+                  value={values.card.expires.month}
                   onChange={handleChange}
                   mask="__"
-                  placeholder="MM"
                   $hasError={!!(errors.card?.expires?.month && touched.card?.expires?.month)}
                 />
 
@@ -142,10 +138,9 @@ function PaymentForm() {
                 <Input 
                   label="Ano de vencimento" 
                   name="card.expires.year"
-                  value={values.card.expires.year.toString()}
+                  value={values.card.expires.year}
                   onChange={handleChange}
                   mask="____"
-                  placeholder="AAAA"
                   $hasError={!!(errors.card?.expires?.year && touched.card?.expires?.year)}
                     />
             

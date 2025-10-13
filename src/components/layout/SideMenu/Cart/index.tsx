@@ -1,5 +1,5 @@
 import * as S from './styles'
-import Button from '../../Button'
+import Button from '../../../ui/Button'
 import Text from '@/components/ui/Text'
 import { CiTrash } from 'react-icons/ci'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'

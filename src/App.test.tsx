@@ -37,7 +37,7 @@ jest.mock('./routes', () => ({
   default: () => <div data-testid="routes">Routes</div>
 }))
 
-jest.mock('./components/ui/SideMenu', () => ({
+jest.mock('./components/layout/SideMenu', () => ({
   __esModule: true,
   default: () => <div data-testid="side-menu">SideMenu</div>
 }))

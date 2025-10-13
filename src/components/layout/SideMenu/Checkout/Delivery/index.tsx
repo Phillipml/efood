@@ -18,7 +18,7 @@ function Delivery() {
       description: '',
       city: '',
       zipCode: '',
-      number: 0,
+      number: '',
       complement: ''
     }
   }
@@ -47,7 +47,6 @@ function Delivery() {
                 name="receiver"
                 value={values.receiver}
                 onChange={handleChange}
-                placeholder="Digite o nome completo"
                 $hasError={!!(errors.receiver && touched.receiver)}
                 />
            
@@ -57,7 +56,6 @@ function Delivery() {
                 name="address.description"
                 value={values.address.description}
                 onChange={handleChange}
-                placeholder="Rua, avenida, etc."
                 $hasError={!!(errors.address?.description && touched.address?.description)}
               />
 
@@ -66,7 +64,6 @@ function Delivery() {
                 name="address.city"
                 value={values.address.city}
                 onChange={handleChange}
-                placeholder="Nome da cidade"
                 $hasError={!!(errors.address?.city && touched.address?.city)}
               />
             
@@ -78,16 +75,14 @@ function Delivery() {
                   value={values.address.zipCode}
                   onChange={handleChange}
                   mask="_____-___"
-                  placeholder="00000-000"
                   $hasError={!!(errors.address?.zipCode && touched.address?.zipCode)}
                 />
             
                 <Input 
                   label="Número" 
                   name="address.number"
-                  value={values.address.number.toString()}
+                  value={values.address.number}
                   onChange={handleChange}
-                  placeholder="123"
                   $hasError={!!(errors.address?.number && touched.address?.number)}
                 />
                 
@@ -98,7 +93,6 @@ function Delivery() {
                 name="address.complement"
                 value={values.address.complement || ''}
                 onChange={handleChange}
-                placeholder="Apartamento, casa, etc."
                 $hasError={!!(errors.address?.complement && touched.address?.complement)}
               />
               

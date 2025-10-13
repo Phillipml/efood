@@ -12,7 +12,7 @@ export const FormStyled = styled.div`
 
   .cep {
     display: flex;
-    ${pxToRem('gap', { lgScreen: 8 })}
+    ${pxToRem('gap', { lgScreen: 32 })}
   }
   button:first-of-type {
     ${pxToRem('margin-top', { lgScreen: 16 })}
