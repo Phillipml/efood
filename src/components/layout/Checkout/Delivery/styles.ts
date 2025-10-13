@@ -1,7 +1,7 @@
 import { pxToRem } from '@/utils/size-utils'
 import styled from 'styled-components'
 
-export const FormStyled = styled.form`
+export const FormStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   > h2 {

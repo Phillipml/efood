@@ -3,12 +3,15 @@ import { OverlayProvider } from './OverlayProvider'
 import { Provider } from 'react-redux'
 import { store } from '@/store'
 import CheckoutProvider from './checkoutProvider'
+import { CheckoutDataProvider } from '@/contexts/checkout-data-context'
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   return (
     <Provider store={store}>
       <OverlayProvider>
-        <CheckoutProvider>{children}</CheckoutProvider>
+        <CheckoutDataProvider>
+          <CheckoutProvider>{children}</CheckoutProvider>
+        </CheckoutDataProvider>
       </OverlayProvider>
     </Provider>
   )

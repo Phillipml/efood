@@ -7,7 +7,7 @@ export const deliverySchema = yup.object({
     .min(2, 'Nome deve ter pelo menos 2 caracteres'),
   
   address: yup.object({
-    descripton: yup
+    description: yup
       .string()
       .required('Endereço é obrigatório')
       .min(5, 'Endereço deve ter pelo menos 5 caracteres'),

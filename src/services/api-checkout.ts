@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export interface Product {
-  product: number
+  id: number
   price: number
 }
 export interface Address {
-  descripton: string
+  description: string
   city: string
   zipCode: string
   number: number
@@ -32,12 +32,15 @@ export interface CheckoutRequest {
   delivery: Delivery
   payment: Payment
 }
-export type CheckoutResponse = unknown
+export interface CheckoutResponse {
+  success: boolean
+  message?: string
+}
 
 export const checkoutApi = createApi({
   reducerPath: 'checkoutApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api-ebac.vercel.app/api/efood/restaurantes'
+    baseUrl: 'https://api-ebac.vercel.app'
   }),
   endpoints: (builder) => ({
     checkout: builder.mutation<CheckoutResponse, CheckoutRequest>({

@@ -1,19 +1,26 @@
-import { Formik, Form } from 'formik'
+import { Formik } from 'formik'
 import Input from '@/components/ui/Input'
 import { FormStyled } from './styles'
 import Text from '@/components/ui/Text'
 import Button from '@/components/ui/Button'
 import { useAppSelector } from '@/store/hooks'
-import { cartTotalPrice } from '@/store/cart/cartSelector'
+import { cartTotalPrice, cartItems } from '@/store/cart/cartSelector'
 import { priceFormatter } from '@/utils/price-utils'
 import { useCheckoutStep } from '@/hooks/useCheckoutStep'
 import type { Payment } from '@/services/api-checkout'
 import { paymentSchema } from '@/utils/validation-schemas'
+import { useCheckoutData } from '@/hooks/useCheckoutData'
+import { useCheckoutMutation } from '@/services/api-checkout'
+import { useState } from 'react'
 
 function PaymentForm() {
   const value = useAppSelector(cartTotalPrice)
+  const items = useAppSelector(cartItems)
   const amount = priceFormatter(value)
   const { setDelivery, setCheckout } = useCheckoutStep()
+  const { checkoutData: savedCheckoutData, setPaymentData } = useCheckoutData()
+  const [checkout, { isLoading }] = useCheckoutMutation()
+  const [isSuccess, setIsSuccess] = useState(false)
   
   const initialValues: Payment = {
     card: {
@@ -27,9 +34,37 @@ function PaymentForm() {
     }
   }
 
-  const handleSubmit = (values: Payment) => {
-    console.log('Dados do pagamento:', values)
-    setCheckout()
+  const handleSubmit = async (values: Payment) => {
+    try {
+      setPaymentData(values)
+      
+      const products = items.map(item => ({
+        id: item.id,
+        price: item.preco
+      }))
+
+      const requestData = {
+        products,
+        delivery: savedCheckoutData.delivery!,
+        payment: values
+      }
+
+      await checkout(requestData).unwrap()
+      
+      setIsSuccess(true)
+      setTimeout(() => {
+        setCheckout()
+      }, 2000)
+    } catch (error: unknown) {
+      console.error('Erro no checkout:', error)
+      const errorObj = error as { data?: { message?: string }; message?: string }
+      const errorMessage = errorObj?.data?.message || errorObj?.message || 'Erro desconhecido no processamento'
+      alert(`Erro: ${errorMessage}`)
+    }
+  }
+
+  const handleFormSubmit = (values: Payment) => {
+    handleSubmit(values)
   }
 
   return (
@@ -37,11 +72,10 @@ function PaymentForm() {
       <Formik
         initialValues={initialValues}
         validationSchema={paymentSchema}
-        onSubmit={handleSubmit}
+        onSubmit={handleFormSubmit}
       >
-        {({ values, errors, touched, handleChange }) => (
-          <Form>
-            <FormStyled>
+        {({ values, errors, touched, handleChange, handleSubmit: formikSubmit }) => (
+          <FormStyled>
               <Text as="title" $lgFontSize="md" $textLightTheme="secondary">
                 Pagamento - Valor a pagar {amount}
               </Text>
@@ -119,13 +153,21 @@ function PaymentForm() {
                 )}
               </div>
 
-              <Button
-                $buttonLightThemeColor="secondary"
-                $buttonTextLightTheme="tertiary"
-                onClick={() => handleSubmit(values)}
+              <button
+                type="button"
+                onClick={() => formikSubmit()}
+                style={{
+                  backgroundColor: '#FF6B35',
+                  color: 'white',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  opacity: isLoading ? 0.7 : 1
+                }}
               >
-                Finalizar pagamento
-              </Button>
+                {isLoading ? 'Processando...' : isSuccess ? 'Pagamento realizado!' : 'Finalizar pagamento'}
+              </button>
               
               <Button
                 $buttonLightThemeColor="secondary"
@@ -134,8 +176,7 @@ function PaymentForm() {
               >
                 Voltar para edição de endereço
               </Button>
-            </FormStyled>
-          </Form>
+          </FormStyled>
         )}
       </Formik>
     </>

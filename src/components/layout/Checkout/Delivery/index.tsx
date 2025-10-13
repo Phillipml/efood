@@ -6,14 +6,16 @@ import Button from '@/components/ui/Button'
 import { useCheckoutStep } from '@/hooks/useCheckoutStep'
 import type { Delivery } from '@/services/api-checkout'
 import { deliverySchema } from '@/utils/validation-schemas'
+import { useCheckoutData } from '@/hooks/useCheckoutData'
 
 function Delivery() {
   const { setCart, setPayment } = useCheckoutStep()
+  const { setDeliveryData } = useCheckoutData()
   
   const initialValues: Delivery = {
     receiver: '',
     address: {
-      descripton: '',
+      description: '',
       city: '',
       zipCode: '',
       number: 0,
@@ -22,7 +24,7 @@ function Delivery() {
   }
 
   const handleSubmit = (values: Delivery) => {
-    console.log('Dados do formulário:', values)
+    setDeliveryData(values)
     setPayment()
   }
 
@@ -55,14 +57,14 @@ function Delivery() {
               
               <Input 
                 label="Endereço" 
-                name="address.descripton"
-                value={values.address.descripton}
+                name="address.description"
+                value={values.address.description}
                 onChange={handleChange}
                 placeholder="Rua, avenida, etc."
               />
-              {errors.address?.descripton && touched.address?.descripton && (
+              {errors.address?.description && touched.address?.description && (
                 <div style={{ color: 'red', fontSize: '12px' }}>
-                  {errors.address.descripton}
+                  {errors.address.description}
                 </div>
               )}
               
