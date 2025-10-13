@@ -6,7 +6,7 @@ import GlobalStyle from './styles/reset'
 import RoutesApp from './routes'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import SideMenu from './components/layout/SideMenu'
+import SideMenu from './components/ui/SideMenu'
 
 function AppContent() {
   const { currentTheme, toggleTheme, isDarkTheme } = useThemeState()

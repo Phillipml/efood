@@ -8,10 +8,11 @@ import Modal from '@/components/ui/Modal'
 import Hero from '@/components/ui/Hero'
 import { useOverlay } from '@/hooks/useOverlay'
 import { ItemsList } from './styles'
-import SideMenu from '@/components/layout/SideMenu'
+import SideMenu from '@/components/ui/SideMenu'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { addItem } from '@/store/cart/cartSlice'
 import { cartItems } from '@/store/cart/cartSelector'
+import { useCheckoutStep } from '@/hooks/useCheckoutStep'
 
 const Restaurant = () => {
   const [restaurant, setRestaurant] = useState<Menu[] | null>(null)
@@ -21,6 +22,7 @@ const Restaurant = () => {
   const { id } = useParams()
   const dispatch = useAppDispatch()
   const cartItemsList = useAppSelector(cartItems)
+  const{setCart}=useCheckoutStep()
 
   useEffect(() => {
     const clientList = async () => {
@@ -50,6 +52,7 @@ const Restaurant = () => {
       descricao: item.descricao,
       porcao: item.porcao
     }
+    setCart()
     const findItem = cartItemsList.some((cartList) => cartList.id === item.id)
     if (!findItem) {
       dispatch(addItem(newItem))

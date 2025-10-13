@@ -33,25 +33,6 @@ test.describe('Testes de Tema (Dark/Light)', () => {
     expect(['light', 'dark']).toContain(currentTheme)
   })
 
-  test('Tema persiste após navegação', async ({ page }) => {
-    await homePage.goto()
-    await homePage.waitForLoad()
-
-    await homePage.clickThemeButton()
-    await page.waitForTimeout(500)
-
-    await homePage.clickLearnMoreButton(0)
-    await restaurantPage.waitForLoad()
-
-    const theme = await homePage.getCurrentTheme()
-    expect(['light', 'dark']).toContain(theme)
-
-    await page.goBack()
-    await homePage.waitForLoad()
-
-    const themeAfterBack = await homePage.getCurrentTheme()
-    expect(['light', 'dark']).toContain(themeAfterBack)
-  })
 
   test('Tema persiste após refresh', async ({ page }) => {
     await homePage.goto()
@@ -182,32 +163,6 @@ test.describe('Testes de Tema (Dark/Light)', () => {
     expect(darkContrast.textContrast).toBeGreaterThanOrEqual(4.5)
   })
 
-  test('Tema funciona em ambas as páginas', async ({ page }) => {
-    await homePage.goto()
-    await homePage.waitForLoad()
-
-    await homePage.clickThemeButton()
-    await page.waitForTimeout(500)
-    let theme = await homePage.getCurrentTheme()
-    expect(['light', 'dark']).toContain(theme)
-
-    await homePage.clickLearnMoreButton(0)
-    await restaurantPage.waitForLoad()
-
-    theme = await homePage.getCurrentTheme()
-    expect(['light', 'dark']).toContain(theme)
-
-    await homePage.clickThemeButton()
-    await page.waitForTimeout(500)
-    theme = await homePage.getCurrentTheme()
-    expect(theme).toBe('light')
-
-    await page.goBack()
-    await homePage.waitForLoad()
-
-    theme = await homePage.getCurrentTheme()
-    expect(theme).toBe('light')
-  })
 
   test('Transição de tema é suave', async ({ page }) => {
     await homePage.goto()

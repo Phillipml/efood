@@ -11,6 +11,7 @@ export type ButtonTypes = {
   $lgButtonPercent?: number
   $mdButtonPercent?: number
   $smButtonPercent?: number
+  type?: 'button' | 'submit'
   onClick?: () => void
 } & FontSizeProps
 const Button = ({
@@ -27,10 +28,12 @@ const Button = ({
   $buttonTextColor = 'secondary',
   $buttonTextDarkTheme,
   $buttonTextLightTheme,
+  type='button',
   onClick
 }: ButtonTypes) => {
   return (
     <ButtonStyled
+    type={type}
       $lgFontSize={$lgFontSize}
       $mdFontSize={$mdFontSize}
       $smFontSize={$smFontSize}

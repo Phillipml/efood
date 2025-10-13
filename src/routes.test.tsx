@@ -1,33 +1,17 @@
-import { screen, fireEvent, cleanup } from '@testing-library/react'
+import { screen, fireEvent, cleanup, waitFor } from '@testing-library/react'
 import RoutesApp from './routes'
 import { renderWithProviders } from './utils/test-utils'
+import { GetData } from '@/services/api'
+import CheckoutProvider from '@/providers/CheckoutProvider'
+
+global.console.error = jest.fn()
+global.alert = jest.fn()
+
+const mockGetData = GetData as jest.MockedFunction<typeof GetData>
 
 jest.mock('@/services/api', () => ({
-  GetData: jest.fn(() =>
-    Promise.resolve([
-      {
-        id: 1,
-        titulo: 'Restaurante Teste',
-        destacado: true,
-        tipo: 'Italiana',
-        avaliacao: 4.5,
-        descricao: 'Descrição do restaurante',
-        capa: 'https://example.com/capa.jpg',
-        cardapio: [
-          {
-            id: 1,
-            nome: 'Prato Teste',
-            descricao: 'Descrição do prato',
-            foto: 'https://example.com/prato.jpg',
-            preco: 25.9,
-            porcao: 'Serve 2 pessoas'
-          }
-        ]
-      }
-    ])
-  )
+  GetData: jest.fn()
 }))
-
 const mockNavigate = jest.fn()
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -88,12 +72,37 @@ jest.mock('@/components/ui/Modal', () => {
 })
 
 describe('Routes', () => {
+  const mockRestaurantData = [
+    {
+      id: 1,
+      titulo: 'Restaurante Teste',
+      destacado: true,
+      tipo: 'Italiana',
+      avaliacao: 4.5,
+      descricao: 'Descrição do restaurante',
+      capa: 'https://example.com/capa.jpg',
+      cardapio: [
+        {
+          id: 1,
+          nome: 'Prato Teste',
+          descricao: 'Descrição do prato',
+          foto: 'https://example.com/prato.jpg',
+          preco: 25.9,
+          porcao: 'Serve 2 pessoas'
+        }
+      ]
+    }
+  ]
+
   beforeEach(() => {
     jest.clearAllMocks()
+    mockGetData.mockResolvedValue(mockRestaurantData)
+    jest.spyOn(console, 'error').mockImplementation(() => {})
   })
 
   afterEach(() => {
     cleanup()
+    jest.restoreAllMocks()
   })
 
   describe('Renderização das rotas', () => {
@@ -110,7 +119,12 @@ describe('Routes', () => {
     })
 
     it('renderiza rota restaurant corretamente', async () => {
-      renderWithProviders(<RoutesApp />, ['/restaurant/1'])
+      renderWithProviders(
+        <CheckoutProvider>
+          <RoutesApp />
+        </CheckoutProvider>, 
+        ['/restaurant/1']
+      )
 
       await screen.findByTestId('card')
 
@@ -120,24 +134,56 @@ describe('Routes', () => {
       )
       expect(screen.getByTestId('hero')).toBeInTheDocument()
     })
-  })
 
-  describe('Navegação entre rotas', () => {
-    it('navega entre rotas corretamente', async () => {
+    it('renderiza múltiplos restaurantes na home', async () => {
+      const multipleRestaurants = [
+        ...mockRestaurantData,
+        {
+          id: 2,
+          titulo: 'Restaurante 2',
+          destacado: false,
+          tipo: 'Japonesa',
+          avaliacao: 4.8,
+          descricao: 'Descrição do restaurante 2',
+          capa: 'https://example.com/capa2.jpg',
+          cardapio: []
+        }
+      ]
+      
+      mockGetData.mockResolvedValueOnce(multipleRestaurants)
+      
       renderWithProviders(<RoutesApp />, ['/'])
 
       await screen.findByTestId('card-list')
 
-      expect(screen.getByTestId('card-button')).toHaveTextContent('Saiba Mais')
+      const cards = screen.getAllByTestId('card')
+      expect(cards).toHaveLength(2)
+      expect(screen.getByText('Restaurante Teste')).toBeInTheDocument()
+      expect(screen.getByText('Restaurante 2')).toBeInTheDocument()
+    })
+  })
+
+  describe('Navegação entre rotas', () => {
+    it('navega para restaurant quando clica no botão Saiba Mais', async () => {
+      renderWithProviders(<RoutesApp />, ['/'])
+
+      await screen.findByTestId('card-list')
 
       const button = screen.getByTestId('card-button')
+      expect(button).toHaveTextContent('Saiba Mais')
+
       fireEvent.click(button)
 
-      expect(screen.getByTestId('card-button')).toHaveTextContent('Saiba Mais')
+      expect(mockNavigate).toHaveBeenCalledWith('/restaurant/1')
     })
 
-    it('navega para restaurant via URL', async () => {
-      renderWithProviders(<RoutesApp />, ['/restaurant/1'])
+    it('renderiza página restaurant quando acessa via URL', async () => {
+      renderWithProviders(
+        <CheckoutProvider>
+          <RoutesApp />
+        </CheckoutProvider>, 
+        ['/restaurant/1']
+      )
 
       await screen.findByTestId('card')
 
@@ -147,7 +193,7 @@ describe('Routes', () => {
       expect(screen.getByTestId('hero')).toBeInTheDocument()
     })
 
-    it('navega para home via URL', async () => {
+    it('renderiza página home quando acessa via URL', async () => {
       renderWithProviders(<RoutesApp />, ['/'])
 
       await screen.findByTestId('card-list')
@@ -157,18 +203,14 @@ describe('Routes', () => {
   })
 
   describe('Comportamento das rotas', () => {
-    it('renderiza rota padrão (home) quando acessa rota inválida', async () => {
-      const consoleSpy = jest
-        .spyOn(console, 'warn')
-        .mockImplementation(() => {})
-
+    it('renderiza página 404 para rota inválida', async () => {
       renderWithProviders(<RoutesApp />, ['/invalid-route'])
 
-      expect(screen.queryByTestId('card-list')).not.toBeInTheDocument()
-
-      consoleSpy.mockRestore()
+      await waitFor(() => {
+        expect(screen.queryByTestId('card-list')).not.toBeInTheDocument()
+        expect(screen.queryByTestId('card')).not.toBeInTheDocument()
+      })
     })
-
 
     it('testa carregamento inicial na página home', async () => {
       renderWithProviders(<RoutesApp />, ['/'])
@@ -180,12 +222,18 @@ describe('Routes', () => {
     })
 
     it('testa carregamento inicial na página restaurant', async () => {
-      renderWithProviders(<RoutesApp />, ['/restaurant/1'])
+      renderWithProviders(
+        <CheckoutProvider>
+          <RoutesApp />
+        </CheckoutProvider>, 
+        ['/restaurant/1']
+      )
 
       expect(screen.getByTestId('loading')).toBeInTheDocument()
 
       await screen.findByTestId('card')
       expect(screen.queryByTestId('loading')).not.toBeInTheDocument()
     })
+
   })
 })

@@ -3,23 +3,11 @@ import { setColor } from '@/utils/color-utils'
 import { pxToRem } from '@/utils/size-utils'
 import styled, { css } from 'styled-components'
 
-export const SideMenuStyled = styled.aside`
-  ${pxToRem('width', { lgScreen: 360 })}
-  height: 100vh;
-  ${pxToRem('padding', { lgScreen: 8 })};
-  ${({ theme }) => css`
-    background-color: ${setColor(theme, {
-      light: 'tertiary',
-      dark: 'secondary'
-    })};
-  `}
-`
 export const CartWrapper = styled.div`
   display: grid;
   ${pxToRem('gap', { lgScreen: 8 })}
   ${pxToRem('padding-top', { lgScreen: 16 })}
   ${pxToRem('padding-bottom', { lgScreen: 32 })}
-  
 `
 export const CartItem = styled(ModalContent)`
   ${pxToRem('padding', { lgScreen: 8 })}
