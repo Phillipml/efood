@@ -1,6 +1,7 @@
 import { screen, waitFor } from '@testing-library/react'
 import Restaurant from './index'
 import { renderWithProviders } from '@/utils/__mocks__/render-utils'
+import CheckoutProvider from '@/providers/checkoutProvider'
 
 const mockData = {
   id: 1,
@@ -59,7 +60,11 @@ describe('Restaurant Page', () => {
   })
 
   it('mostra título do restaurante', async () => {
-    renderWithProviders(<Restaurant />)
+    renderWithProviders(
+      <CheckoutProvider>
+        <Restaurant />
+      </CheckoutProvider>
+    )
 
     await waitFor(() => {
       expect(screen.getByText('Restaurante Teste')).toBeInTheDocument()
@@ -67,7 +72,12 @@ describe('Restaurant Page', () => {
   })
 
   it('mostra botões de adicionar ao carrinho', async () => {
-    renderWithProviders(<Restaurant />)
+
+    renderWithProviders(
+      <CheckoutProvider>
+        <Restaurant />
+      </CheckoutProvider>
+    )
 
     await waitFor(() => {
       expect(screen.queryByTestId('loading-container')).not.toBeInTheDocument()

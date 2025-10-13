@@ -1,8 +1,22 @@
 import Text from '@/components/ui/Text'
 import { CheckoutText } from './styles'
 import Button from '@/components/ui/Button'
+import { useAppDispatch } from '@/store/hooks'
+import { clearCart } from '@/store/cart/cartSlice'
+import { useOverlay } from '@/hooks/useOverlay'
+import { useCheckoutStep } from '@/hooks/useCheckoutStep'
 
 function Checkout() {
+  const dispatch =useAppDispatch()
+  const {setCart} = useCheckoutStep()
+  const {hideOverlay} = useOverlay()
+
+  const confirmationHandle = () => {
+    dispatch(clearCart())
+    setCart()
+    hideOverlay()
+  }
+
   return (
     <CheckoutText>
       <Text as="title" $lgFontSize="md">
@@ -29,6 +43,7 @@ function Checkout() {
       <Button
         $buttonLightThemeColor="secondary"
         $buttonTextLightTheme="tertiary"
+        onClick={confirmationHandle}
       >
         Concluir
       </Button>
