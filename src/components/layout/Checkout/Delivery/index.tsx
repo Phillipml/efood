@@ -4,7 +4,7 @@ import { FormStyled } from './styles'
 import Text from '@/components/ui/Text'
 import Button from '@/components/ui/Button'
 import { useCheckoutStep } from '@/hooks/useCheckoutStep'
-import type { Delivery } from '@/services/api-checkout'
+import type { Delivery as DeliveryType } from '@/services/api-checkout'
 import { deliverySchema } from '@/utils/validation-schemas'
 import { useCheckoutData } from '@/hooks/useCheckoutData'
 
@@ -12,7 +12,7 @@ function Delivery() {
   const { setCart, setPayment } = useCheckoutStep()
   const { setDeliveryData } = useCheckoutData()
   
-  const initialValues: Delivery = {
+  const initialValues: DeliveryType = {
     receiver: '',
     address: {
       description: '',
@@ -23,11 +23,11 @@ function Delivery() {
     }
   }
 
-  const handleSubmit = (values: Delivery) => {
+  const handleSubmit = (values: DeliveryType) => {
     setDeliveryData(values)
     setPayment()
   }
-
+  
   return (
     <>
       <Formik
@@ -35,10 +35,10 @@ function Delivery() {
         validationSchema={deliverySchema}
         onSubmit={handleSubmit}
       >
-        {({ values, errors, touched, handleChange }) => (
+        {({ values, errors, touched, handleChange, handleSubmit: formikSubmit }) => (
           <Form>
             <FormStyled>
-              <Text as="title" $lgFontSize="md">
+              <Text as="title" $lgFontSize="md" $textLightTheme='secondary'>
                 Entrega
               </Text>
               
@@ -48,12 +48,9 @@ function Delivery() {
                 value={values.receiver}
                 onChange={handleChange}
                 placeholder="Digite o nome completo"
-              />
-              {errors.receiver && touched.receiver && (
-                <div style={{ color: 'red', fontSize: '12px' }}>
-                  {errors.receiver}
-                </div>
-              )}
+                $hasError={!!(errors.receiver && touched.receiver)}
+                />
+           
               
               <Input 
                 label="Endereço" 
@@ -61,25 +58,18 @@ function Delivery() {
                 value={values.address.description}
                 onChange={handleChange}
                 placeholder="Rua, avenida, etc."
+                $hasError={!!(errors.address?.description && touched.address?.description)}
               />
-              {errors.address?.description && touched.address?.description && (
-                <div style={{ color: 'red', fontSize: '12px' }}>
-                  {errors.address.description}
-                </div>
-              )}
-              
+
               <Input 
                 label="Cidade" 
                 name="address.city"
                 value={values.address.city}
                 onChange={handleChange}
                 placeholder="Nome da cidade"
+                $hasError={!!(errors.address?.city && touched.address?.city)}
               />
-              {errors.address?.city && touched.address?.city && (
-                <div style={{ color: 'red', fontSize: '12px' }}>
-                  {errors.address.city}
-                </div>
-              )}
+            
               
               <div className="cep">
                 <Input 
@@ -89,25 +79,18 @@ function Delivery() {
                   onChange={handleChange}
                   mask="_____-___"
                   placeholder="00000-000"
+                  $hasError={!!(errors.address?.zipCode && touched.address?.zipCode)}
                 />
-                {errors.address?.zipCode && touched.address?.zipCode && (
-                  <div style={{ color: 'red', fontSize: '12px' }}>
-                    {errors.address.zipCode}
-                  </div>
-                )}
-                
+            
                 <Input 
                   label="Número" 
                   name="address.number"
                   value={values.address.number.toString()}
                   onChange={handleChange}
                   placeholder="123"
+                  $hasError={!!(errors.address?.number && touched.address?.number)}
                 />
-                {errors.address?.number && touched.address?.number && (
-                  <div style={{ color: 'red', fontSize: '12px' }}>
-                    {errors.address.number}
-                  </div>
-                )}
+                
               </div>
               
               <Input 
@@ -116,12 +99,13 @@ function Delivery() {
                 value={values.address.complement || ''}
                 onChange={handleChange}
                 placeholder="Apartamento, casa, etc."
+                $hasError={!!(errors.address?.complement && touched.address?.complement)}
               />
               
               <Button
                 $buttonLightThemeColor="secondary"
                 $buttonTextLightTheme="tertiary"
-                onClick={() => handleSubmit(values)}
+                onClick={() => formikSubmit()}
               >
                 Continuar com o pagamento
               </Button>
@@ -131,7 +115,7 @@ function Delivery() {
                 $buttonTextLightTheme="tertiary"
                 onClick={() => setCart()}
               >
-                Voltar para carrinho
+                Voltar para o carrinho
               </Button>
             </FormStyled>
           </Form>

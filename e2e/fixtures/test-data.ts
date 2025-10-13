@@ -5,8 +5,8 @@ export const TEST_DATA = {
 
   TEXTS: {
     HOME: {
-      TITLE: 'Hioki Sushi',
-      SUBTITLE: 'Peça já o melhor da culinária japonesa',
+      TITLE: 'Bella Tavola Italiana',
+      SUBTITLE: 'Peça já o melhor da culinária italiana',
       LOGO_ALT: 'logo'
     },
     RESTAURANT: {
@@ -26,8 +26,8 @@ export const TEST_DATA = {
     FOOTER: 'footer',
     LOGO: 'img[alt*="logo"], img[alt*="Logo"]',
     THEME_BUTTON: 'button.sc-bRKDuR',
-    CARD_LIST: 'div:has-text("Hioki Sushi")',
-    CARD: 'div:has-text("Hioki Sushi")',
+    CARD_LIST: 'div:has-text("Bella Tavola Italiana")',
+    CARD: 'div:has-text("Bella Tavola Italiana")',
     RESTAURANT_HEADER: 'header',
     CART_COUNTER: 'text=/carrinho/',
     ADD_BUTTON: 'button:has-text("Adicionar")',
@@ -37,16 +37,16 @@ export const TEST_DATA = {
   RESTAURANTS: [
     {
       id: '1',
-      name: 'Restaurante La Dolce Vita',
-      rating: 4.8,
-      description: 'Culinária italiana autêntica',
+      name: 'Bella Tavola Italiana',
+      rating: 4.7,
+      description: 'A paixão dos nossos talentosos chefs pela cozinha italiana é evidente em cada prato, desde massas caseiras e risotos cremosos até suculentos frutos do mar e carnes tenras. Nosso menu é complementado por uma excelente carta de vinhos, cuidadosamente selecionados para harmonizar com a riqueza dos sabores italianos.',
       image: '/images/laDolce.png'
     },
     {
       id: '2',
-      name: 'Sushi Hioki',
+      name: 'Hioki Sushi',
       rating: 4.9,
-      description: 'Sushi fresco e tradicional',
+      description: 'Peça já o melhor da culinária japonesa no delivery. Da nossa cozinha para a sua casa, frescor, sabor e qualidade em cada pedaço.',
       image: '/images/hioki.png'
     }
   ],

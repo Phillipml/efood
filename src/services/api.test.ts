@@ -19,7 +19,7 @@ describe('API Service', () => {
     await GetData()
 
     expect(mockFetch).toHaveBeenCalledWith(
-      'https://ebac-fake-api.vercel.app/api/efood/restaurantes'
+      "https://api-ebac.vercel.app/api/efood/restaurantes"
     )
     expect(mockFetch).toHaveBeenCalledTimes(1)
   })

@@ -35,6 +35,7 @@ export interface CheckoutRequest {
 export interface CheckoutResponse {
   success: boolean
   message?: string
+  orderId?: string
 }
 
 export const checkoutApi = createApi({

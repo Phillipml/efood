@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { CheckoutDataContext } from '@/contexts/checkout-data-context'
+import { CheckoutDataContext } from '../contexts/checkout-data-context'
 
 export function useCheckoutData() {
   const context = useContext(CheckoutDataContext)

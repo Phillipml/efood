@@ -1,19 +1,6 @@
-import { createContext, useState, type ReactNode } from 'react'
-import type { Delivery, Payment } from '@/services/api-checkout'
-
-interface CheckoutData {
-  delivery?: Delivery
-  payment?: Payment
-}
-
-interface CheckoutDataContextType {
-  checkoutData: CheckoutData
-  setDeliveryData: (delivery: Delivery) => void
-  setPaymentData: (payment: Payment) => void
-  clearCheckoutData: () => void
-}
-
-export const CheckoutDataContext = createContext<CheckoutDataContextType | undefined>(undefined)
+import { useState, type ReactNode } from 'react'
+import { CheckoutDataContext, type CheckoutData } from './checkout-data-context'
+import type { Delivery, Payment } from '../services/api-checkout'
 
 export function CheckoutDataProvider({ children }: { children: ReactNode }) {
   const [checkoutData, setCheckoutData] = useState<CheckoutData>({})
@@ -26,6 +13,10 @@ export function CheckoutDataProvider({ children }: { children: ReactNode }) {
     setCheckoutData(prev => ({ ...prev, payment }))
   }
 
+  const setOrderId = (orderId: string) => {
+    setCheckoutData(prev => ({ ...prev, orderId }))
+  }
+
   const clearCheckoutData = () => {
     setCheckoutData({})
   }
@@ -35,6 +26,7 @@ export function CheckoutDataProvider({ children }: { children: ReactNode }) {
       checkoutData,
       setDeliveryData,
       setPaymentData,
+      setOrderId,
       clearCheckoutData
     }}>
       {children}

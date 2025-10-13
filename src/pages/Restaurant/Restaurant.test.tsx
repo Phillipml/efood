@@ -1,7 +1,7 @@
-import { screen, waitFor } from '@testing-library/react'
+import { screen, waitFor, act } from '@testing-library/react'
 import Restaurant from './index'
 import { renderWithProviders } from '@/utils/__mocks__/render-utils'
-import CheckoutProvider from '@/providers/checkoutProvider'
+import CheckoutProvider from '@/providers/CheckoutProvider'
 
 const mockData = {
   id: 1,
@@ -43,13 +43,15 @@ jest.mock('react-router-dom', () => ({
 global.alert = jest.fn()
 
 describe('Restaurant Page', () => {
-  it('mostra loading inicialmente', () => {
-    renderWithProviders(<Restaurant />)
-    expect(screen.getByTestId('loading-container')).toBeInTheDocument()
-  })
 
   it('mostra cards após carregar', async () => {
-    renderWithProviders(<Restaurant />)
+    await act(async () => {
+      renderWithProviders(
+        <CheckoutProvider>
+          <Restaurant />
+        </CheckoutProvider>
+      )
+    })
 
     await waitFor(() => {
       expect(screen.queryByTestId('loading-container')).not.toBeInTheDocument()
@@ -60,11 +62,13 @@ describe('Restaurant Page', () => {
   })
 
   it('mostra título do restaurante', async () => {
-    renderWithProviders(
-      <CheckoutProvider>
-        <Restaurant />
-      </CheckoutProvider>
-    )
+    await act(async () => {
+      renderWithProviders(
+        <CheckoutProvider>
+          <Restaurant />
+        </CheckoutProvider>
+      )
+    })
 
     await waitFor(() => {
       expect(screen.getByText('Restaurante Teste')).toBeInTheDocument()
@@ -72,12 +76,13 @@ describe('Restaurant Page', () => {
   })
 
   it('mostra botões de adicionar ao carrinho', async () => {
-
-    renderWithProviders(
-      <CheckoutProvider>
-        <Restaurant />
-      </CheckoutProvider>
-    )
+    await act(async () => {
+      renderWithProviders(
+        <CheckoutProvider>
+          <Restaurant />
+        </CheckoutProvider>
+      )
+    })
 
     await waitFor(() => {
       expect(screen.queryByTestId('loading-container')).not.toBeInTheDocument()

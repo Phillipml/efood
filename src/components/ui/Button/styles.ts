@@ -38,6 +38,7 @@ export const ButtonStyled = styled.button<Omit<ButtonTypes, 'children'>>`
       dark: $buttonTextDarkTheme,
       light: $buttonTextLightTheme
     })}
+
   `}
   padding: 4px 6px;
   font-weight: bold;

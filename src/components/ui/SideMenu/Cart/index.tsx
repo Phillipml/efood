@@ -63,9 +63,9 @@ function Cart() {
       <Button
         $buttonLightThemeColor="secondary"
         $buttonTextLightTheme="tertiary"
-        onClick={() => setDelivery()}
+        onClick={() => cart.length > 0 ? setDelivery() : null}
       >
-        Continuar com a entrega
+        {cart.length > 0 ? 'Continuar com a entrega' : 'Adicione itens ao carrinho'}
       </Button>
     </>
   )

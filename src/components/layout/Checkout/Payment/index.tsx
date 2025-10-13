@@ -12,16 +12,19 @@ import { paymentSchema } from '@/utils/validation-schemas'
 import { useCheckoutData } from '@/hooks/useCheckoutData'
 import { useCheckoutMutation } from '@/services/api-checkout'
 import { useState } from 'react'
+import { BeatLoader } from 'react-spinners'
+import { useTheme } from 'styled-components'
+import { setColor } from '@/utils/color-utils'
 
 function PaymentForm() {
   const value = useAppSelector(cartTotalPrice)
   const items = useAppSelector(cartItems)
   const amount = priceFormatter(value)
   const { setDelivery, setCheckout } = useCheckoutStep()
-  const { checkoutData: savedCheckoutData, setPaymentData } = useCheckoutData()
+  const { checkoutData: savedCheckoutData, setPaymentData, setOrderId } = useCheckoutData()
   const [checkout, { isLoading }] = useCheckoutMutation()
   const [isSuccess, setIsSuccess] = useState(false)
-  
+  const theme = useTheme()
   const initialValues: Payment = {
     card: {
       name: '',
@@ -32,6 +35,11 @@ function PaymentForm() {
         year: 0
       }
     }
+  }
+  const color = ()=>{
+    const getColor = setColor(theme, { light: 'tertiary', dark: 'secondary' })
+    const returnColor = getColor?.replace(';', '')
+    return returnColor
   }
 
   const handleSubmit = async (values: Payment) => {
@@ -49,7 +57,13 @@ function PaymentForm() {
         payment: values
       }
 
-      await checkout(requestData).unwrap()
+      const response = await checkout(requestData).unwrap()
+      
+   
+      
+      if (response && response.orderId) {
+        setOrderId(response.orderId)
+      }
       
       setIsSuccess(true)
       setTimeout(() => {
@@ -86,12 +100,9 @@ function PaymentForm() {
                 value={values.card.name}
                 onChange={handleChange}
                 placeholder="Nome como está no cartão"
+                $hasError={!!(errors.card?.name && touched.card?.name)}
               />
-              {errors.card?.name && touched.card?.name && (
-                <div style={{ color: 'red', fontSize: '12px' }}>
-                  {errors.card.name}
-                </div>
-              )}
+            
               
               <div className="card-number">
                 <Input 
@@ -101,13 +112,9 @@ function PaymentForm() {
                   onChange={handleChange}
                   mask="____ ____ ____ ____"
                   placeholder="0000 0000 0000 0000"
+                  $hasError={!!(errors.card?.number && touched.card?.number)}
                 />
-                {errors.card?.number && touched.card?.number && (
-                  <div style={{ color: 'red', fontSize: '12px' }}>
-                    {errors.card.number}
-                  </div>
-                )}
-                
+              
                 <Input 
                   label="CVV" 
                   name="card.code"
@@ -115,12 +122,9 @@ function PaymentForm() {
                   onChange={handleChange}
                   mask="___"
                   placeholder="000"
+                  $hasError={!!(errors.card?.code && touched.card?.code)}
                 />
-                {errors.card?.code && touched.card?.code && (
-                  <div style={{ color: 'red', fontSize: '12px' }}>
-                    {errors.card.code}
-                  </div>
-                )}
+
               </div>
               
               <div className="card-data">
@@ -131,12 +135,9 @@ function PaymentForm() {
                   onChange={handleChange}
                   mask="__"
                   placeholder="MM"
+                  $hasError={!!(errors.card?.expires?.month && touched.card?.expires?.month)}
                 />
-                {errors.card?.expires?.month && touched.card?.expires?.month && (
-                  <div style={{ color: 'red', fontSize: '12px' }}>
-                    {errors.card.expires.month}
-                  </div>
-                )}
+
                 
                 <Input 
                   label="Ano de vencimento" 
@@ -145,36 +146,27 @@ function PaymentForm() {
                   onChange={handleChange}
                   mask="____"
                   placeholder="AAAA"
-                />
-                {errors.card?.expires?.year && touched.card?.expires?.year && (
-                  <div style={{ color: 'red', fontSize: '12px' }}>
-                    {errors.card.expires.year}
-                  </div>
-                )}
+                  $hasError={!!(errors.card?.expires?.year && touched.card?.expires?.year)}
+                    />
+            
               </div>
 
-              <button
-                type="button"
+              <Button
+                $buttonLightThemeColor="secondary"
+                $buttonTextDarkTheme="secondary"
+                $buttonTextLightTheme="tertiary"
                 onClick={() => formikSubmit()}
-                style={{
-                  backgroundColor: '#FF6B35',
-                  color: 'white',
-                  border: 'none',
-                  padding: '12px 24px',
-                  borderRadius: '8px',
-                  cursor: isLoading ? 'not-allowed' : 'pointer',
-                  opacity: isLoading ? 0.7 : 1
-                }}
+               
               >
-                {isLoading ? 'Processando...' : isSuccess ? 'Pagamento realizado!' : 'Finalizar pagamento'}
-              </button>
+                {isLoading ||  isSuccess ? <BeatLoader color={color()} />: 'Finalizar pagamento'}
+              </Button>
               
               <Button
                 $buttonLightThemeColor="secondary"
                 $buttonTextLightTheme="tertiary"
                 onClick={() => setDelivery()}
               >
-                Voltar para edição de endereço
+                Voltar para a edição de endereço
               </Button>
           </FormStyled>
         )}

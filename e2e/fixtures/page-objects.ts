@@ -17,9 +17,8 @@ export class HomePage {
     this.footer = page.locator('footer')
     this.logo = page.locator('img[alt*="logo"], img[alt*="Logo"]').first()
     this.themeButton = page
-      .locator('button')
-      .filter({ hasText: /theme|Theme|🌙|☀️/ })
-      .or(page.locator('button[style*="position: fixed"]'))
+      .locator('button[style*="position: fixed"]')
+      .or(page.locator('button').filter({ hasText: /🌙|☀️/ }))
       .or(page.locator('button').last())
     this.cardList = page.locator('[data-testid="card-list"]')
     this.cards = page.locator('[data-testid="card"]')
@@ -42,7 +41,7 @@ export class HomePage {
   }
 
   async clickLearnMoreButton(index: number = 0) {
-    await this.learnMoreButtons.nth(index).click()
+    await this.learnMoreButtons.nth(index).click({ timeout: 10000 })
   }
 
   async getCardCount() {
