@@ -23,9 +23,12 @@ export const deliverySchema = yup.object({
       .matches(/^\d{5}-?\d{3}$/, 'CEP deve ter formato 00000-000'),
     
     number: yup
-      .number()
+      .string()
       .required()
-      .min(1, 'Número deve ser maior que 0'),
+      .matches(/^\d+$/, 'Número deve conter apenas dígitos')
+      .test('min-value', 'Número deve ser maior que 0', (value) => {
+        return value ? parseInt(value) > 0 : false
+      }),
     
     complement: yup.string()
   })
@@ -44,22 +47,20 @@ export const paymentSchema = yup.object({
       .matches(/^\d{4}\s\d{4}\s\d{4}\s\d{4}$/, 'Número do cartão deve ter formato 0000 0000 0000 0000'),
     
     code: yup
-      .number()
+      .string()
       .required()
-      .min(100, 'CVV deve ter 3 dígitos')
-      .max(999, 'CVV deve ter 3 dígitos'),
+      .matches(/^\d{3}$/, 'CVV deve ter 3 dígitos'),
     
     expires: yup.object({
       month: yup
-        .number()
+        .string()
         .required()
-        .min(1, 'Mês deve ser entre 1 e 12')
-        .max(12, 'Mês deve ser entre 1 e 12'),
+        .matches(/^(0[1-9]|1[0-2])$/, 'Mês deve ser entre 01 e 12'),
       
       year: yup
-        .number()
+        .string()
         .required()
-        .min(2024, 'Ano deve ser 2024 ou superior')
+        .matches(/^(202[4-9]|20[3-9]\d|2[1-9]\d{2})$/, 'Ano deve ser 2024 ou superior')
     })
   })
 })

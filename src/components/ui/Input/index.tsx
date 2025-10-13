@@ -8,7 +8,7 @@ interface InputProps {
   value?: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   name?: string
-  placeholder?: string
+
   $hasError?: boolean
 }
 
@@ -18,7 +18,6 @@ function Input({
   value = '', 
   onChange, 
   name,
-  placeholder,
   $hasError = false
 }: InputProps) {
   const inputRef = useMask({
@@ -45,7 +44,7 @@ function Input({
         value={value}
         onChange={onChange}
         name={name}
-        placeholder={placeholder}
+
         $hasError={$hasError}
       />
     </InputWraper>

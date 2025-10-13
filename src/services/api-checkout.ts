@@ -8,7 +8,7 @@ export interface Address {
   description: string
   city: string
   zipCode: string
-  number: number
+  number: string
   complement?: string
 }
 export interface Delivery {
@@ -18,10 +18,10 @@ export interface Delivery {
 export interface Card {
   name: string
   number: string
-  code: number
+  code: string
   expires: {
-    month: number
-    year: number
+    month: string
+    year: string
   }
 }
 export interface Payment {
