@@ -14,6 +14,6 @@
       "@services/*": ["src/services/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "./.eslint.*", "jest.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "./.eslint.*", "src/jest.d.ts"],
   "extends": "./tsconfig.app.json"
 }
