@@ -5,12 +5,14 @@ Uma aplicação moderna de delivery de comida construída com React, TypeScript 
 ## 📸 Screenshots
 
 ### 🌞 Tema Claro
-![Screenshot Tema Claro](./public/screenshotLightTheme.png)
-*Interface do eFood em tema claro com catálogo de restaurantes*
+
+![Screenshot Tema Claro](https://raw.githubusercontent.com/Phillipml/efood/main/public/screenshotLightTheme.png)
+_Interface do eFood em tema claro com catálogo de restaurantes_
 
 ### 🌙 Tema Escuro
-![Screenshot Tema Escuro](./public/screenshotDarkTheme.png)
-*Interface do eFood em tema escuro com sistema de delivery*
+
+![Screenshot Tema Escuro](https://raw.githubusercontent.com/Phillipml/efood/main/public/screenshotDarkTheme.png)
+_Interface do eFood em tema escuro com sistema de delivery_
 
 ## 🚀 Funcionalidades
 
@@ -45,17 +47,20 @@ Uma aplicação moderna de delivery de comida construída com React, TypeScript 
 ## 🚀 Como Executar
 
 1. **Clone o repositório**
+
    ```bash
    git clone <url-do-repositorio>
    cd efood
    ```
 
 2. **Instale as dependências**
+
    ```bash
    npm install
    ```
 
 3. **Execute o projeto em modo de desenvolvimento**
+
    ```bash
    npm run dev
    ```
@@ -100,18 +105,21 @@ src/
 ## 🏪 Funcionalidades do Delivery
 
 ### 🍽️ **Catálogo de Restaurantes**
+
 - Lista dinâmica de estabelecimentos
 - Sistema de tags (Destaque da semana, tipo de comida)
 - Ratings opcionais por restaurante
 - Navegação fluida entre páginas
 
 ### 🛒 **Sistema de Carrinho**
+
 - Adicionar/remover itens do cardápio
 - Cálculo automático de valores
 - Persistência do estado
 - Checkout integrado
 
 ### 🎨 **Sistema de Temas**
+
 - Toggle entre tema claro/escuro
 - Persistência da preferência
 - Componentes adaptáveis
