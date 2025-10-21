@@ -1,7 +1,8 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { HeaderWrapper, Container } from '../styles'
-import { pxToRem } from '@/utils/size-utils'
+import { FontSize, pxToRem } from '@/utils/size-utils'
 import { mobile } from '@/styles/breakpoints'
+import { setColor } from '@/utils/color-utils'
 
 export const HeaderRestaurantWrap = styled(HeaderWrapper)`
   ${pxToRem('height', { lgScreen: 186 })};
@@ -28,6 +29,19 @@ export const RestaurantContainer = styled(Container)`
 
   img {
     margin: 0 auto;
+  }
+  button {
+    ${({ theme }) => css`
+      color: ${setColor(theme, {
+          unique: 'tertiary',
+          dark: 'primary'
+        })}
+        ${FontSize({ lgScreen: 'lg' })};
+      font-weight: bold;
+      border: unset;
+      background-color: transparent;
+      cursor: pointer;
+    `}
   }
 
   ${mobile} {

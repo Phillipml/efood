@@ -3,8 +3,12 @@ import Text from '@/components/ui/Text'
 import { HeaderRestaurantWrap, RestaurantContainer } from './styles'
 import { useAppSelector } from '@/store/hooks'
 import { cartTotalItems } from '@/store/cart/cartSelector'
+import { useCheckoutStep } from '@/hooks/useCheckoutStep'
+import { useOverlay } from '@/hooks/useOverlay'
 export const RestaurantHeader = () => {
   const count = useAppSelector(cartTotalItems)
+  const { setCart } = useCheckoutStep()
+  const { showSideMenu } = useOverlay()
   return (
     <HeaderRestaurantWrap>
       <RestaurantContainer>
@@ -17,14 +21,15 @@ export const RestaurantHeader = () => {
           Restaurantes
         </Text>
         <Logo $lgRem={125} />
-        <Text
-          as="title"
-          $textColor="tertiary"
-          $textDarkTheme="primary"
-          $lgFontSize="lg"
+
+        <button
+          onClick={() => {
+            setCart()
+            showSideMenu()
+          }}
         >
           {count} produto(s) no carrinho
-        </Text>
+        </button>
       </RestaurantContainer>
     </HeaderRestaurantWrap>
   )
